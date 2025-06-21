@@ -10,7 +10,12 @@ export const QUESTIONS: QCM[] = [
   {
     id: 1,
     question: "Quelle est la forme CNF (Forme Normale Conjonctive) ?",
-    options: ["(A ∨ B) ∧ (¬C ∨ D)", "(A ∧ B) ∨ (C ∧ D)", "A ∨ B ∨ C", "(A ∧ ¬B) ∧ C"],
+    options: [
+      "$(A \\vee B) \\wedge (\\neg C \\vee D)$", 
+      "$(A \\wedge B) \\vee (C \\wedge D)$", 
+      "$A \\vee B \\vee C$", 
+      "$(A \\wedge \\neg B) \\wedge C$"
+    ],
     answer: 0,
     explanation:
       "La **Forme Normale Conjonctive (CNF)** est une conjonction (∧) de disjonctions (∨) de littéraux.\n\nUn littéral est soit une variable propositionnelle, soit sa négation.\n\nLa formule (A ∨ B) ∧ (¬C ∨ D) respecte cette structure : c'est un ET de deux clauses, chaque clause étant un OU de littéraux.\n\n**Propriété importante :** Toute formule peut être transformée en CNF par les lois de De Morgan et la distributivité.",
@@ -18,15 +23,25 @@ export const QUESTIONS: QCM[] = [
   {
     id: 2,
     question: "La règle de De Morgan correcte est :",
-    options: ["¬(A ∧ B) ≡ (¬A ∨ ¬B)", "¬(A ∧ B) ≡ (¬A ∧ ¬B)", "¬(A ∨ B) ≡ (¬A ∨ ¬B)", "A ∨ B ≡ A ∧ B"],
+    options: [
+      "$\\neg(A \\wedge B) \\equiv (\\neg A \\vee \\neg B)$", 
+      "$\\neg(A \\wedge B) \\equiv (\\neg A \\wedge \\neg B)$", 
+      "$\\neg(A \\vee B) \\equiv (\\neg A \\vee \\neg B)$", 
+      "$A \\vee B \\equiv A \\wedge B$"
+    ],
     answer: 0,
     explanation:
       'Les **lois de De Morgan** sont fondamentales en logique booléenne.\n\nElles établissent la dualité entre conjonction et disjonction sous négation :\n• ¬(A ∧ B) ≡ ¬A ∨ ¬B\n• ¬(A ∨ B) ≡ ¬A ∧ ¬B\n\n**Intuition :** "Il n\'est pas vrai que A ET B" équivaut à "non-A OU non-B".\n\n**Application :** Ces lois permettent de pousser les négations vers l\'intérieur des formules lors de la transformation en formes normales.',
   },
   {
     id: 3,
-    question: "La contraposée de A ⇒ B est :",
-    options: ["¬B ⇒ ¬A", "¬A ⇒ ¬B", "B ⇒ A", "A ⇒ ¬B"],
+    question: "La contraposée de $A \\Rightarrow B$ est :",
+    options: [
+      "$\\neg B \\Rightarrow \\neg A$", 
+      "$\\neg A \\Rightarrow \\neg B$", 
+      "$B \\Rightarrow A$", 
+      "$A \\Rightarrow \\neg B$"
+    ],
     answer: 0,
     explanation:
       "La **contraposée** d'une implication A ⇒ B est ¬B ⇒ ¬A.\n\n**Équivalence fondamentale :** A ⇒ B ≡ ¬B ⇒ ¬A\n\nLa preuve se fait par table de vérité ou en utilisant l'équivalence A ⇒ B ≡ ¬A ∨ B.\n\n**Important :** La contraposée conserve la valeur de vérité de l'implication originale, contrairement à la réciproque B ⇒ A qui n'est pas équivalente.",
@@ -34,7 +49,12 @@ export const QUESTIONS: QCM[] = [
   {
     id: 4,
     question: "Quel connecteur logique est à la fois commutatif et associatif ?",
-    options: ["∨ (disjonction)", "⇒ (implication)", "¬ (négation)", "↦ (fonction)"],
+    options: [
+      "$\\vee$ (disjonction)", 
+      "$\\Rightarrow$ (implication)", 
+      "$\\neg$ (négation)", 
+      "$\\mapsto$ (fonction)"
+    ],
     answer: 0,
     explanation:
       "La **disjonction** ∨ possède deux propriétés importantes :\n\n**Commutativité :** A ∨ B ≡ B ∨ A\n**Associativité :** (A ∨ B) ∨ C ≡ A ∨ (B ∨ C)\n\nCes propriétés permettent de réorganiser les termes d'une disjonction sans changer sa valeur de vérité.\n\n**Note :** La conjonction ∧ possède également ces propriétés.\n\n**Contre-exemple :** L'implication ⇒ n'est ni commutative (A ⇒ B ≢ B ⇒ A) ni associative.",
@@ -62,8 +82,13 @@ export const QUESTIONS: QCM[] = [
   },
   {
     id: 7,
-    question: "L'implication matérialisée : A ⇒ B équivaut à :",
-    options: ["¬A ∨ B", "A ∧ B", "¬B ∨ A", "B ∧ ¬A"],
+    question: "L'implication matérialisée : $A \\Rightarrow B$ équivaut à :",
+    options: [
+      "$\\neg A \\vee B$", 
+      "$A \\wedge B$", 
+      "$\\neg B \\vee A$", 
+      "$B \\wedge \\neg A$"
+    ],
     answer: 0,
     explanation:
       "L'**implication matérialisée** définit : A ⇒ B ≡ ¬A ∨ B\n\n**Vérification par table de vérité :**\nL'implication n'est fausse que quand l'antécédent est vrai et le conséquent faux.\n\nDans tous les autres cas (A faux ou B vrai), l'implication est vraie.\n\n**Utilité :** Cette définition permet d'éliminer le connecteur ⇒ lors de la transformation en formes normales, en utilisant uniquement ¬, ∧ et ∨.",

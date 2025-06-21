@@ -21,7 +21,7 @@ export default function QuizConfig({ onStart }: QuizConfigProps) {
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col">
       <div className="flex-1 flex items-center justify-center p-4">
-      <div className="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-md">
+        <div className="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-md">
         <h1 className="text-3xl font-bold text-gray-200 text-center mb-8">Quiz de Logique</h1>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -75,8 +75,7 @@ export default function QuizConfig({ onStart }: QuizConfigProps) {
             Commencer le Quiz
           </button>
         </form>
-
-        </form>
+        </div>
       </div>
       
       <Footer />
