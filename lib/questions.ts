@@ -2,7 +2,7 @@ export interface QCM {
   id: number
   question: string
   options: [string, string, string, string]
-  answer: number // 0-3
+  answer: number
   explanation: string
 }
 

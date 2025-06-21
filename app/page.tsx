@@ -37,13 +37,12 @@ export default function Home() {
     const correctAnswer = question.answer
     const correctText = answers[correctAnswer]
 
-    // Mélanger les réponses
     for (let i = answers.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1))
       ;[answers[i], answers[j]] = [answers[j], answers[i]]
     }
 
-    // Trouver le nouvel index de la bonne réponse
+    
     const newCorrectIndex = answers.findIndex((answer) => answer === correctText)
 
     return {
