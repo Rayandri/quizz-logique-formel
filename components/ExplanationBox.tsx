@@ -1,6 +1,7 @@
 "use client"
 
 import type { QCM } from "@/lib/questions"
+import KatexRenderer from "./KatexRenderer"
 
 interface ExplanationBoxProps {
   question: QCM
@@ -83,15 +84,14 @@ export default function ExplanationBox({
 
         <div className="bg-gray-700/50 rounded-lg p-4 mb-8">
           <h5 className="font-semibold text-gray-200 mb-2">Explication :</h5>
-          <div 
+          <KatexRenderer 
             className="text-gray-300 leading-relaxed prose prose-invert max-w-none"
-            dangerouslySetInnerHTML={{
-              __html: question.explanation
-                .replace(/\*\*(.*?)\*\*/g, '<strong class="text-gray-100">$1</strong>')
-                .replace(/\n\n/g, '</p><p class="mt-3">')
-                .replace(/\n/g, '<br/>')
-                .replace(/•/g, '<span class="text-indigo-400">•</span>')
-            }}
+            children={question.explanation
+              .replace(/\*\*(.*?)\*\*/g, '<strong class="text-gray-100">$1</strong>')
+              .replace(/\n\n/g, '</p><p class="mt-3">')
+              .replace(/\n/g, '<br/>')
+              .replace(/•/g, '<span class="text-indigo-400">•</span>')
+            }
           />
         </div>
 
