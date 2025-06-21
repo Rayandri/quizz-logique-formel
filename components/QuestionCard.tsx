@@ -2,6 +2,7 @@
 
 import type { QCM } from "@/lib/questions"
 import KatexRenderer from "./KatexRenderer"
+import Footer from "./Footer"
 
 interface QuestionCardProps {
   question: QCM
@@ -27,7 +28,8 @@ export default function QuestionCard({
   currentScore,
 }: QuestionCardProps) {
   return (
-    <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gray-900 flex flex-col">
+      <div className="flex-1 flex items-center justify-center p-4">
       <div className="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-2xl">
         <div className="mb-6">
           <div className="flex justify-between items-center mb-4">
@@ -123,6 +125,8 @@ export default function QuestionCard({
           Valider
         </button>
       </div>
+      
+      <Footer />
     </div>
   )
 }

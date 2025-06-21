@@ -2,6 +2,7 @@
 
 import type React from "react"
 import { useState } from "react"
+import Footer from "./Footer"
 
 interface QuizConfigProps {
   onStart: (numQuestions: number) => void
@@ -18,7 +19,8 @@ export default function QuizConfig({ onStart }: QuizConfigProps) {
   const questionOptions = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
 
   return (
-    <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gray-900 flex flex-col">
+      <div className="flex-1 flex items-center justify-center p-4">
       <div className="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-md">
         <h1 className="text-3xl font-bold text-gray-200 text-center mb-8">Quiz de Logique</h1>
 
@@ -74,15 +76,10 @@ export default function QuizConfig({ onStart }: QuizConfigProps) {
           </button>
         </form>
 
-        <div className="mt-8 pt-6 border-t border-gray-600 text-center">
-          <p className="text-xs text-gray-500 mb-2">
-            ⚠️ Les questions sont générées par IA et relues rapidement - des erreurs peuvent subsister
-          </p>
-          <p className="text-xs text-gray-400">
-            by Rayan Drissi
-          </p>
-        </div>
+        </form>
       </div>
+      
+      <Footer />
     </div>
   )
 }

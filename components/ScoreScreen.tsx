@@ -1,5 +1,7 @@
 "use client"
 
+import Footer from "./Footer"
+
 interface ScoreScreenProps {
   score: number
   totalQuestions: number
@@ -25,7 +27,8 @@ export default function ScoreScreen({ score, totalQuestions, onRestart }: ScoreS
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gray-900 flex flex-col">
+      <div className="flex-1 flex items-center justify-center p-4">
       <div className="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-md text-center">
         <h1 className="text-3xl font-bold text-gray-200 mb-8">Résultats du Quiz</h1>
 
@@ -64,15 +67,10 @@ export default function ScoreScreen({ score, totalQuestions, onRestart }: ScoreS
           </button>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-gray-600 text-center">
-          <p className="text-xs text-gray-500 mb-2">
-            ⚠️ Les questions sont générées par IA et relues rapidement - des erreurs peuvent subsister
-          </p>
-          <p className="text-xs text-gray-400">
-            by Rayan Drissi
-          </p>
         </div>
       </div>
+      
+      <Footer />
     </div>
   )
 }
