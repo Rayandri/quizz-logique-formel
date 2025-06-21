@@ -63,6 +63,15 @@ export default function ScoreScreen({ score, totalQuestions, onRestart }: ScoreS
             Recommencer ce Quiz
           </button>
         </div>
+
+        <div className="mt-8 pt-6 border-t border-gray-600 text-center">
+          <p className="text-xs text-gray-500 mb-2">
+            ⚠️ Les questions sont générées par IA et relues rapidement - des erreurs peuvent subsister
+          </p>
+          <p className="text-xs text-gray-400">
+            by Rayan Drissi
+          </p>
+        </div>
       </div>
     </div>
   )
