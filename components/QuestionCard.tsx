@@ -1,6 +1,7 @@
 "use client"
 
 import type { QCM } from "@/lib/questions"
+import KatexRenderer from "./KatexRenderer"
 
 interface QuestionCardProps {
   question: QCM
@@ -41,7 +42,9 @@ export default function QuestionCard({
             </div>
           </div>
 
-          <h2 className="text-xl font-semibold text-gray-200 mb-6">{question.question}</h2>
+          <KatexRenderer className="text-xl font-semibold text-gray-200 mb-6">
+            {question.question}
+          </KatexRenderer>
         </div>
 
         <div className="space-y-3 mb-8">
@@ -88,7 +91,9 @@ export default function QuestionCard({
                   />
                 )}
               </div>
-              <span className="text-gray-200 flex-1">{option}</span>
+              <KatexRenderer className="text-gray-200 flex-1">
+                {option}
+              </KatexRenderer>
             </label>
           ))}
         </div>
