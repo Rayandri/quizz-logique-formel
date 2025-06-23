@@ -10,7 +10,7 @@ import { DeductionRules } from "@/components/DeductionRules"
 import { LambdaTypingRules } from "@/components/LambdaTypingRules"
 
 type GameState = "config" | "question" | "explanation" | "score"
-type SelectionMode = "random" | "difficulty"
+type SelectionMode = "random" | "difficulty" | "multi-difficulty"
 
 export default function Home() {
   const [gameState, setGameState] = useState<GameState>("config")
@@ -55,11 +55,13 @@ export default function Home() {
     }
   }
 
-  const handleStart = (numQuestions: number, mode: SelectionMode, difficulty?: DifficultyLevel) => {
+  const handleStart = (numQuestions: number, mode: SelectionMode, difficulty?: DifficultyLevel, difficulties?: DifficultyLevel[]) => {
     let questionsPool = QUESTIONS
 
     if (mode === "difficulty" && difficulty) {
       questionsPool = QUESTIONS.filter(q => q.difficulty === difficulty)
+    } else if (mode === "multi-difficulty" && difficulties && difficulties.length > 0) {
+      questionsPool = QUESTIONS.filter(q => difficulties.includes(q.difficulty!))
     }
 
     const shuffled = shuffleArray(questionsPool)

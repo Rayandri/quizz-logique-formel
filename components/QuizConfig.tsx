@@ -5,16 +5,17 @@ import { useState, useMemo } from "react"
 import Footer from "./Footer"
 import { QUESTIONS, type DifficultyLevel } from "@/lib/questions"
 
-type SelectionMode = "random" | "difficulty"
+type SelectionMode = "random" | "difficulty" | "multi-difficulty"
 
 interface QuizConfigProps {
-  onStart: (numQuestions: number, mode: SelectionMode, difficulty?: DifficultyLevel) => void
+  onStart: (numQuestions: number, mode: SelectionMode, difficulty?: DifficultyLevel, difficulties?: DifficultyLevel[]) => void
 }
 
 export default function QuizConfig({ onStart }: QuizConfigProps) {
   const [numQuestions, setNumQuestions] = useState(10)
   const [selectionMode, setSelectionMode] = useState<SelectionMode>("random")
   const [selectedDifficulty, setSelectedDifficulty] = useState<DifficultyLevel>("facile")
+  const [selectedDifficulties, setSelectedDifficulties] = useState<DifficultyLevel[]>(["facile", "moyen"])
 
   const questionsCount = useMemo(() => {
     const total = QUESTIONS.length
@@ -30,9 +31,13 @@ export default function QuizConfig({ onStart }: QuizConfigProps) {
   const availableQuestions = useMemo(() => {
     if (selectionMode === "random") {
       return questionsCount.total
+    } else if (selectionMode === "difficulty") {
+      return questionsCount.byDifficulty[selectedDifficulty]
+    } else if (selectionMode === "multi-difficulty") {
+      return selectedDifficulties.reduce((total, diff) => total + questionsCount.byDifficulty[diff], 0)
     }
-    return questionsCount.byDifficulty[selectedDifficulty]
-  }, [selectionMode, selectedDifficulty, questionsCount])
+    return questionsCount.total
+  }, [selectionMode, selectedDifficulty, selectedDifficulties, questionsCount])
 
   const maxSelectableQuestions = Math.min(50, availableQuestions)
   const questionOptions = useMemo(() => {
@@ -49,7 +54,25 @@ export default function QuizConfig({ onStart }: QuizConfigProps) {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    onStart(numQuestions, selectionMode, selectionMode === "difficulty" ? selectedDifficulty : undefined)
+    if (selectionMode === "difficulty") {
+      onStart(numQuestions, selectionMode, selectedDifficulty)
+    } else if (selectionMode === "multi-difficulty") {
+      onStart(numQuestions, selectionMode, undefined, selectedDifficulties)
+    } else {
+      onStart(numQuestions, selectionMode)
+    }
+  }
+
+  const toggleDifficulty = (difficulty: DifficultyLevel) => {
+    setSelectedDifficulties(prev => {
+      if (prev.includes(difficulty)) {
+        // Ne pas permettre de désélectionner toutes les difficultés
+        if (prev.length === 1) return prev
+        return prev.filter(d => d !== difficulty)
+      } else {
+        return [...prev, difficulty]
+      }
+    })
   }
 
   const difficulties: { value: DifficultyLevel; label: string; color: string }[] = [
@@ -58,6 +81,18 @@ export default function QuizConfig({ onStart }: QuizConfigProps) {
     { value: "moyen", label: "Moyen", color: "bg-yellow-600" },
     { value: "dur", label: "Difficile", color: "bg-red-600" }
   ]
+
+  const getDisplayText = () => {
+    if (selectionMode === "random") {
+      return `${questionsCount.total} au total`
+    } else if (selectionMode === "difficulty") {
+      return `${availableQuestions} en ${difficulties.find(d => d.value === selectedDifficulty)?.label}`
+    } else if (selectionMode === "multi-difficulty") {
+      const labels = selectedDifficulties.map(d => difficulties.find(diff => diff.value === d)?.label).join(", ")
+      return `${availableQuestions} en ${labels}`
+    }
+    return `${questionsCount.total} au total`
+  }
 
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col">
@@ -69,11 +104,7 @@ export default function QuizConfig({ onStart }: QuizConfigProps) {
         <div className="text-center mb-6 p-3 bg-gray-700 rounded-lg">
           <div className="text-sm text-gray-300 mb-1">Questions disponibles</div>
           <div className="text-xl font-bold text-indigo-400">
-            {selectionMode === "random" ? (
-              <span>{questionsCount.total} au total</span>
-            ) : (
-              <span>{availableQuestions} en {difficulties.find(d => d.value === selectedDifficulty)?.label}</span>
-            )}
+            <span>{getDisplayText()}</span>
           </div>
           {selectionMode === "random" && (
             <div className="text-xs text-gray-400 mt-1">
@@ -110,12 +141,23 @@ export default function QuizConfig({ onStart }: QuizConfigProps) {
                   onChange={(e) => setSelectionMode(e.target.value as SelectionMode)}
                   className="w-4 h-4 text-indigo-600 bg-gray-700 border-gray-600 focus:ring-indigo-500 focus:ring-2"
                 />
-                <span className="ml-2 text-gray-300">Par difficulté</span>
+                <span className="ml-2 text-gray-300">Une seule difficulté</span>
+              </label>
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  name="selectionMode"
+                  value="multi-difficulty"
+                  checked={selectionMode === "multi-difficulty"}
+                  onChange={(e) => setSelectionMode(e.target.value as SelectionMode)}
+                  className="w-4 h-4 text-indigo-600 bg-gray-700 border-gray-600 focus:ring-indigo-500 focus:ring-2"
+                />
+                <span className="ml-2 text-gray-300">Plusieurs difficultés</span>
               </label>
             </div>
           </div>
 
-          {/* Sélection de difficulté (si mode difficulté activé) */}
+          {/* Sélection de difficulté unique */}
           {selectionMode === "difficulty" && (
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-3">
@@ -138,6 +180,38 @@ export default function QuizConfig({ onStart }: QuizConfigProps) {
                   </button>
                 ))}
               </div>
+            </div>
+          )}
+
+          {/* Sélection de difficultés multiples */}
+          {selectionMode === "multi-difficulty" && (
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-3">
+                Niveaux de difficulté <span className="text-xs text-gray-400">(sélection multiple)</span>
+              </label>
+              <div className="grid grid-cols-2 gap-2">
+                {difficulties.map((diff) => (
+                  <button
+                    key={diff.value}
+                    type="button"
+                    onClick={() => toggleDifficulty(diff.value)}
+                    className={`py-2 px-3 text-sm rounded-md transition-colors duration-200 flex items-center justify-center border-2 ${
+                      selectedDifficulties.includes(diff.value)
+                        ? `${diff.color} text-white border-transparent` 
+                        : "bg-gray-700 text-gray-300 hover:bg-gray-600 border-gray-600 hover:border-gray-500"
+                    }`}
+                  >
+                    <span>{diff.label}</span>
+                    <span className="ml-1 text-xs opacity-75">({questionsCount.byDifficulty[diff.value]})</span>
+                    {selectedDifficulties.includes(diff.value) && (
+                      <span className="ml-1 text-xs">✓</span>
+                    )}
+                  </button>
+                ))}
+              </div>
+              <p className="text-xs text-gray-400 mt-2">
+                {selectedDifficulties.length} difficulté{selectedDifficulties.length > 1 ? 's' : ''} sélectionnée{selectedDifficulties.length > 1 ? 's' : ''}
+              </p>
             </div>
           )}
 
