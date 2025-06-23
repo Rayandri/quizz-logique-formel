@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <style>
+      .logic-symbol { 
+        fill: #2563eb; 
+        font-family: 'Times New Roman', serif; 
+        font-weight: bold; 
+      }
+    </style>
+  </defs>
+  <rect width="32" height="32" rx="4" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="8" y="12" class="logic-symbol" font-size="8">∀</text>
+  <text x="18" y="12" class="logic-symbol" font-size="8">∃</text>
+  <text x="6" y="22" class="logic-symbol" font-size="8">⇒</text>
+  <text x="18" y="22" class="logic-symbol" font-size="8">¬</text>
+  <text x="12" y="28" class="logic-symbol" font-size="6">∧∨</text>
+</svg> 
