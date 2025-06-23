@@ -5,7 +5,7 @@ interface DifficultyBadgeProps {
   difficulty: DifficultyLevel
 }
 
-export function DifficultyBadge({ difficulty }: DifficultyBadgeProps) {
+export default function DifficultyBadge({ difficulty }: DifficultyBadgeProps) {
   const getDifficultyConfig = (level: DifficultyLevel) => {
     switch (level) {
       case "cours":
