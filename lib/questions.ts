@@ -1,4 +1,5 @@
 import { DEDUCTION_QUESTIONS } from './deduction-questions'
+import { LAMBDA_CALCULUS_QUESTIONS } from './lambda-calculus-questions'
 
 export interface QCM {
   id: number
@@ -568,5 +569,6 @@ const EXISTING_QUESTIONS: QCM[] = [
 
 export const QUESTIONS: QCM[] = [
   ...EXISTING_QUESTIONS,
-  ...DEDUCTION_QUESTIONS.map(q => ({ ...q, id: q.id + 1000 }))
+  ...DEDUCTION_QUESTIONS.map(q => ({ ...q, id: q.id + 1000 })),
+  ...LAMBDA_CALCULUS_QUESTIONS.map(q => ({ id: q.id + 2000, question: q.question, options: q.options, answer: q.answer, explanation: q.explanation }))
 ]

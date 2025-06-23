@@ -4,7 +4,7 @@ export interface LambdaQuestion {
   options: [string, string, string, string]
   answer: number
   explanation: string
-  points: number
+  points?: number
 }
 
 export const LAMBDA_CALCULUS_QUESTIONS: LambdaQuestion[] = [

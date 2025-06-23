@@ -6,6 +6,8 @@ import QuizConfig from "@/components/QuizConfig"
 import QuestionCard from "@/components/QuestionCard"
 import ExplanationBox from "@/components/ExplanationBox"
 import ScoreScreen from "@/components/ScoreScreen"
+import { DeductionRules } from "@/components/DeductionRules"
+import { LambdaTypingRules } from "@/components/LambdaTypingRules"
 
 type GameState = "config" | "question" | "explanation" | "score"
 
@@ -117,18 +119,28 @@ export default function Home() {
   }
 
   if (gameState === "question") {
+    const currentQuestion = selectedQuestions[currentQuestionIndex]
+    const isDeductionQuestion = currentQuestion.id > 1000 && currentQuestion.id < 2000
+    const isLambdaQuestion = currentQuestion.id >= 2000
+    
     return (
-      <QuestionCard
-        question={selectedQuestions[currentQuestionIndex]}
-        questionNumber={currentQuestionIndex + 1}
-        totalQuestions={selectedQuestions.length}
-        selectedAnswer={selectedAnswer}
-        onAnswerSelect={handleAnswerSelect}
-        onValidate={handleValidate}
-        onSkip={handleSkip}
-        isValidated={isValidated}
-        currentScore={currentScore}
-      />
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-4">
+        <div className="max-w-4xl mx-auto">
+          {isDeductionQuestion && <DeductionRules />}
+          {isLambdaQuestion && <LambdaTypingRules />}
+          <QuestionCard
+            question={currentQuestion}
+            questionNumber={currentQuestionIndex + 1}
+            totalQuestions={selectedQuestions.length}
+            selectedAnswer={selectedAnswer}
+            onAnswerSelect={handleAnswerSelect}
+            onValidate={handleValidate}
+            onSkip={handleSkip}
+            isValidated={isValidated}
+            currentScore={currentScore}
+          />
+        </div>
+      </div>
     )
   }
 
