@@ -4,21 +4,27 @@ import type React from "react"
 import { useState, useMemo, useEffect } from "react"
 import Footer from "./Footer"
 import { QUESTIONS, type DifficultyLevel } from "@/lib/questions"
+import { COPYRIGHT_QUESTIONS } from "@/lib/copyright-questions"
 
 type SelectionMode = "random" | "difficulty" | "multi-difficulty"
 
 interface QuizConfigProps {
+  subject: "logique" | "droit"
   onStart: (numQuestions: number, mode: SelectionMode, difficulty?: DifficultyLevel, difficulties?: DifficultyLevel[]) => void
+  onBackToSubjects: () => void
 }
 
-export default function QuizConfig({ onStart }: QuizConfigProps) {
+export default function QuizConfig({ subject, onStart, onBackToSubjects }: QuizConfigProps) {
   const [numQuestions, setNumQuestions] = useState(10)
   const [selectionMode, setSelectionMode] = useState<SelectionMode>("random")
   const [selectedDifficulty, setSelectedDifficulty] = useState<DifficultyLevel>("facile")
   const [selectedDifficulties, setSelectedDifficulties] = useState<DifficultyLevel[]>(["facile", "moyen"])
   const [hasSavedQuiz, setHasSavedQuiz] = useState(false)
 
-  const STORAGE_KEY = "quiz-logique-state"
+  const STORAGE_KEY = `quiz-${subject}-state`
+
+  // Get questions based on subject
+  const currentQuestions = subject === "droit" ? COPYRIGHT_QUESTIONS : QUESTIONS.filter(q => q.id < 5000)
 
   // Vérifier s'il y a une sauvegarde
   useEffect(() => {
@@ -36,15 +42,15 @@ export default function QuizConfig({ onStart }: QuizConfigProps) {
   }
 
   const questionsCount = useMemo(() => {
-    const total = QUESTIONS.length
+    const total = currentQuestions.length
     const byDifficulty = {
-      cours: QUESTIONS.filter(q => q.difficulty === "cours").length,
-      facile: QUESTIONS.filter(q => q.difficulty === "facile").length,
-      moyen: QUESTIONS.filter(q => q.difficulty === "moyen").length,
-      dur: QUESTIONS.filter(q => q.difficulty === "dur").length,
+      cours: currentQuestions.filter(q => q.difficulty === "cours").length,
+      facile: currentQuestions.filter(q => q.difficulty === "facile").length,
+      moyen: currentQuestions.filter(q => q.difficulty === "moyen").length,
+      dur: currentQuestions.filter(q => q.difficulty === "dur").length,
     }
     return { total, byDifficulty }
-  }, [])
+  }, [currentQuestions])
 
   const availableQuestions = useMemo(() => {
     if (selectionMode === "random") {
@@ -116,7 +122,18 @@ export default function QuizConfig({ onStart }: QuizConfigProps) {
     <div className="min-h-screen bg-gray-900 flex flex-col">
       <div className="flex-1 flex items-center justify-center p-4">
         <div className="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-md">
-        <h1 className="text-3xl font-bold text-gray-200 text-center mb-4">Quiz de Logique</h1>
+        <div className="flex items-center justify-between mb-4">
+          <button
+            onClick={onBackToSubjects}
+            className="text-gray-400 hover:text-gray-200 transition-colors duration-200"
+          >
+            ← Retour
+          </button>
+          <h1 className="text-2xl font-bold text-gray-200">
+            Quiz de {subject === "logique" ? "Logique" : "Droit"}
+          </h1>
+          <div className="w-16"></div>
+        </div>
         
         {/* Notification de sauvegarde */}
         {hasSavedQuiz && (

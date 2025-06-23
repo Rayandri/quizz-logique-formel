@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react"
 import { QUESTIONS, type QCM, type DifficultyLevel } from "@/lib/questions"
+import { COPYRIGHT_QUESTIONS } from "@/lib/copyright-questions"
+import SubjectSelection from "@/components/SubjectSelection"
 import QuizConfig from "@/components/QuizConfig"
 import QuestionCard from "@/components/QuestionCard"
 import ExplanationBox from "@/components/ExplanationBox"
@@ -9,11 +11,13 @@ import ScoreScreen from "@/components/ScoreScreen"
 import { DeductionRules } from "@/components/DeductionRules"
 import { LambdaTypingRules } from "@/components/LambdaTypingRules"
 
-type GameState = "config" | "question" | "explanation" | "score"
+type GameState = "subject-selection" | "config" | "question" | "explanation" | "score"
 type SelectionMode = "random" | "difficulty" | "multi-difficulty"
+type Subject = "logique" | "droit"
 
 interface QuizState {
   gameState: GameState
+  subject: Subject
   selectedQuestions: QCM[]
   currentQuestionIndex: number
   selectedAnswer: number | null
@@ -24,7 +28,8 @@ interface QuizState {
 }
 
 export default function Home() {
-  const [gameState, setGameState] = useState<GameState>("config")
+  const [gameState, setGameState] = useState<GameState>("subject-selection")
+  const [subject, setSubject] = useState<Subject>("logique")
   const [selectedQuestions, setSelectedQuestions] = useState<QCM[]>([])
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null)
@@ -34,13 +39,14 @@ export default function Home() {
   const [skippedQuestion, setSkippedQuestion] = useState(false)
 
   // Clé pour le localStorage
-  const STORAGE_KEY = "quiz-logique-state"
+  const STORAGE_KEY = `quiz-${subject}-state`
 
   // Sauvegarder l'état dans localStorage
   const saveState = () => {
-    if (typeof window !== "undefined" && gameState !== "config") {
+    if (typeof window !== "undefined" && gameState !== "subject-selection" && gameState !== "config") {
       const state: QuizState = {
         gameState,
+        subject,
         selectedQuestions,
         currentQuestionIndex,
         selectedAnswer,
@@ -57,9 +63,25 @@ export default function Home() {
   const loadState = () => {
     if (typeof window !== "undefined") {
       try {
-        const saved = localStorage.getItem(STORAGE_KEY)
-        if (saved) {
-          const state: QuizState = JSON.parse(saved)
+        // Try to load logique first, then droit
+        const logiqueState = localStorage.getItem("quiz-logique-state")
+        const droitState = localStorage.getItem("quiz-droit-state")
+        
+        if (logiqueState) {
+          const state: QuizState = JSON.parse(logiqueState)
+          setSubject("logique")
+          setGameState(state.gameState)
+          setSelectedQuestions(state.selectedQuestions)
+          setCurrentQuestionIndex(state.currentQuestionIndex)
+          setSelectedAnswer(state.selectedAnswer)
+          setIsValidated(state.isValidated)
+          setScore(state.score)
+          setCurrentScore(state.currentScore)
+          setSkippedQuestion(state.skippedQuestion)
+          return true
+        } else if (droitState) {
+          const state: QuizState = JSON.parse(droitState)
+          setSubject("droit")
           setGameState(state.gameState)
           setSelectedQuestions(state.selectedQuestions)
           setCurrentQuestionIndex(state.currentQuestionIndex)
@@ -72,7 +94,8 @@ export default function Home() {
         }
       } catch (error) {
         console.error("Erreur lors du chargement de l'état:", error)
-        localStorage.removeItem(STORAGE_KEY)
+        localStorage.removeItem("quiz-logique-state")
+        localStorage.removeItem("quiz-droit-state")
       }
     }
     return false
@@ -93,7 +116,7 @@ export default function Home() {
   // Sauvegarder automatiquement à chaque changement d'état
   useEffect(() => {
     saveState()
-  }, [gameState, selectedQuestions, currentQuestionIndex, selectedAnswer, isValidated, score, currentScore, skippedQuestion])
+  }, [gameState, subject, selectedQuestions, currentQuestionIndex, selectedAnswer, isValidated, score, currentScore, skippedQuestion])
 
   const shuffleArray = <T,>(array: T[]): T[] => {
     const shuffled = [...array]
@@ -114,7 +137,6 @@ export default function Home() {
       ;[answers[i], answers[j]] = [answers[j], answers[i]]
     }
 
-    
     const newCorrectIndex = answers.findIndex((answer) => answer === correctText)
 
     return {
@@ -124,13 +146,21 @@ export default function Home() {
     }
   }
 
+  const handleSubjectSelect = (selectedSubject: Subject) => {
+    setSubject(selectedSubject)
+    setGameState("config")
+  }
+
   const handleStart = (numQuestions: number, mode: SelectionMode, difficulty?: DifficultyLevel, difficulties?: DifficultyLevel[]) => {
-    let questionsPool = QUESTIONS
+    // Get questions based on subject
+    const currentQuestions = subject === "droit" ? COPYRIGHT_QUESTIONS : QUESTIONS.filter(q => q.id < 5000)
+    
+    let questionsPool = currentQuestions
 
     if (mode === "difficulty" && difficulty) {
-      questionsPool = QUESTIONS.filter(q => q.difficulty === difficulty)
+      questionsPool = currentQuestions.filter(q => q.difficulty === difficulty)
     } else if (mode === "multi-difficulty" && difficulties && difficulties.length > 0) {
-      questionsPool = QUESTIONS.filter(q => difficulties.includes(q.difficulty!))
+      questionsPool = currentQuestions.filter(q => difficulties.includes(q.difficulty!))
     }
 
     const shuffled = shuffleArray(questionsPool)
@@ -186,7 +216,7 @@ export default function Home() {
 
   const handleRestart = () => {
     clearSavedState()
-    setGameState("config")
+    setGameState("subject-selection")
     setSelectedQuestions([])
     setCurrentQuestionIndex(0)
     setSelectedAnswer(null)
@@ -202,14 +232,22 @@ export default function Home() {
     }
   }
 
+  const handleBackToSubjects = () => {
+    setGameState("subject-selection")
+  }
+
+  if (gameState === "subject-selection") {
+    return <SubjectSelection onSelectSubject={handleSubjectSelect} />
+  }
+
   if (gameState === "config") {
-    return <QuizConfig onStart={handleStart} />
+    return <QuizConfig subject={subject} onStart={handleStart} onBackToSubjects={handleBackToSubjects} />
   }
 
   if (gameState === "question") {
     const currentQuestion = selectedQuestions[currentQuestionIndex]
-    const isDeductionQuestion = currentQuestion.id > 1000 && currentQuestion.id < 2000
-    const isLambdaQuestion = currentQuestion.id >= 2000
+    const isDeductionQuestion = subject === "logique" && currentQuestion.id > 1000 && currentQuestion.id < 2000
+    const isLambdaQuestion = subject === "logique" && currentQuestion.id >= 2000
     
     return (
       <div className="min-h-screen bg-gray-900">
