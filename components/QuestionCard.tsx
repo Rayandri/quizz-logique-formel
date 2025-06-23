@@ -1,11 +1,16 @@
 "use client"
 
-import { useMemo, useState } from "react"
-import type { QCM } from "@/lib/questions"
+import { QCM } from "@/lib/questions"
+import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Progress } from "@/components/ui/progress"
+import { Badge } from "@/components/ui/badge"
+import { ArrowLeft, SkipForward } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { useState, useMemo } from "react"
 import KatexRenderer from "./KatexRenderer"
 import SimpleTextRenderer from "./SimpleTextRenderer"
-
-import { DifficultyBadge } from "./DifficultyBadge"
+import DifficultyBadge from "./DifficultyBadge"
 
 interface QuestionCardProps {
   question: QCM
@@ -18,7 +23,7 @@ interface QuestionCardProps {
   onReturnToMenu: () => void
   isValidated: boolean
   currentScore: number
-  subject?: "logique" | "droit" | "risques" | "probabilites"
+  subject?: string
 }
 
 export default function QuestionCard({
@@ -34,197 +39,141 @@ export default function QuestionCard({
   currentScore,
   subject = "logique",
 }: QuestionCardProps) {
-  const [refreshKey, setRefreshKey] = useState(0)
   const [numericAnswer, setNumericAnswer] = useState("")
-  const memoizedOptions = useMemo(() => question.options, [question.id, refreshKey])
+  const memoizedOptions = useMemo(() => question.options, [question.id])
   
   const isNumericQuestion = question.answerType === 'numeric'
   const needsLatex = subject === "logique" || subject === "probabilites"
   const TextRenderer = needsLatex ? KatexRenderer : SimpleTextRenderer
 
-  const handleRepairLatex = () => {
-    // Force un re-rendu plus agressif
-    setRefreshKey(prev => prev + Math.random())
-    // Forcer le re-rendu de KaTeX après un court délai
-    setTimeout(() => {
-      if (typeof window !== "undefined" && window.renderMathInElement) {
-        window.renderMathInElement(document.body, {
-          delimiters: [
-            {left: "$$", right: "$$", display: true},
-            {left: "$", right: "$", display: false}
-          ]
-        })
-      }
-    }, 100)
-  }
+  const progress = (questionNumber / totalQuestions) * 100
 
-  const handleClearCache = () => {
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("quiz-logique-state")
-      // Force une actualisation complète de la page pour recharger les questions corrigées
-      window.location.reload()
+  const handleNumericSubmit = () => {
+    if (numericAnswer.trim()) {
+      onAnswerSelect(numericAnswer.trim())
     }
   }
 
   return (
-    <div className="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-2xl">
-        <div className="flex justify-between items-center mb-4">
-          <button
+    <Card className="w-full max-w-4xl mx-auto bg-gray-900 border-gray-700">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+        <div className="flex items-center gap-4">
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={onReturnToMenu}
-            className="px-3 py-2 bg-gray-600 hover:bg-gray-500 text-white text-sm rounded-md transition-colors duration-200"
+            className="text-gray-400 hover:text-gray-200"
           >
-            ← Menu
-          </button>
-          {needsLatex && (
-            <div className="flex gap-2">
-              <button
-                onClick={handleClearCache}
-                className="px-2 py-1 bg-red-600 hover:bg-red-500 text-white text-xs rounded transition-colors duration-200"
-                title="Vider le cache"
-              >
-                🗑️ Cache
-              </button>
-              <button
-                onClick={handleRepairLatex}
-                className="px-2 py-1 bg-orange-600 hover:bg-orange-500 text-white text-xs rounded transition-colors duration-200"
-                title="Réparer l'affichage LaTeX"
-              >
-                Réparer LaTeX
-              </button>
-            </div>
-          )}
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Menu
+          </Button>
+        </div>
+        
+        <div className="flex items-center gap-4">
+          <DifficultyBadge difficulty={question.difficulty} />
+        </div>
+      </CardHeader>
+
+      <CardContent className="space-y-6">
+        <div className="flex items-center justify-between mb-4">
+          <span className="text-sm text-gray-400">
+            Question {questionNumber} sur {totalQuestions}
+          </span>
+          <Progress value={progress} className="w-1/2" />
         </div>
 
-        <div className="mb-6">
-          <div className="flex justify-between items-center mb-4">
-            <div className="flex items-center gap-3">
-              <span className="text-sm text-gray-400">
-                Question {questionNumber} sur {totalQuestions}
-              </span>
-              <DifficultyBadge difficulty={question.difficulty || "facile"} />
-            </div>
-            <div className="w-full max-w-xs bg-gray-700 rounded-full h-2 ml-4">
-              <div
-                className="bg-indigo-600 h-2 rounded-full transition-all duration-300"
-                style={{ width: `${(questionNumber / totalQuestions) * 100}%` }}
-              />
-            </div>
-          </div>
+        <div className="space-y-4">
+          <h2 className="text-xl font-semibold text-gray-100">
+            <TextRenderer>{question.question}</TextRenderer>
+          </h2>
 
-          <TextRenderer key={`question-${question.id}-${refreshKey}`} className="text-xl font-semibold text-gray-200 mb-6 leading-relaxed">
-            {question.question}
-          </TextRenderer>
-        </div>
-
-        {isNumericQuestion ? (
-          <div className="mb-8">
+          {isNumericQuestion ? (
             <div className="space-y-4">
-              <div className="text-gray-300 text-sm">
-                Entrez votre réponse numérique :
-              </div>
-              <div className="flex items-center space-x-4">
-                <input
-                  type="number"
-                  value={numericAnswer}
-                  onChange={(e) => {
-                    setNumericAnswer(e.target.value)
-                    onAnswerSelect(e.target.value)
-                  }}
-                  disabled={isValidated}
-                  className={`flex-1 px-4 py-3 text-lg bg-gray-700 border rounded-lg text-gray-200 focus:outline-none focus:ring-2 transition-colors duration-200 ${
-                    isValidated
-                      ? numericAnswer === question.answer?.toString()
-                        ? "border-green-500 focus:ring-green-500"
-                        : "border-red-500 focus:ring-red-500"
-                      : "border-gray-600 focus:ring-indigo-500"
-                  }`}
-                  placeholder="Votre réponse..."
-                />
-                {isValidated && (
-                  <div className="text-gray-300">
-                    Réponse correcte : <span className="text-green-400 font-bold">{question.answer}</span>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="space-y-3 mb-8">
-            {memoizedOptions.map((option, index) => (
-              <label
-                key={`${question.id}-${index}-${refreshKey}`}
-                className={`flex items-center p-4 rounded-lg border cursor-pointer transition-colors duration-200 ${
-                  isValidated
-                    ? index === question.answer
-                      ? "border-green-500 bg-green-900/20"
-                      : selectedAnswer === index && index !== question.answer
-                        ? "border-red-500 bg-red-900/20"
-                        : "border-gray-600 bg-gray-700/50"
-                    : selectedAnswer === index
-                      ? "border-indigo-500 bg-indigo-900/20"
-                      : "border-gray-600 bg-gray-700/50 hover:border-gray-500"
-                }`}
-              >
-                <input
-                  type="radio"
-                  name="answer"
-                  value={index}
-                  checked={selectedAnswer === index}
-                  onChange={() => onAnswerSelect(index)}
-                  disabled={isValidated}
-                  className="sr-only"
-                />
-                <div
-                  className={`w-4 h-4 rounded-full border-2 mr-3 flex items-center justify-center ${
-                    selectedAnswer === index
-                      ? isValidated
-                        ? index === question.answer
-                          ? "border-green-500"
-                          : "border-red-500"
-                        : "border-indigo-500"
-                      : "border-gray-400"
-                  }`}
+              <Input
+                type="text"
+                placeholder="Entrez votre réponse numérique"
+                value={numericAnswer}
+                onChange={(e) => setNumericAnswer(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    handleNumericSubmit()
+                  }
+                }}
+                className="bg-gray-800 border-gray-600 text-gray-100"
+                disabled={isValidated}
+              />
+              {!isValidated && (
+                <Button 
+                  onClick={handleNumericSubmit}
+                  disabled={!numericAnswer.trim()}
+                  className="w-full"
                 >
-                  {selectedAnswer === index && (
-                    <div
-                      className={`w-2 h-2 rounded-full ${
-                        isValidated ? (index === question.answer ? "bg-green-500" : "bg-red-500") : "bg-indigo-500"
+                  Confirmer la réponse
+                </Button>
+              )}
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {memoizedOptions.map((option, index) => (
+                <button
+                  key={index}
+                  onClick={() => !isValidated && onAnswerSelect(index)}
+                  disabled={isValidated}
+                  className={`w-full p-4 text-left rounded-lg border transition-colors
+                    ${selectedAnswer === index
+                      ? 'border-blue-500 bg-blue-500/20 text-blue-200'
+                      : 'border-gray-600 bg-gray-800 text-gray-300 hover:border-gray-500 hover:bg-gray-700'
+                    }
+                    ${isValidated ? 'cursor-not-allowed opacity-60' : 'cursor-pointer'}
+                  `}
+                >
+                  <div className="flex items-center space-x-3">
+                    <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center
+                      ${selectedAnswer === index 
+                        ? 'border-blue-500 bg-blue-500' 
+                        : 'border-gray-500'
                       }`}
-                    />
-                  )}
-                </div>
-                <TextRenderer key={`option-${question.id}-${index}-${refreshKey}`} className="text-gray-200 flex-1">
-                  {option}
-                </TextRenderer>
-              </label>
-            ))}
-          </div>
-        )}
-
-        <div className="flex justify-between items-center mb-4">
-          <div className="text-sm text-gray-400">
-            Score actuel :{" "}
-            <span className={currentScore > questionNumber / 2 ? "text-green-400" : "text-red-400"}>
-              {currentScore}/{questionNumber - 1}
-            </span>
-          </div>
-          {!isValidated && (
-            <button
-              onClick={onSkip}
-              className="px-4 py-2 bg-gray-600 hover:bg-gray-500 text-white text-sm rounded-md transition-colors duration-200"
-            >
-              Passer
-            </button>
+                    >
+                      {selectedAnswer === index && (
+                        <div className="w-2 h-2 rounded-full bg-white" />
+                      )}
+                    </div>
+                    <span>
+                      <TextRenderer>{option}</TextRenderer>
+                    </span>
+                  </div>
+                </button>
+              ))}
+            </div>
           )}
         </div>
 
-        <button
-          onClick={onValidate}
-          disabled={selectedAnswer === null || isValidated}
-          className="w-full bg-indigo-600 hover:bg-indigo-500 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-medium py-3 px-4 rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-800"
-        >
-          Valider
-        </button>
-      </div>
+        <div className="flex items-center justify-between pt-4">
+          <div className="text-sm text-gray-400">
+            Score actuel : {currentScore}/{questionNumber-1}
+          </div>
+          
+          <div className="flex gap-3">
+            <Button
+              variant="outline"
+              onClick={onSkip}
+              disabled={isValidated}
+              className="border-gray-600 text-gray-300 hover:bg-gray-700"
+            >
+              <SkipForward className="h-4 w-4 mr-2" />
+              Passer
+            </Button>
+            
+            <Button
+              onClick={onValidate}
+              disabled={isValidated || selectedAnswer === null}
+              className="bg-blue-600 hover:bg-blue-700 text-white"
+            >
+              Valider
+            </Button>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
   )
 }

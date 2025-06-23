@@ -1,10 +1,12 @@
 "use client"
 
-import { useMemo, useState } from "react"
-import type { QCM } from "@/lib/questions"
+import { QCM } from "@/lib/questions"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { CheckCircle, XCircle, SkipForward, ArrowRight } from "lucide-react"
+import { useMemo } from "react"
 import KatexRenderer from "./KatexRenderer"
 import SimpleTextRenderer from "./SimpleTextRenderer"
-
 
 interface ExplanationBoxProps {
   question: QCM
@@ -12,8 +14,8 @@ interface ExplanationBoxProps {
   onNext: () => void
   onReturnToMenu: () => void
   isLastQuestion: boolean
-  skippedQuestion: boolean
-  subject?: "logique" | "droit" | "risques" | "probabilites"
+  skippedQuestion?: boolean
+  subject?: string
 }
 
 export default function ExplanationBox({
@@ -25,7 +27,6 @@ export default function ExplanationBox({
   skippedQuestion,
   subject = "logique",
 }: ExplanationBoxProps) {
-  const [refreshKey, setRefreshKey] = useState(0)
   
   const needsLatex = subject === "logique" || subject === "probabilites"
   const TextRenderer = needsLatex ? KatexRenderer : SimpleTextRenderer
@@ -36,151 +37,100 @@ export default function ExplanationBox({
       .replace(/\n\n/g, '</p><p class="mt-3">')
       .replace(/\n/g, '<br/>')
       .replace(/•/g, '<span class="text-indigo-400">•</span>')
-  }, [question.explanation, refreshKey])
-
-  const handleRepairLatex = () => {
-    // Force un re-rendu plus agressif
-    setRefreshKey(prev => prev + Math.random())
-    // Forcer le re-rendu de KaTeX après un court délai
-    setTimeout(() => {
-      if (typeof window !== "undefined" && window.renderMathInElement) {
-        window.renderMathInElement(document.body, {
-          delimiters: [
-            {left: "$$", right: "$$", display: true},
-            {left: "$", right: "$", display: false}
-          ]
-        })
-      }
-    }, 100)
-  }
-
-  const handleClearCache = () => {
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("quiz-logique-state")
-      // Force une actualisation complète de la page pour recharger les questions corrigées
-      window.location.reload()
-    }
-  }
+  }, [question.explanation])
 
   const isCorrect = question.answerType === 'numeric' 
     ? selectedAnswer?.toString() === question.answer?.toString()
     : selectedAnswer === question.answer
 
+  const isSkipped = skippedQuestion || selectedAnswer === null
+
   return (
-    <div className="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-2xl">
-        <div className="flex justify-between items-center mb-6">
-          <button
-            onClick={onReturnToMenu}
-            className="px-3 py-2 bg-gray-600 hover:bg-gray-500 text-white text-sm rounded-md transition-colors duration-200"
-          >
-            ← Menu
-          </button>
-          {needsLatex && (
-            <div className="flex gap-2">
-              <button
-                onClick={handleClearCache}
-                className="px-2 py-1 bg-red-600 hover:bg-red-500 text-white text-xs rounded transition-colors duration-200"
-                title="Vider le cache"
-              >
-                🗑️ Cache
-              </button>
-              <button
-                onClick={handleRepairLatex}
-                className="px-2 py-1 bg-orange-600 hover:bg-orange-500 text-white text-xs rounded transition-colors duration-200"
-                title="Réparer l'affichage LaTeX"
-              >
-                Réparer LaTeX
-              </button>
+    <Card className="w-full max-w-4xl mx-auto bg-gray-900 border-gray-700">
+      <CardHeader className="text-center">
+        <div className="flex items-center justify-center mb-4">
+          {isSkipped ? (
+            <div className="w-16 h-16 rounded-full bg-yellow-500/20 flex items-center justify-center">
+              <SkipForward className="h-8 w-8 text-yellow-400" />
+            </div>
+          ) : isCorrect ? (
+            <div className="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center">
+              <CheckCircle className="h-8 w-8 text-green-400" />
+            </div>
+          ) : (
+            <div className="w-16 h-16 rounded-full bg-red-500/20 flex items-center justify-center">
+              <XCircle className="h-8 w-8 text-red-400" />
             </div>
           )}
         </div>
+        
+        <CardTitle className={`text-2xl font-bold ${
+          isSkipped ? 'text-yellow-400' : isCorrect ? 'text-green-400' : 'text-red-400'
+        }`}>
+          {isSkipped ? 'Question ignorée' : isCorrect ? 'Correct' : 'Incorrect'}
+        </CardTitle>
+      </CardHeader>
 
-        <div className="text-center mb-6">
-          <div
-            className={`inline-flex items-center justify-center w-16 h-16 rounded-full mb-4 ${
-              skippedQuestion
-                ? "bg-gray-600 text-gray-300"
-                : isCorrect
-                  ? "bg-green-900/20 text-green-400"
-                  : "bg-red-900/20 text-red-400"
-            }`}
-          >
-            {skippedQuestion ? (
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            ) : isCorrect ? (
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
-            ) : (
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            )}
-          </div>
-
-          <h3
-            className={`text-2xl font-bold mb-2 ${
-              skippedQuestion ? "text-gray-400" : isCorrect ? "text-green-400" : "text-red-400"
-            }`}
-          >
-            {skippedQuestion ? "Question passée" : isCorrect ? "Correct !" : "Incorrect"}
-          </h3>
-        </div>
-
-        <div className="mb-6">
-          <TextRenderer key={`question-${question.id}-${refreshKey}`} className="text-lg font-semibold text-gray-200 mb-2 leading-relaxed">
-            {question.question}
-          </TextRenderer>
-
-          <div className="space-y-2 mb-4">
-            {!skippedQuestion && selectedAnswer !== null && selectedAnswer !== "" && (
-              <p className="text-gray-300">
-                <span className="font-medium">Votre réponse :</span>{" "}
-                {question.answerType === 'numeric' ? (
-                  <span className={isCorrect ? "text-green-400" : "text-red-400"}>
-                    {selectedAnswer}
-                  </span>
-                ) : (
-                  <TextRenderer key={`selected-${question.id}-${refreshKey}`} className={isCorrect ? "text-green-400" : "text-red-400"}>
-                    {question.options[selectedAnswer as number]}
-                  </TextRenderer>
+      <CardContent className="space-y-6">
+        {!isSkipped && (
+          <div className="space-y-4">
+            <div className="bg-gray-800 p-4 rounded-lg border border-gray-700">
+              <h3 className="font-semibold text-gray-200 mb-2">
+                <TextRenderer>{question.question}</TextRenderer>
+              </h3>
+              
+              <div className="space-y-2">
+                <div className="text-sm text-gray-400">Votre réponse :</div>
+                <div className={`font-medium ${isCorrect ? 'text-green-400' : 'text-red-400'}`}>
+                  {question.answerType === 'numeric' 
+                    ? selectedAnswer 
+                    : <TextRenderer>{question.options[selectedAnswer as number]}</TextRenderer>
+                  }
+                </div>
+                
+                {!isCorrect && (
+                  <>
+                    <div className="text-sm text-gray-400 mt-3">Bonne réponse :</div>
+                    <div className="text-green-400 font-medium">
+                      {question.answerType === 'numeric' 
+                        ? question.answer 
+                        : <TextRenderer>{question.options[question.answer as number]}</TextRenderer>
+                      }
+                    </div>
+                  </>
                 )}
-              </p>
-            )}
-
-            <p className="text-gray-300">
-              <span className="font-medium">Bonne réponse :</span>{" "}
-              {question.answerType === 'numeric' ? (
-                <span className="text-green-400">{question.answer}</span>
-              ) : (
-                <TextRenderer key={`correct-${question.id}-${refreshKey}`} className="text-green-400">
-                  {question.options[question.answer as number]}
-                </TextRenderer>
-              )}
-            </p>
+              </div>
+            </div>
           </div>
+        )}
+
+        <div className="bg-blue-900/20 border border-blue-600 rounded-lg p-6">
+          <h3 className="text-lg font-semibold text-blue-300 mb-4">Explication :</h3>
+          <div 
+            className="text-gray-300 leading-relaxed prose prose-invert max-w-none"
+            dangerouslySetInnerHTML={{ __html: `<p>${processedExplanation}</p>` }}
+          />
         </div>
 
-        <div className="bg-gray-700/50 rounded-lg p-4 mb-8">
-          <h5 className="font-semibold text-gray-200 mb-2">Explication :</h5>
-          <TextRenderer key={`explanation-${question.id}-${refreshKey}`} className="text-gray-300 leading-relaxed prose prose-invert max-w-none">
-            {processedExplanation}
-          </TextRenderer>
+        <div className="flex justify-center pt-4">
+          <Button
+            onClick={isLastQuestion ? onReturnToMenu : onNext}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3"
+          >
+            {isLastQuestion ? (
+              <>
+                Retour au menu
+                <ArrowRight className="h-4 w-4 ml-2" />
+              </>
+            ) : (
+              <>
+                Question suivante
+                <ArrowRight className="h-4 w-4 ml-2" />
+              </>
+            )}
+          </Button>
         </div>
-
-        <button
-          onClick={onNext}
-          className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-3 px-4 rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-800"
-        >
-          {isLastQuestion ? "Voir les résultats" : "Question suivante"}
-        </button>
-      </div>
+      </CardContent>
+    </Card>
   )
 }
