@@ -33,19 +33,15 @@ export function LambdaTypingRules() {
                 <div className="space-y-2">
                   <div className="bg-gray-800 p-3 rounded border border-gray-600">
                     <div className="font-medium text-sm text-gray-400 mb-1">Variable [Var]</div>
-                    <KatexRenderer 
-                      latex="\\frac{x : \\sigma \\in \\Gamma}{\\Gamma \\vdash x : \\sigma}" 
-                      displayMode={true}
-                      className="text-gray-200"
-                    />
+                    <KatexRenderer className="text-gray-200">
+                      {"$$\\frac{x : \\sigma \\in \\Gamma}{\\Gamma \\vdash x : \\sigma}$$"}
+                    </KatexRenderer>
                   </div>
                   <div className="bg-gray-800 p-3 rounded border border-gray-600">
                     <div className="font-medium text-sm text-gray-400 mb-1">Abstraction [λ]</div>
-                    <KatexRenderer 
-                      latex="\\frac{\\Gamma, x : \\sigma \\vdash M : \\tau}{\\Gamma \\vdash \\lambda x \\cdot M : \\sigma \\to \\tau}" 
-                      displayMode={true}
-                      className="text-gray-200"
-                    />
+                    <KatexRenderer className="text-gray-200">
+                      {"$$\\frac{\\Gamma, x : \\sigma \\vdash M : \\tau}{\\Gamma \\vdash \\lambda x \\cdot M : \\sigma \\to \\tau}$$"}
+                    </KatexRenderer>
                   </div>
                 </div>
               </div>
@@ -58,11 +54,9 @@ export function LambdaTypingRules() {
                 <div className="space-y-2">
                   <div className="bg-gray-800 p-3 rounded border border-gray-600">
                     <div className="font-medium text-sm text-gray-400 mb-1">Application [App]</div>
-                    <KatexRenderer 
-                      latex="\\frac{\\Gamma \\vdash M : \\sigma \\to \\tau \\quad \\Gamma \\vdash N : \\sigma}{\\Gamma \\vdash MN : \\tau}" 
-                      displayMode={true}
-                      className="text-gray-200"
-                    />
+                    <KatexRenderer className="text-gray-200">
+                      {"$$\\frac{\\Gamma \\vdash M : \\sigma \\to \\tau \\quad \\Gamma \\vdash N : \\sigma}{\\Gamma \\vdash MN : \\tau}$$"}
+                    </KatexRenderer>
                   </div>
                 </div>
               </div>
@@ -75,19 +69,15 @@ export function LambdaTypingRules() {
                 <div className="space-y-2">
                   <div className="bg-gray-800 p-3 rounded border border-gray-600">
                     <div className="font-medium text-sm text-gray-400 mb-1">Introduction [×I]</div>
-                    <KatexRenderer 
-                      latex="\\frac{\\Gamma \\vdash M : \\sigma \\quad \\Gamma \\vdash N : \\tau}{\\Gamma \\vdash \\langle M, N \\rangle : \\sigma \\times \\tau}" 
-                      displayMode={true}
-                      className="text-gray-200"
-                    />
+                    <KatexRenderer className="text-gray-200">
+                      {"$$\\frac{\\Gamma \\vdash M : \\sigma \\quad \\Gamma \\vdash N : \\tau}{\\Gamma \\vdash \\langle M, N \\rangle : \\sigma \\times \\tau}$$"}
+                    </KatexRenderer>
                   </div>
                   <div className="bg-gray-800 p-3 rounded border border-gray-600">
                     <div className="font-medium text-sm text-gray-400 mb-1">Élimination [×E₁] et [×E₂]</div>
-                    <KatexRenderer 
-                      latex="\\frac{\\Gamma \\vdash M : \\sigma \\times \\tau}{\\Gamma \\vdash \\Pi_1(M) : \\sigma} \\quad \\frac{\\Gamma \\vdash M : \\sigma \\times \\tau}{\\Gamma \\vdash \\Pi_2(M) : \\tau}" 
-                      displayMode={true}
-                      className="text-gray-200"
-                    />
+                    <KatexRenderer className="text-gray-200">
+                      {"$$\\frac{\\Gamma \\vdash M : \\sigma \\times \\tau}{\\Gamma \\vdash \\Pi_1(M) : \\sigma} \\quad \\frac{\\Gamma \\vdash M : \\sigma \\times \\tau}{\\Gamma \\vdash \\Pi_2(M) : \\tau}$$"}
+                    </KatexRenderer>
                   </div>
                 </div>
               </div>
@@ -100,19 +90,15 @@ export function LambdaTypingRules() {
                 <div className="space-y-2">
                   <div className="bg-gray-800 p-3 rounded border border-gray-600">
                     <div className="font-medium text-sm text-gray-400 mb-1">Introduction [∪I₁] et [∪I₂]</div>
-                    <KatexRenderer 
-                      latex="\\frac{\\Gamma \\vdash M : \\sigma}{\\Gamma \\vdash K_1(M) : \\sigma \\cup \\tau} \\quad \\frac{\\Gamma \\vdash M : \\tau}{\\Gamma \\vdash K_2(M) : \\sigma \\cup \\tau}" 
-                      displayMode={true}
-                      className="text-gray-200"
-                    />
+                    <KatexRenderer className="text-gray-200">
+                      {"$$\\frac{\\Gamma \\vdash M : \\sigma}{\\Gamma \\vdash K_1(M) : \\sigma \\cup \\tau} \\quad \\frac{\\Gamma \\vdash M : \\tau}{\\Gamma \\vdash K_2(M) : \\sigma \\cup \\tau}$$"}
+                    </KatexRenderer>
                   </div>
                   <div className="bg-gray-800 p-3 rounded border border-gray-600">
                     <div className="font-medium text-sm text-gray-400 mb-1">Élimination [∪E]</div>
-                    <KatexRenderer 
-                      latex="\\frac{\\Gamma \\vdash M : \\sigma \\cup \\tau \\quad \\Gamma, u : \\sigma \\vdash U : \\mu \\quad \\Gamma, v : \\tau \\vdash V : \\mu}{\\Gamma \\vdash \\oplus(\\lambda u \\cdot U, \\lambda v \\cdot V, M) : \\mu}" 
-                      displayMode={true}
-                      className="text-gray-200"
-                    />
+                    <KatexRenderer className="text-gray-200">
+                      {"$$\\frac{\\Gamma \\vdash M : \\sigma \\cup \\tau \\quad \\Gamma, u : \\sigma \\vdash U : \\mu \\quad \\Gamma, v : \\tau \\vdash V : \\mu}{\\Gamma \\vdash \\oplus(\\lambda u \\cdot U, \\lambda v \\cdot V, M) : \\mu}$$"}
+                    </KatexRenderer>
                   </div>
                 </div>
               </div>
@@ -126,11 +112,9 @@ export function LambdaTypingRules() {
               </h3>
               <div className="bg-gray-800 p-3 rounded border border-gray-600">
                 <div className="font-medium text-sm text-gray-400 mb-1">Élimination [∅E]</div>
-                <KatexRenderer 
-                  latex="\\frac{\\Gamma \\vdash M : \\emptyset}{\\Gamma \\vdash \\varepsilon(M) : \\sigma}" 
-                  displayMode={true}
-                  className="text-gray-200"
-                />
+                <KatexRenderer className="text-gray-200">
+                  {"$$\\frac{\\Gamma \\vdash M : \\emptyset}{\\Gamma \\vdash \\varepsilon(M) : \\sigma}$$"}
+                </KatexRenderer>
                 <div className="text-xs text-gray-500 mt-1">
                   Du type vide, on peut dériver n'importe quel type
                 </div>
@@ -144,16 +128,16 @@ export function LambdaTypingRules() {
               </h3>
               <div className="bg-gray-800 p-3 rounded border border-gray-600 space-y-2">
                 <div className="text-sm">
-                  <KatexRenderer latex="\\overline{0} = \\lambda f x \\cdot x" className="text-gray-200" />
+                  <KatexRenderer className="text-gray-200">{"$\\overline{0} = \\lambda f x \\cdot x$"}</KatexRenderer>
                 </div>
                 <div className="text-sm">
-                  <KatexRenderer latex="\\overline{1} = \\lambda f x \\cdot f(x)" className="text-gray-200" />
+                  <KatexRenderer className="text-gray-200">{"$\\overline{1} = \\lambda f x \\cdot f(x)$"}</KatexRenderer>
                 </div>
                 <div className="text-sm">
-                  <KatexRenderer latex="\\overline{n} = \\lambda f x \\cdot f^n(x)" className="text-gray-200" />
+                  <KatexRenderer className="text-gray-200">{"$\\overline{n} = \\lambda f x \\cdot f^n(x)$"}</KatexRenderer>
                 </div>
                 <div className="text-xs text-gray-500 mt-2">
-                  Type : <KatexRenderer latex="(\\alpha \\to \\alpha) \\to \\alpha \\to \\alpha" className="text-gray-300" />
+                  Type : <KatexRenderer className="text-gray-300">{"$(\\alpha \\to \\alpha) \\to \\alpha \\to \\alpha$"}</KatexRenderer>
                 </div>
               </div>
             </div>
@@ -161,11 +145,11 @@ export function LambdaTypingRules() {
             <div className="text-xs text-gray-400 bg-gray-800 p-3 rounded">
               <p><strong>Notation :</strong></p>
               <ul className="mt-1 space-y-1">
-                <li>• <KatexRenderer latex="\\Gamma" className="text-gray-300" /> : contexte de typage (environnement)</li>
-                <li>• <KatexRenderer latex="\\Gamma \\vdash M : \\tau" className="text-gray-300" /> : "M a le type τ dans le contexte Γ"</li>
-                <li>• <KatexRenderer latex="\\sigma \\to \\tau" className="text-gray-300" /> : type fonction de σ vers τ</li>
-                <li>• <KatexRenderer latex="\\sigma \\times \\tau" className="text-gray-300" /> : type produit (paire)</li>
-                <li>• <KatexRenderer latex="\\sigma \\cup \\tau" className="text-gray-300" /> : type union (somme)</li>
+                <li>• <KatexRenderer className="text-gray-300">{"$\\Gamma$"}</KatexRenderer> : contexte de typage (environnement)</li>
+                <li>• <KatexRenderer className="text-gray-300">{"$\\Gamma \\vdash M : \\tau$"}</KatexRenderer> : "M a le type τ dans le contexte Γ"</li>
+                <li>• <KatexRenderer className="text-gray-300">{"$\\sigma \\to \\tau$"}</KatexRenderer> : type fonction de σ vers τ</li>
+                <li>• <KatexRenderer className="text-gray-300">{"$\\sigma \\times \\tau$"}</KatexRenderer> : type produit (paire)</li>
+                <li>• <KatexRenderer className="text-gray-300">{"$\\sigma \\cup \\tau$"}</KatexRenderer> : type union (somme)</li>
               </ul>
             </div>
 

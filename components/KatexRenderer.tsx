@@ -24,25 +24,35 @@ export default function KatexRenderer({
   const processedContent = useMemo(() => content, [content])
 
   useEffect(() => {
-    if (containerRef.current && processedContent !== lastProcessedContent.current) {
-      if (displayMode && latex) {
-        containerRef.current.innerHTML = `$$${processedContent}$$`
-      } else {
-        containerRef.current.innerHTML = processedContent
+    if (containerRef.current && processedContent && processedContent !== lastProcessedContent.current) {
+      try {
+        if (displayMode && latex) {
+          containerRef.current.innerHTML = `$$${processedContent}$$`
+        } else if (latex) {
+          containerRef.current.innerHTML = `$${processedContent}$`
+        } else {
+          containerRef.current.innerHTML = processedContent
+        }
+        
+        renderMathInElement(containerRef.current, {
+          delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true },
+          ],
+          throwOnError: false,
+          ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+          trust: true,
+        })
+        
+        lastProcessedContent.current = processedContent
+      } catch (error) {
+        console.error("KaTeX rendering error:", error, "Content:", processedContent)
+        if (containerRef.current) {
+          containerRef.current.innerHTML = processedContent
+        }
       }
-      
-      renderMathInElement(containerRef.current, {
-        delimiters: [
-          { left: "$$", right: "$$", display: true },
-          { left: "$", right: "$", display: false },
-          { left: "\\(", right: "\\)", display: false },
-          { left: "\\[", right: "\\]", display: true },
-        ],
-        throwOnError: false,
-        ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
-      })
-      
-      lastProcessedContent.current = processedContent
     }
   }, [processedContent, displayMode, latex])
 
