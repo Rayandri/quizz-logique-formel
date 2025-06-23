@@ -124,8 +124,7 @@ export default function Home() {
     const isLambdaQuestion = currentQuestion.id >= 2000
     
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-4">
-        <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto">
           {isDeductionQuestion && <DeductionRules />}
           {isLambdaQuestion && <LambdaTypingRules />}
           <QuestionCard
@@ -140,7 +139,6 @@ export default function Home() {
             currentScore={currentScore}
           />
         </div>
-      </div>
     )
   }
 

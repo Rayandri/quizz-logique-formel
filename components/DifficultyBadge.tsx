@@ -11,27 +11,27 @@ export function DifficultyBadge({ difficulty }: DifficultyBadgeProps) {
       case "cours":
         return {
           label: "Question de cours",
-          className: "bg-blue-100 text-blue-800 hover:bg-blue-200 border-blue-200"
+          className: "bg-blue-900/30 text-blue-300 hover:bg-blue-900/40 border-blue-600"
         }
       case "facile":
         return {
           label: "Facile",
-          className: "bg-green-100 text-green-800 hover:bg-green-200 border-green-200"
+          className: "bg-green-900/30 text-green-300 hover:bg-green-900/40 border-green-600"
         }
       case "moyen":
         return {
           label: "Moyen",
-          className: "bg-orange-100 text-orange-800 hover:bg-orange-200 border-orange-200"
+          className: "bg-orange-900/30 text-orange-300 hover:bg-orange-900/40 border-orange-600"
         }
       case "dur":
         return {
           label: "Difficile",
-          className: "bg-red-100 text-red-800 hover:bg-red-200 border-red-200"
+          className: "bg-red-900/30 text-red-300 hover:bg-red-900/40 border-red-600"
         }
       default:
         return {
           label: "Facile",
-          className: "bg-green-100 text-green-800 hover:bg-green-200 border-green-200"
+          className: "bg-green-900/30 text-green-300 hover:bg-green-900/40 border-green-600"
         }
     }
   }
