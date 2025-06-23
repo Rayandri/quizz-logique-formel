@@ -91,10 +91,10 @@ const EXISTING_QUESTIONS: QCM[] = [
     id: 7,
     question: "L'implication matérialisée : $A \Rightarrow B$ équivaut à :",
     options: [
-      "$\neg A \vee B$", 
-      "$A \wedge B$", 
-      "$\neg B \vee A$", 
-      "$B \wedge \neg A$"
+      "$\\neg A \\vee B$", 
+      "$A \\wedge B$", 
+      "$\\neg B \\vee A$", 
+      "$B \\wedge \\neg A$"
     ],
     answer: 0,
     explanation: "L'**implication matérialisée** définit : $A \Rightarrow B \equiv \neg A \vee B$\n\n**Vérification par table de vérité :**\nL'implication n'est fausse que quand l'antécédent est vrai et le conséquent faux.\n\nDans tous les autres cas (A faux ou B vrai), l'implication est vraie.\n\n**Utilité :** Cette définition permet d'éliminer le connecteur $\Rightarrow$ lors de la transformation en formes normales, en utilisant uniquement $\neg$, $\wedge$ et $\vee$.",
