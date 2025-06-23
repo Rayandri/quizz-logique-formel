@@ -4,6 +4,7 @@ import { useMemo } from "react"
 import type { QCM } from "@/lib/questions"
 import KatexRenderer from "./KatexRenderer"
 import Footer from "./Footer"
+import { DifficultyBadge } from "./DifficultyBadge"
 
 interface QuestionCardProps {
   question: QCM
@@ -36,9 +37,12 @@ export default function QuestionCard({
         <div className="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-2xl">
         <div className="mb-6">
           <div className="flex justify-between items-center mb-4">
-            <span className="text-sm text-gray-400">
-              Question {questionNumber} sur {totalQuestions}
-            </span>
+            <div className="flex items-center gap-3">
+              <span className="text-sm text-gray-400">
+                Question {questionNumber} sur {totalQuestions}
+              </span>
+              <DifficultyBadge difficulty={question.difficulty || "facile"} />
+            </div>
             <div className="w-full max-w-xs bg-gray-700 rounded-full h-2 ml-4">
               <div
                 className="bg-indigo-600 h-2 rounded-full transition-all duration-300"

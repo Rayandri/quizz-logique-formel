@@ -1,12 +1,15 @@
 import { DEDUCTION_QUESTIONS } from './deduction-questions'
 import { LAMBDA_CALCULUS_QUESTIONS } from './lambda-calculus-questions'
 
+export type DifficultyLevel = "cours" | "facile" | "moyen" | "dur"
+
 export interface QCM {
   id: number
   question: string
   options: [string, string, string, string]
   answer: number
   explanation: string
+  difficulty?: DifficultyLevel
 }
 
 const EXISTING_QUESTIONS: QCM[] = [
@@ -22,6 +25,7 @@ const EXISTING_QUESTIONS: QCM[] = [
     answer: 0,
     explanation:
       "La **Forme Normale Conjonctive (CNF)** est une conjonction (∧) de disjonctions (∨) de littéraux.\n\nUn littéral est soit une variable propositionnelle, soit sa négation.\n\nLa formule (A ∨ B) ∧ (¬C ∨ D) respecte cette structure : c'est un ET de deux clauses, chaque clause étant un OU de littéraux.\n\n**Propriété importante :** Toute formule peut être transformée en CNF par les lois de De Morgan et la distributivité.",
+    difficulty: "cours"
   },
   {
     id: 2,
@@ -568,7 +572,7 @@ const EXISTING_QUESTIONS: QCM[] = [
 ]
 
 export const QUESTIONS: QCM[] = [
-  ...EXISTING_QUESTIONS,
-  ...DEDUCTION_QUESTIONS.map(q => ({ ...q, id: q.id + 1000 })),
-  ...LAMBDA_CALCULUS_QUESTIONS.map(q => ({ id: q.id + 2000, question: q.question, options: q.options, answer: q.answer, explanation: q.explanation }))
+  ...EXISTING_QUESTIONS.map(q => ({ ...q, difficulty: (q as any).difficulty || "facile" as DifficultyLevel })),
+  ...DEDUCTION_QUESTIONS.map(q => ({ ...q, id: q.id + 1000, difficulty: (q as any).difficulty || "moyen" as DifficultyLevel })),
+  ...LAMBDA_CALCULUS_QUESTIONS.map(q => ({ id: q.id + 2000, question: q.question, options: q.options, answer: q.answer, explanation: q.explanation, difficulty: q.points && q.points >= 3 ? "dur" : "moyen" as DifficultyLevel }))
 ]

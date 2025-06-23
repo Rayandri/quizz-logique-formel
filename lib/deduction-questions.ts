@@ -1,9 +1,12 @@
+export type DifficultyLevel = "cours" | "facile" | "moyen" | "dur"
+
 export interface QCM {
   id: number
   question: string
   options: [string, string, string, string]
   answer: number
   explanation: string
+  difficulty?: DifficultyLevel
 }
 
 export const DEDUCTION_QUESTIONS: QCM[] = [
@@ -17,7 +20,8 @@ export const DEDUCTION_QUESTIONS: QCM[] = [
       "$[\\vee\\text{E}]$ : élimination de disjonction"
     ],
     answer: 0,
-    explanation: "La règle $[\\Rightarrow\\text{I}]$ (**introduction de l'implication**) permet de prouver A ⇒ B en supposant A et en dérivant B.\n\n**Structure de la preuve :**\n```\n[A]¹\n ⋮\n B\n―――――― ⇒I,¹\nA ⇒ B\n```\n\n**Principe :** Pour établir \"si A alors B\", on suppose A et on montre que cela implique B.\n\n**Décharge d'hypothèse :** L'hypothèse A est déchargée (marquée par l'exposant) lors de l'application de la règle."
+    explanation: "La règle $[\\Rightarrow\\text{I}]$ (**introduction de l'implication**) permet de prouver A ⇒ B en supposant A et en dérivant B.\n\n**Structure de la preuve :**\n```\n[A]¹\n ⋮\n B\n―――――― ⇒I,¹\nA ⇒ B\n```\n\n**Principe :** Pour établir \"si A alors B\", on suppose A et on montre que cela implique B.\n\n**Décharge d'hypothèse :** L'hypothèse A est déchargée (marquée par l'exposant) lors de l'application de la règle.",
+    difficulty: "cours"
   },
   {
     id: 2,
@@ -53,7 +57,8 @@ export const DEDUCTION_QUESTIONS: QCM[] = [
       "L'application du modus ponens"
     ],
     answer: 0,
-    explanation: "La règle $[\\vee\\text{E}]$ formalise le **raisonnement par cas** :\n\n**Structure complète :**\n```\n      [A]¹  [B]²\n       ⋮     ⋮\nA ∨ B  C     C\n―――――――――――――――― ∨E,¹,²\n       C\n```\n\n**Principe :** Si on a A ∨ B, et qu'on peut dériver C en supposant A et dériver C en supposant B, alors C est vrai.\n\n**Intuition :** \"Dans tous les cas possibles, C est vrai, donc C est vrai.\""
+    explanation: "La règle $[\\vee\\text{E}]$ formalise le **raisonnement par cas** :\n\n**Structure complète :**\n```\n      [A]¹  [B]²\n       ⋮     ⋮\nA ∨ B  C     C\n―――――――――――――――― ∨E,¹,²\n       C\n```\n\n**Principe :** Si on a A ∨ B, et qu'on peut dériver C en supposant A et dériver C en supposant B, alors C est vrai.\n\n**Intuition :** \"Dans tous les cas possibles, C est vrai, donc C est vrai.\"",
+    difficulty: "moyen"
   },
   {
     id: 5,
@@ -125,6 +130,7 @@ export const DEDUCTION_QUESTIONS: QCM[] = [
       "Élimination de disjonction"
     ],
     answer: 0,
-    explanation: "Cette formule exprime la **transitivité de l'implication**. La preuve utilise :\n\n**Structure :**\n```\n[A ⇒ B]¹\n[B ⇒ C]²\n[A]³\n  |\n  B     (⇒E sur A ⇒ B et A)\n  |\n  C     (⇒E sur B ⇒ C et B)\n  |\nA ⇒ C   (⇒I,³)\n  |\n(B ⇒ C) ⇒ (A ⇒ C)   (⇒I,²)\n  |\n(A ⇒ B) ⇒ ((B ⇒ C) ⇒ (A ⇒ C))   (⇒I,¹)\n```\n\n**Stratégie :** Trois $[\\Rightarrow\\text{I}]$ imbriquées suivies de deux $[\\Rightarrow\\text{E}]$ pour la chaîne de déduction."
+    explanation: "Cette formule exprime la **transitivité de l'implication**. La preuve utilise :\n\n**Structure :**\n```\n[A ⇒ B]¹\n[B ⇒ C]²\n[A]³\n  |\n  B     (⇒E sur A ⇒ B et A)\n  |\n  C     (⇒E sur B ⇒ C et B)\n  |\nA ⇒ C   (⇒I,³)\n  |\n(B ⇒ C) ⇒ (A ⇒ C)   (⇒I,²)\n  |\n(A ⇒ B) ⇒ ((B ⇒ C) ⇒ (A ⇒ C))   (⇒I,¹)\n```\n\n**Stratégie :** Trois $[\\Rightarrow\\text{I}]$ imbriquées suivies de deux $[\\Rightarrow\\text{E}]$ pour la chaîne de déduction.",
+    difficulty: "dur"
   }
 ] 

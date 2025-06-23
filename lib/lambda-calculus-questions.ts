@@ -1,3 +1,5 @@
+export type DifficultyLevel = "cours" | "facile" | "moyen" | "dur"
+
 export interface LambdaQuestion {
   id: number
   question: string
@@ -5,6 +7,7 @@ export interface LambdaQuestion {
   answer: number
   explanation: string
   points?: number
+  difficulty?: DifficultyLevel
 }
 
 export const LAMBDA_CALCULUS_QUESTIONS: LambdaQuestion[] = [
@@ -32,7 +35,8 @@ export const LAMBDA_CALCULUS_QUESTIONS: LambdaQuestion[] = [
     ],
     answer: 0,
     explanation: "Dans l'encodage de Church, l'entier $n$ est représenté par :\n$$\\overline{n} = \\lambda f x \\cdot f^n(x)$$\n\noù $f^n(x)$ signifie appliquer $f$ exactement $n$ fois à $x$.\n\n**Pour 3 :** $\\overline{3} = \\lambda f x \\cdot f(f(f(x)))$\n\n**Structure générale :**\n- $\\overline{0} = \\lambda f x \\cdot x$\n- $\\overline{1} = \\lambda f x \\cdot f(x)$\n- $\\overline{2} = \\lambda f x \\cdot f(f(x))$",
-    points: 1
+    points: 1,
+    difficulty: "cours"
   },
   {
     id: 3,
@@ -110,7 +114,8 @@ export const LAMBDA_CALCULUS_QUESTIONS: LambdaQuestion[] = [
     ],
     answer: 0,
     explanation: "Le **prédécesseur** est complexe dans l'encodage de Church car on ne peut pas \"défaire\" une application.\n\n**Solution de Church :** Utiliser des paires $\\langle n, n-1 \\rangle$\n\n$$\\text{Pred} = \\lambda n \\cdot \\pi_2(n(\\lambda p \\cdot \\langle \\text{Succ}(\\pi_1(p)), \\pi_1(p) \\rangle) \\langle 0, 0 \\rangle)$$\n\n**Principe :**\n1. Partir de $\\langle 0, 0 \\rangle$\n2. Appliquer $n$ fois : $\\langle k, k-1 \\rangle \\mapsto \\langle k+1, k \\rangle$\n3. Extraire la seconde composante\n\n**Résultat :** $\\text{Pred}(n) = \\max(n-1, 0)$",
-    points: 3
+    points: 3,
+    difficulty: "dur"
   },
   {
     id: 9,
