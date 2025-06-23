@@ -5,19 +5,31 @@ import renderMathInElement from "katex/dist/contrib/auto-render"
 import "katex/dist/katex.min.css"
 
 interface KatexRendererProps {
-  children: string
+  children?: string
+  latex?: string
   className?: string
+  displayMode?: boolean
 }
 
-export default function KatexRenderer({ children, className = "" }: KatexRendererProps) {
+export default function KatexRenderer({ 
+  children, 
+  latex, 
+  className = "", 
+  displayMode = false 
+}: KatexRendererProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const lastProcessedContent = useRef<string>("")
 
-  const processedContent = useMemo(() => children, [children])
+  const content = latex || children || ""
+  const processedContent = useMemo(() => content, [content])
 
   useEffect(() => {
     if (containerRef.current && processedContent !== lastProcessedContent.current) {
-      containerRef.current.innerHTML = processedContent
+      if (displayMode && latex) {
+        containerRef.current.innerHTML = `$$${processedContent}$$`
+      } else {
+        containerRef.current.innerHTML = processedContent
+      }
       
       renderMathInElement(containerRef.current, {
         delimiters: [
@@ -27,11 +39,12 @@ export default function KatexRenderer({ children, className = "" }: KatexRendere
           { left: "\\[", right: "\\]", display: true },
         ],
         throwOnError: false,
+        ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
       })
       
       lastProcessedContent.current = processedContent
     }
-  }, [processedContent])
+  }, [processedContent, displayMode, latex])
 
   return (
     <div 
