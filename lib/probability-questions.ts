@@ -31,7 +31,7 @@ export const PROBABILITY_QUESTIONS: ProbabilityQCM[] = [
     ],
     answer: 1,
     answerType: "multiple",
-    explanation: "Si $X \\\\sim N(\\\\mu_1, \\\\sigma_1^2)$ et $Y \\\\sim N(\\\\mu_2, \\\\sigma_2^2)$ sont indépendantes, alors $X + Y \\\\sim N(\\\\mu_1 + \\\\mu_2, \\\\sigma_1^2 + \\\\sigma_2^2)$. La somme de normales indépendantes est normale.",
+    explanation: "Si $X \\sim N(\mu_1, \sigma_1^2)$ et $Y \\sim N(\mu_2, \sigma_2^2)$ sont indépendantes, alors $X + Y \\sim N(\mu_1 + \mu_2, \sigma_1^2 + \sigma_2^2)$. La somme de normales indépendantes est normale.",
     difficulty: "cours"
   },
   {
@@ -45,21 +45,21 @@ export const PROBABILITY_QUESTIONS: ProbabilityQCM[] = [
     ],
     answer: 0,
     answerType: "multiple",
-    explanation: "La fonction de répartition $F(x) = P(X \\\\leq x)$ est par définition croissante (non décroissante), car si $x_1 < x_2$, alors $P(X \\\\leq x_1) \\\\leq P(X \\\\leq x_2)$.",
+    explanation: "La fonction de répartition $F(x) = P(X \leq x)$ est par définition croissante (non décroissante), car si $x_1 < x_2$, alors $P(X \leq x_1) \leq P(X \leq x_2)$.",
     difficulty: "cours"
   },
   {
     id: 7004,
     question: "Espérance d'une variable géométrique de paramètre $p$ :",
     options: [
-      "$\\\\frac{1}{p}$",
+      "$\\frac{1}{p}$",
       "$p$",
       "$1-p$",
-      "$\\\\frac{p}{1-p}$"
+      "\$\frac{p}{1-p}$"
     ],
     answer: 0,
     answerType: "multiple",
-    explanation: "Pour une loi géométrique de paramètre $p$, l'espérance est $E(X) = \\\\frac{1}{p}$. C'est le nombre moyen d'essais nécessaires pour obtenir le premier succès.",
+    explanation: "Pour une loi géométrique de paramètre $p$, l'espérance est $E(X) = \frac{1}{p}$. C'est le nombre moyen d'essais nécessaires pour obtenir le premier succès.",
     difficulty: "cours"
   },
   {
@@ -274,16 +274,16 @@ export const PROBABILITY_QUESTIONS: ProbabilityQCM[] = [
   },
   {
     id: 7020,
-    question: "Si \text{Cov}(X,Y) = 0$ alors :",
+    question: "Si $\\text{Cov}(X,Y) = 0$ alors :",
     options: [
-      "$X$ et $Y$ sont indépendantes (piège !)",
+      "$X$ et $Y$ sont indépendantes",
       "$X$ et $Y$ peuvent être dépendantes",
       "$E(XY) = E(X)E(Y)$",
       "$V(X+Y) = V(X) + V(Y)$"
     ],
     answer: 1,
     answerType: "multiple",
-    explanation: "Covariance nulle n'implique pas indépendance en général ! Cependant, \text{Cov}(X,Y) = 0$ implique $E(XY) = E(X)E(Y)$ et $V(X+Y) = V(X) + V(Y)$. L'indépendance n'est garantie que pour les vecteurs gaussiens.",
+    explanation: "Covariance nulle n'implique pas indépendance en général ! Cependant, $\\text{Cov}(X,Y) = 0$ implique $E(XY) = E(X)E(Y)$ et $V(X+Y) = V(X) + V(Y)$. L'indépendance n'est garantie que pour les vecteurs gaussiens.",
     difficulty: "dur"
   },
   {

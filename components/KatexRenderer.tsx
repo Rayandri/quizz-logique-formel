@@ -35,6 +35,10 @@ export default function KatexRenderer({
   useEffect(() => {
     if (containerRef.current && processedContent) {
       try {
+        // Clear previous content
+        containerRef.current.innerHTML = ""
+        
+        // Set the content
         containerRef.current.innerHTML = processedContent
         
         renderMathInElement(containerRef.current, {
@@ -49,18 +53,23 @@ export default function KatexRenderer({
           trust: (context) => ['\\htmlId', '\\href'].includes(context.command),
           strict: false,
           fleqn: false,
+          errorColor: '#cc0000',
           macros: {
             "\\RR": "\\mathbb{R}",
             "\\NN": "\\mathbb{N}",
             "\\ZZ": "\\mathbb{Z}",
             "\\QQ": "\\mathbb{Q}",
             "\\CC": "\\mathbb{C}",
+            "\\text": "\\text",
+            "\\Cov": "\\text{Cov}",
           }
         })
       } catch (error) {
         console.error("KaTeX rendering error:", error, "Content:", processedContent)
         if (containerRef.current) {
-          containerRef.current.textContent = processedContent.replace(/<[^>]*>/g, '')
+          containerRef.current.innerHTML = processedContent.replace(/\$[^$]*\$/g, (match) => {
+            return `<span style="color: #cc0000; font-family: monospace;">[LaTeX Error: ${match}]</span>`
+          })
         }
       }
     }
