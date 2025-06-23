@@ -82,22 +82,35 @@ export default function KatexRenderer({
           "\\Sigma": "\\Sigma",
           "\\Phi": "\\Phi",
           "\\Psi": "\\Psi",
-          "\\Omega": "\\Omega"
+          "\\Omega": "\\Omega",
+          "\\to": "\\to",
+          "\\tau": "\\tau",
+          "\\vee": "\\vee",
+          "\\wedge": "\\wedge",
+          "\\neg": "\\neg",
+          "\\vdash": "\\vdash",
+          "\\times": "\\times",
+          "\\cup": "\\cup",
+          "\\emptyset": "\\emptyset",
+          "\\overline": "\\overline",
+          "\\varepsilon": "\\varepsilon",
+          "\\oplus": "\\oplus"
         }
       })
 
-      // Vérifier si le rendu a réussi
+      // Vérifier si le rendu a réussi avec plus de tolérance
       setTimeout(() => {
         if (containerRef.current) {
           const hasKatex = containerRef.current.querySelector('.katex') !== null
-          const hasUnrenderedMath = /\$[^$]*\$/.test(containerRef.current.textContent || "")
-          const shouldHaveMath = /\$[^$]*\$/.test(content)
+          const hasUnrenderedMath = /\$[^$]+\$/.test(containerRef.current.textContent || "")
+          const shouldHaveMath = /\$[^$]+\$/.test(content)
           
-          if (shouldHaveMath && (hasUnrenderedMath || !hasKatex)) {
+          // Seulement signaler une erreur si il devrait y avoir du math ET qu'il y a du math non rendu
+          if (shouldHaveMath && hasUnrenderedMath && !hasKatex) {
             setRenderError("LaTeX non rendu correctement")
           }
         }
-      }, 100)
+      }, 200)
 
     } catch (error) {
       console.error("KaTeX rendering error:", error)
