@@ -33,13 +33,26 @@ export default function ExplanationBox({
   }, [question.explanation, refreshKey])
 
   const handleRepairLatex = () => {
-    setRefreshKey(prev => prev + 1)
+    // Force un re-rendu plus agressif
+    setRefreshKey(prev => prev + Math.random())
+    // Forcer le re-rendu de KaTeX après un court délai
+    setTimeout(() => {
+      if (typeof window !== "undefined" && window.renderMathInElement) {
+        window.renderMathInElement(document.body, {
+          delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "$", right: "$", display: false}
+          ]
+        })
+      }
+    }, 100)
   }
 
   const handleClearCache = () => {
     if (typeof window !== "undefined") {
       localStorage.removeItem("quiz-logique-state")
-      alert("Cache vidé !")
+      // Force une actualisation complète de la page pour recharger les questions corrigées
+      window.location.reload()
     }
   }
 
