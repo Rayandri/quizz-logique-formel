@@ -1,3 +1,5 @@
+import { DEDUCTION_QUESTIONS } from './deduction-questions'
+
 export interface QCM {
   id: number
   question: string
@@ -6,7 +8,7 @@ export interface QCM {
   explanation: string
 }
 
-export const QUESTIONS: QCM[] = [
+const EXISTING_QUESTIONS: QCM[] = [
   {
     id: 1,
     question: "Quelle est la forme CNF (Forme Normale Conjonctive) ?",
@@ -253,7 +255,7 @@ export const QUESTIONS: QCM[] = [
   },
   {
     id: 24,
-    question: "En déduction naturelle, la règle [∧I] permet de :",
+    question: "En déduction naturelle, la règle $[\\wedge\\text{I}]$ permet de :",
     options: [
       "Introduire une conjonction",
       "Éliminer une conjonction",
@@ -262,15 +264,15 @@ export const QUESTIONS: QCM[] = [
     ],
     answer: 0,
     explanation:
-      "La règle **[∧I]** (**introduction de la conjonction**) permet de former une conjonction à partir de ses deux composants.\n\n**Règle formelle :** De A et B, on peut dériver A ∧ B\n\n**Principe :** Si on a prouvé A et prouvé B séparément, alors on peut conclure A ∧ B.\n\n**Intuition :** Pour établir \"A et B\", il faut établir A d'une part et B d'autre part.\n\n**Statut :** C'est l'une des règles fondamentales de la déduction naturelle de Gentzen.",
+      "La règle $[\\wedge\\text{I}]$ (**introduction de la conjonction**) permet de former une conjonction à partir de ses deux composants.\n\n**Règle formelle :** De A et B, on peut dériver A ∧ B\n\n**Principe :** Si on a prouvé A et prouvé B séparément, alors on peut conclure A ∧ B.\n\n**Intuition :** Pour établir \"A et B\", il faut établir A d'une part et B d'autre part.\n\n**Statut :** C'est l'une des règles fondamentales de la déduction naturelle de Gentzen.",
   },
   {
     id: 25,
     question: "Quelle règle élimine une implication en déduction naturelle ?",
-    options: ["[⇒E] (Modus Ponens)", "[⇒I]", "[∨I]", "[¬I]"],
+    options: ["$[\\Rightarrow\\text{E}]$ (Modus Ponens)", "$[\\Rightarrow\\text{I}]$", "$[\\vee\\text{I}]$", "$[\\neg\\text{I}]$"],
     answer: 0,
     explanation:
-      "La règle **[⇒E]** (**élimination de l'implication**), aussi appelée **Modus Ponens**, permet d'utiliser une implication.\n\n**Règle formelle :** De A ⇒ B et A, on peut dériver B\n\n**Condition :** Si on a prouvé A ⇒ B et prouvé A, alors on peut conclure B.\n\n**Principe fondamental :** \"Si A implique B et que A est vrai, alors B est vrai\"\n\n**Importance :** C'est l'une des règles d'inférence les plus utilisées en logique.",
+      "La règle $[\\Rightarrow\\text{E}]$ (**élimination de l'implication**), aussi appelée **Modus Ponens**, permet d'utiliser une implication.\n\n**Règle formelle :** De A ⇒ B et A, on peut dériver B\n\n**Condition :** Si on a prouvé A ⇒ B et prouvé A, alors on peut conclure B.\n\n**Principe fondamental :** \"Si A implique B et que A est vrai, alors B est vrai\"\n\n**Importance :** C'est l'une des règles d'inférence les plus utilisées en logique.",
   },
   {
     id: 26,
@@ -384,7 +386,7 @@ export const QUESTIONS: QCM[] = [
   },
   {
     id: 36,
-    question: "La règle [∨E] (élimination de la disjonction) s'utilise pour :",
+    question: "La règle $[\\vee\\text{E}]$ (élimination de la disjonction) s'utilise pour :",
     options: [
       "Raisonner par cas sur une disjonction",
       "Introduire une disjonction",
@@ -393,7 +395,7 @@ export const QUESTIONS: QCM[] = [
     ],
     answer: 0,
     explanation:
-      "La règle **[∨E]** (**élimination de la disjonction**) formalise le **raisonnement par cas**.\n\n**Principe :** Si on a prouvé A ∨ B, et qu'on peut :\n• Dériver C en supposant A\n• Dériver C en supposant B\n\nAlors on peut conclure C.\n\n**Intuition :** \"Si A ou B est vrai, et que dans les deux cas on peut prouver C, alors C est vrai\"\n\n**Importance :** C'est essentiel pour exploiter les disjonctions en déduction naturelle.",
+      "La règle $[\\vee\\text{E}]$ (**élimination de la disjonction**) formalise le **raisonnement par cas**.\n\n**Principe :** Si on a prouvé A ∨ B, et qu'on peut :\n• Dériver C en supposant A\n• Dériver C en supposant B\n\nAlors on peut conclure C.\n\n**Intuition :** \"Si A ou B est vrai, et que dans les deux cas on peut prouver C, alors C est vrai\"\n\n**Importance :** C'est essentiel pour exploiter les disjonctions en déduction naturelle.",
   },
   {
     id: 37,
@@ -436,7 +438,7 @@ export const QUESTIONS: QCM[] = [
   },
   {
     id: 40,
-    question: "En déduction naturelle, la règle [¬I] sert à :",
+    question: "En déduction naturelle, la règle $[\\neg\\text{I}]$ sert à :",
     options: [
       "Introduire une négation par l'absurde",
       "Éliminer une négation",
@@ -445,7 +447,7 @@ export const QUESTIONS: QCM[] = [
     ],
     answer: 0,
     explanation:
-      "La règle **[¬I]** (**introduction de la négation**) formalise le **raisonnement par l'absurde**.\n\n**Principe :** Pour prouver ¬A, on suppose A et on dérive une contradiction (⊥)\n\n**Intuition :** \"Si supposer A mène à une contradiction, alors A doit être faux, donc ¬A est vrai\"\n\n**Puissance :** C'est l'une des règles les plus puissantes de la logique classique.\n\n**Avantage :** Elle permet de prouver des négations sans avoir à les établir directement.",
+      "La règle $[\\neg\\text{I}]$ (**introduction de la négation**) formalise le **raisonnement par l'absurde**.\n\n**Principe :** Pour prouver ¬A, on suppose A et on dérive une contradiction (⊥)\n\n**Intuition :** \"Si supposer A mène à une contradiction, alors A doit être faux, donc ¬A est vrai\"\n\n**Puissance :** C'est l'une des règles les plus puissantes de la logique classique.\n\n**Avantage :** Elle permet de prouver des négations sans avoir à les établir directement.",
   },
   {
     id: 41,
@@ -562,4 +564,9 @@ export const QUESTIONS: QCM[] = [
     explanation:
       "La **réflexivité** de l'équivalence logique établit que φ ≡ φ : toute formule est **logiquement équivalente à elle-même**.\n\n**Avec les autres propriétés :**\n• **Symétrie :** φ ≡ ψ ⇒ ψ ≡ φ\n• **Transitivité :** φ ≡ ψ ∧ ψ ≡ χ ⇒ φ ≡ χ\n\n**Conséquence :** Ces trois propriétés font de ≡ une **relation d'équivalence** sur l'ensemble des formules.\n\n**Évidence de la réflexivité :** φ et φ ont exactement les mêmes modèles, donc φ ⊨ ψ et ψ ⊨ φ.",
   },
+]
+
+export const QUESTIONS: QCM[] = [
+  ...EXISTING_QUESTIONS,
+  ...DEDUCTION_QUESTIONS.map(q => ({ ...q, id: q.id + 1000 }))
 ]
