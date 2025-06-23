@@ -24,7 +24,7 @@ export default function KatexRenderer({
   const processedContent = useMemo(() => content, [content])
 
   useEffect(() => {
-    if (containerRef.current && processedContent && processedContent !== lastProcessedContent.current) {
+    if (containerRef.current && processedContent) {
       try {
         if (displayMode && latex) {
           containerRef.current.innerHTML = `$$${processedContent}$$`
@@ -44,6 +44,7 @@ export default function KatexRenderer({
           throwOnError: false,
           ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
           trust: true,
+          strict: false,
         })
         
         lastProcessedContent.current = processedContent
