@@ -11,28 +11,28 @@ export const subjects: Subject[] = [
     id: "logique",
     name: "Logique Formelle",
     icon: "🧠",
-    color: "from-blue-500 to-blue-700",
+    color: "bg-blue-600",
     description: "Logique propositionnelle et prédicats"
   },
   {
     id: "droit",
     name: "Droit",
     icon: "⚖️",
-    color: "from-purple-500 to-purple-700",
+    color: "bg-purple-600",
     description: "Droit d'auteur et propriété intellectuelle"
   },
   {
     id: "risques",
     name: "Gestion des Risques",
     icon: "🛡️",
-    color: "from-red-500 to-red-700",
+    color: "bg-red-600",
     description: "Analyse et mitigation des risques"
   },
   {
     id: "probabilites",
     name: "Probabilités & Statistiques",
     icon: "📊",
-    color: "from-green-500 to-green-700",
+    color: "bg-green-600",
     description: "Théorie des probabilités et statistiques"
   }
 ]

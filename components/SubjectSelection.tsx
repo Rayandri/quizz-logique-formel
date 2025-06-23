@@ -21,7 +21,7 @@ export default function SubjectSelection() {
               href={`/${subject.id}`}
               className="aspect-square flex flex-col items-center justify-center text-white rounded-lg shadow-md transition-all duration-300 hover:scale-105 hover:shadow-lg"
             >
-              <div className={`w-full h-full flex flex-col items-center justify-center rounded-lg bg-gradient-to-br ${subject.color} hover:opacity-90 transition-opacity p-3`}>
+              <div className={`w-full h-full flex flex-col items-center justify-center rounded-lg ${subject.color} hover:opacity-90 transition-opacity p-3`}>
                 <span className="text-3xl mb-2">{subject.icon}</span>
                 <h3 className="text-base font-semibold text-center leading-tight">{subject.name}</h3>
                 {subject.description && (
