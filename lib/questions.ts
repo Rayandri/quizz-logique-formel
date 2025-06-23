@@ -510,7 +510,7 @@ const EXISTING_QUESTIONS: QCM[] = [
       "A ∧ A est toujours fausse",
     ],
     answer: 0,
-    explanation: "La **loi du tiers exclu** (latin : *tertium non datur*) affirme que A $\\vee \\neg A$ est une **tautologie** pour toute proposition A.\n\n**Principe :** Il n'existe pas de \"troisième possibilité\" entre vrai et faux - toute proposition est soit vraie, soit fausse.\n\n**Statut en logique classique :** C'est un pilier de la **logique classique**\n\n**Rejet en logique intuitionniste :** Cette loi est rejetée en **logique intuitionniste**, où une proposition n'est vraie que si on peut la construire/prouver.\n\n**Conséquence :** Le rejet du tiers exclu mène à des mathématiques constructives différentes.",
+    explanation: "La **loi du tiers exclu** (latin : *tertium non datur*) affirme que A $\vee \\neg A$ est une **tautologie** pour toute proposition A.\n\n**Principe :** Il n'existe pas de \"troisième possibilité\" entre vrai et faux - toute proposition est soit vraie, soit fausse.\n\n**Statut en logique classique :** C'est un pilier de la **logique classique**\n\n**Rejet en logique intuitionniste :** Cette loi est rejetée en **logique intuitionniste**, où une proposition n'est vraie que si on peut la construire/prouver.\n\n**Conséquence :** Le rejet du tiers exclu mène à des mathématiques constructives différentes.",
   },
   {
     id: 49,

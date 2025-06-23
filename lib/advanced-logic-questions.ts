@@ -46,7 +46,7 @@ export const ADVANCED_LOGIC_QUESTIONS: QCM[] = [
       "L'insertion d'un symbole suivie de son élimination immédiate"
     ],
     answer: 3,
-    explanation: "La **coupure** (cut) insère un lemme (sous-formule) et l'utilise immédiatement :\n\n**Règle de coupure :**\n```\n\\frac{\\Gamma \\vdash A \\quad \\Gamma, A \\vdash B}{\\Gamma \\vdash B} \\text{Cut}\n```\n\n**Principe :** On prouve d'abord $A$, puis on utilise $A$ pour prouver $B$.\n\n**Élimination de coupure :** Gentzen a montré qu'on peut toujours éliminer les coupures d'une preuve (théorème d'élimination de coupure).\n\n**Importance :** Une preuve sans coupure révèle la structure logique pure, sans lemmes intermédiaires.\n\n**Analogie :** Comme éliminer les variables intermédiaires dans un calcul mathématique.",
+    explanation: "La **coupure** (cut) insère un lemme (sous-formule) et l'utilise immédiatement :\n\n**Règle de coupure :**\n```\n\frac{\\Gamma \\vdash A \\quad \\Gamma, A \\vdash B}{\\Gamma \\vdash B} \\text{Cut}\n```\n\n**Principe :** On prouve d'abord $A$, puis on utilise $A$ pour prouver $B$.\n\n**Élimination de coupure :** Gentzen a montré qu'on peut toujours éliminer les coupures d'une preuve (théorème d'élimination de coupure).\n\n**Importance :** Une preuve sans coupure révèle la structure logique pure, sans lemmes intermédiaires.\n\n**Analogie :** Comme éliminer les variables intermédiaires dans un calcul mathématique.",
     difficulty: "dur"
   },
   {
@@ -105,10 +105,10 @@ export const ADVANCED_LOGIC_QUESTIONS: QCM[] = [
     id: 8,
     question: "Quel type peut être assigné au terme $\lambda xy . xy$ ?",
     options: [
-      "$(\sigma \to \\tau) \to \sigma \to \\tau$",
-      "$\sigma \to \\tau \to \sigma$",
-      "$(\sigma \to \sigma) \to \sigma \to \sigma$",
-      "$\sigma \to \sigma \to \sigma$"
+      "$(\sigma \to \\tau) \\to \sigma \\to \\tau$",
+      "$\sigma \to \\tau \\to \sigma$",
+      "$(\sigma \to \sigma) \\to \sigma \\to \sigma$",
+      "$\sigma \to \sigma \\to \sigma$"
     ],
     answer: 2,
     explanation: "Analysons le terme $\lambda xy . xy$ :\n\n**Structure :** $\lambda x . (\lambda y . (xy))$\n\n**Typage étape par étape :**\n1. $x$ doit être une fonction car appliquée à $y$\n2. Si $y : \sigma$ et $xy : \sigma$, alors $x : \sigma \to \sigma$\n3. $\lambda y . xy : \sigma \to \sigma$ (même type que $x$)\n4. $\lambda x . (\lambda y . xy) : (\sigma \to \sigma) \to \sigma \to \sigma$\n\n**Vérification :**\n• $x : \sigma \to \sigma$\n• $y : \sigma$\n• $xy : \sigma$ (application valide)\n• Résultat final : $(\sigma \to \sigma) \to \sigma \to \sigma$\n\n**Interprétation :** Prend une fonction endomorphe et un argument, applique la fonction à l'argument.",
