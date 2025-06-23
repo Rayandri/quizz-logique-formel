@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react"
 import type { QCM } from "@/lib/questions"
 import KatexRenderer from "./KatexRenderer"
-import Footer from "./Footer"
+
 
 interface ExplanationBoxProps {
   question: QCM
@@ -61,9 +61,7 @@ export default function ExplanationBox({
     : selectedAnswer === question.answer
 
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-col">
-      <div className="flex-1 flex items-center justify-center p-4">
-        <div className="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-2xl">
+    <div className="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-2xl">
         <div className="flex justify-between items-center mb-6">
           <button
             onClick={onReturnToMenu}
@@ -175,10 +173,6 @@ export default function ExplanationBox({
         >
           {isLastQuestion ? "Voir les résultats" : "Question suivante"}
         </button>
-        </div>
       </div>
-      
-      <Footer />
-    </div>
   )
 }

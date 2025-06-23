@@ -1,6 +1,6 @@
 "use client"
 
-import Footer from "./Footer"
+
 
 interface ScoreScreenProps {
   score: number
@@ -27,8 +27,7 @@ export default function ScoreScreen({ score, totalQuestions, onRestart }: ScoreS
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-col">
-      <div className="flex-1 flex items-center justify-center p-4">
+    <div className="flex items-center justify-center min-h-[60vh]">
       <div className="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-md text-center">
         <h1 className="text-3xl font-bold text-gray-200 mb-8">Résultats du Quiz</h1>
 
@@ -66,11 +65,7 @@ export default function ScoreScreen({ score, totalQuestions, onRestart }: ScoreS
             Recommencer ce Quiz
           </button>
         </div>
-
-        </div>
       </div>
-      
-      <Footer />
     </div>
   )
 }

@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react"
 import type { QCM } from "@/lib/questions"
 import KatexRenderer from "./KatexRenderer"
-import Footer from "./Footer"
+
 import { DifficultyBadge } from "./DifficultyBadge"
 
 interface QuestionCardProps {
@@ -62,9 +62,7 @@ export default function QuestionCard({
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-col">
-      <div className="flex-1 flex items-center justify-center p-4">
-        <div className="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-2xl">
+    <div className="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-2xl">
         <div className="flex justify-between items-center mb-4">
           <button
             onClick={onReturnToMenu}
@@ -220,10 +218,6 @@ export default function QuestionCard({
         >
           Valider
         </button>
-        </div>
       </div>
-      
-      <Footer />
-    </div>
   )
 }
