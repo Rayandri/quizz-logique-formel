@@ -2,7 +2,7 @@ import type React from "react"
 import Footer from "./Footer"
 
 interface SubjectSelectionProps {
-  onSelectSubject: (subject: "logique" | "droit" | "risques") => void
+  onSelectSubject: (subject: "logique" | "droit" | "risques" | "probabilites") => void
 }
 
 export default function SubjectSelection({ onSelectSubject }: SubjectSelectionProps) {
@@ -50,6 +50,19 @@ export default function SubjectSelection({ onSelectSubject }: SubjectSelectionPr
                 <div className="text-xl font-bold">Gestion des Risques</div>
                 <div className="text-sm opacity-90 mt-1">
                   ISO 27005, NIST CSF, audit, compliance, cybersécurité
+                </div>
+              </div>
+            </button>
+
+            <button
+              onClick={() => onSelectSubject("probabilites")}
+              className="w-full bg-purple-600 hover:bg-purple-500 text-white font-medium py-6 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-800 group"
+            >
+              <div className="text-center">
+                <div className="text-2xl mb-2">📊</div>
+                <div className="text-xl font-bold">Probabilités & Statistiques</div>
+                <div className="text-sm opacity-90 mt-1">
+                  Variables aléatoires, lois de probabilité, estimation
                 </div>
               </div>
             </button>

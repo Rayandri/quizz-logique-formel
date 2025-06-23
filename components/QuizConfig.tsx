@@ -6,11 +6,12 @@ import Footer from "./Footer"
 import { QUESTIONS, type DifficultyLevel } from "@/lib/questions"
 import { COPYRIGHT_QUESTIONS } from "@/lib/copyright-questions"
 import { RISK_MANAGEMENT_QUESTIONS } from "@/lib/risk-management-questions"
+import { PROBABILITY_QUESTIONS } from "@/lib/probability-questions"
 
 type SelectionMode = "random" | "difficulty" | "multi-difficulty"
 
 interface QuizConfigProps {
-  subject: "logique" | "droit" | "risques"
+  subject: "logique" | "droit" | "risques" | "probabilites"
   onStart: (numQuestions: number, mode: SelectionMode, difficulty?: DifficultyLevel, difficulties?: DifficultyLevel[]) => void
   onBackToSubjects: () => void
 }
@@ -26,7 +27,8 @@ export default function QuizConfig({ subject, onStart, onBackToSubjects }: QuizC
 
   // Get questions based on subject
   const currentQuestions = subject === "droit" ? COPYRIGHT_QUESTIONS : 
-                          subject === "risques" ? RISK_MANAGEMENT_QUESTIONS : 
+                          subject === "risques" ? RISK_MANAGEMENT_QUESTIONS :
+                          subject === "probabilites" ? PROBABILITY_QUESTIONS :
                           QUESTIONS.filter(q => q.id < 5000)
 
   // Vérifier s'il y a une sauvegarde
@@ -133,7 +135,10 @@ export default function QuizConfig({ subject, onStart, onBackToSubjects }: QuizC
             ← Retour
           </button>
           <h1 className="text-2xl font-bold text-gray-200">
-            Quiz de {subject === "logique" ? "Logique Formelle" : subject === "droit" ? "Droit" : "Gestion des Risques"}
+            Quiz de {subject === "logique" ? "Logique Formelle" : 
+                     subject === "droit" ? "Droit" : 
+                     subject === "risques" ? "Gestion des Risques" : 
+                     "Probabilités & Statistiques"}
           </h1>
           <div className="w-16"></div>
         </div>

@@ -3,6 +3,7 @@ import { LAMBDA_CALCULUS_QUESTIONS } from './lambda-calculus-questions'
 import { EVALUATION_QUESTIONS } from './evaluation-questions'
 import { ADVANCED_LOGIC_QUESTIONS } from './advanced-logic-questions'
 import { COPYRIGHT_QUESTIONS } from './copyright-questions'
+import { PROBABILITY_QUESTIONS } from './probability-questions'
 
 export type DifficultyLevel = "cours" | "facile" | "moyen" | "dur"
 
@@ -10,9 +11,10 @@ export interface QCM {
   id: number
   question: string
   options: [string, string, string, string]
-  answer: number
+  answer: number | string
   explanation: string
   difficulty?: DifficultyLevel
+  answerType?: 'multiple' | 'numeric'
 }
 
 const EXISTING_QUESTIONS: QCM[] = [

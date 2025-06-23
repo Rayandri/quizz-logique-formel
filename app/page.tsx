@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { QUESTIONS, type QCM, type DifficultyLevel } from "@/lib/questions"
 import { COPYRIGHT_QUESTIONS } from "@/lib/copyright-questions"
 import { RISK_MANAGEMENT_QUESTIONS } from "@/lib/risk-management-questions"
+import { PROBABILITY_QUESTIONS } from "@/lib/probability-questions"
 import SubjectSelection from "@/components/SubjectSelection"
 import QuizConfig from "@/components/QuizConfig"
 import QuestionCard from "@/components/QuestionCard"
@@ -14,14 +15,14 @@ import { LambdaTypingRules } from "@/components/LambdaTypingRules"
 
 type GameState = "subject-selection" | "config" | "question" | "explanation" | "score"
 type SelectionMode = "random" | "difficulty" | "multi-difficulty"
-type Subject = "logique" | "droit" | "risques"
+type Subject = "logique" | "droit" | "risques" | "probabilites"
 
 interface QuizState {
   gameState: GameState
   subject: Subject
   selectedQuestions: QCM[]
   currentQuestionIndex: number
-  selectedAnswer: number | null
+  selectedAnswer: number | string | null
   isValidated: boolean
   score: number
   currentScore: number
@@ -33,7 +34,7 @@ export default function Home() {
   const [subject, setSubject] = useState<Subject>("logique")
   const [selectedQuestions, setSelectedQuestions] = useState<QCM[]>([])
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
-  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null)
+  const [selectedAnswer, setSelectedAnswer] = useState<number | string | null>(null)
   const [isValidated, setIsValidated] = useState(false)
   const [score, setScore] = useState(0)
   const [currentScore, setCurrentScore] = useState(0)
@@ -68,6 +69,7 @@ export default function Home() {
         const logiqueState = localStorage.getItem("quiz-logique-state")
         const droitState = localStorage.getItem("quiz-droit-state")
         const risquesState = localStorage.getItem("quiz-risques-state")
+        const probabilitesState = localStorage.getItem("quiz-probabilites-state")
         
         if (logiqueState) {
           const state: QuizState = JSON.parse(logiqueState)
@@ -105,12 +107,25 @@ export default function Home() {
           setCurrentScore(state.currentScore)
           setSkippedQuestion(state.skippedQuestion)
           return true
+        } else if (probabilitesState) {
+          const state: QuizState = JSON.parse(probabilitesState)
+          setSubject("probabilites")
+          setGameState(state.gameState)
+          setSelectedQuestions(state.selectedQuestions)
+          setCurrentQuestionIndex(state.currentQuestionIndex)
+          setSelectedAnswer(state.selectedAnswer)
+          setIsValidated(state.isValidated)
+          setScore(state.score)
+          setCurrentScore(state.currentScore)
+          setSkippedQuestion(state.skippedQuestion)
+          return true
         }
       } catch (error) {
         console.error("Erreur lors du chargement de l'état:", error)
         localStorage.removeItem("quiz-logique-state")
         localStorage.removeItem("quiz-droit-state")
         localStorage.removeItem("quiz-risques-state")
+        localStorage.removeItem("quiz-probabilites-state")
       }
     }
     return false
@@ -169,7 +184,8 @@ export default function Home() {
   const handleStart = (numQuestions: number, mode: SelectionMode, difficulty?: DifficultyLevel, difficulties?: DifficultyLevel[]) => {
     // Get questions based on subject
     const currentQuestions = subject === "droit" ? COPYRIGHT_QUESTIONS : 
-                            subject === "risques" ? RISK_MANAGEMENT_QUESTIONS : 
+                            subject === "risques" ? RISK_MANAGEMENT_QUESTIONS :
+                            subject === "probabilites" ? PROBABILITY_QUESTIONS :
                             QUESTIONS.filter(q => q.id < 5000)
     
     let questionsPool = currentQuestions
@@ -195,16 +211,25 @@ export default function Home() {
     setGameState("question")
   }
 
-  const handleAnswerSelect = (answer: number) => {
+  const handleAnswerSelect = (answer: number | string) => {
     if (!isValidated) {
       setSelectedAnswer(answer)
     }
   }
 
   const handleValidate = () => {
-    if (selectedAnswer !== null) {
+    if (selectedAnswer !== null && selectedAnswer !== "") {
       setIsValidated(true)
-      if (selectedAnswer === selectedQuestions[currentQuestionIndex].answer) {
+      const currentQuestion = selectedQuestions[currentQuestionIndex]
+      let isCorrect = false
+      
+      if (currentQuestion.answerType === 'numeric') {
+        isCorrect = selectedAnswer?.toString() === currentQuestion.answer?.toString()
+      } else {
+        isCorrect = selectedAnswer === currentQuestion.answer
+      }
+      
+      if (isCorrect) {
         const newScore = score + 1
         setScore(newScore)
         setCurrentScore(newScore)

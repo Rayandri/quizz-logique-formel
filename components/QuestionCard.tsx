@@ -10,8 +10,8 @@ interface QuestionCardProps {
   question: QCM
   questionNumber: number
   totalQuestions: number
-  selectedAnswer: number | null
-  onAnswerSelect: (answer: number) => void
+  selectedAnswer: number | string | null
+  onAnswerSelect: (answer: number | string) => void
   onValidate: () => void
   onSkip: () => void
   onReturnToMenu: () => void
@@ -32,7 +32,10 @@ export default function QuestionCard({
   currentScore,
 }: QuestionCardProps) {
   const [refreshKey, setRefreshKey] = useState(0)
+  const [numericAnswer, setNumericAnswer] = useState("")
   const memoizedOptions = useMemo(() => question.options, [question.id, refreshKey])
+  
+  const isNumericQuestion = question.answerType === 'numeric'
 
   const handleRepairLatex = () => {
     // Force un re-rendu plus agressif
@@ -108,56 +111,90 @@ export default function QuestionCard({
           </KatexRenderer>
         </div>
 
-        <div className="space-y-3 mb-8">
-          {memoizedOptions.map((option, index) => (
-            <label
-              key={`${question.id}-${index}-${refreshKey}`}
-              className={`flex items-center p-4 rounded-lg border cursor-pointer transition-colors duration-200 ${
-                isValidated
-                  ? index === question.answer
-                    ? "border-green-500 bg-green-900/20"
-                    : selectedAnswer === index && index !== question.answer
-                      ? "border-red-500 bg-red-900/20"
-                      : "border-gray-600 bg-gray-700/50"
-                  : selectedAnswer === index
-                    ? "border-indigo-500 bg-indigo-900/20"
-                    : "border-gray-600 bg-gray-700/50 hover:border-gray-500"
-              }`}
-            >
-              <input
-                type="radio"
-                name="answer"
-                value={index}
-                checked={selectedAnswer === index}
-                onChange={() => onAnswerSelect(index)}
-                disabled={isValidated}
-                className="sr-only"
-              />
-              <div
-                className={`w-4 h-4 rounded-full border-2 mr-3 flex items-center justify-center ${
-                  selectedAnswer === index
-                    ? isValidated
-                      ? index === question.answer
-                        ? "border-green-500"
-                        : "border-red-500"
-                      : "border-indigo-500"
-                    : "border-gray-400"
-                }`}
-              >
-                {selectedAnswer === index && (
-                  <div
-                    className={`w-2 h-2 rounded-full ${
-                      isValidated ? (index === question.answer ? "bg-green-500" : "bg-red-500") : "bg-indigo-500"
-                    }`}
-                  />
+        {isNumericQuestion ? (
+          <div className="mb-8">
+            <div className="space-y-4">
+              <div className="text-gray-300 text-sm">
+                Entrez votre réponse numérique :
+              </div>
+              <div className="flex items-center space-x-4">
+                <input
+                  type="number"
+                  value={numericAnswer}
+                  onChange={(e) => {
+                    setNumericAnswer(e.target.value)
+                    onAnswerSelect(e.target.value)
+                  }}
+                  disabled={isValidated}
+                  className={`flex-1 px-4 py-3 text-lg bg-gray-700 border rounded-lg text-gray-200 focus:outline-none focus:ring-2 transition-colors duration-200 ${
+                    isValidated
+                      ? numericAnswer === question.answer?.toString()
+                        ? "border-green-500 focus:ring-green-500"
+                        : "border-red-500 focus:ring-red-500"
+                      : "border-gray-600 focus:ring-indigo-500"
+                  }`}
+                  placeholder="Votre réponse..."
+                />
+                {isValidated && (
+                  <div className="text-gray-300">
+                    Réponse correcte : <span className="text-green-400 font-bold">{question.answer}</span>
+                  </div>
                 )}
               </div>
-              <KatexRenderer key={`option-${question.id}-${index}-${refreshKey}`} className="text-gray-200 flex-1">
-                {option}
-              </KatexRenderer>
-            </label>
-          ))}
-        </div>
+            </div>
+          </div>
+        ) : (
+          <div className="space-y-3 mb-8">
+            {memoizedOptions.map((option, index) => (
+              <label
+                key={`${question.id}-${index}-${refreshKey}`}
+                className={`flex items-center p-4 rounded-lg border cursor-pointer transition-colors duration-200 ${
+                  isValidated
+                    ? index === question.answer
+                      ? "border-green-500 bg-green-900/20"
+                      : selectedAnswer === index && index !== question.answer
+                        ? "border-red-500 bg-red-900/20"
+                        : "border-gray-600 bg-gray-700/50"
+                    : selectedAnswer === index
+                      ? "border-indigo-500 bg-indigo-900/20"
+                      : "border-gray-600 bg-gray-700/50 hover:border-gray-500"
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="answer"
+                  value={index}
+                  checked={selectedAnswer === index}
+                  onChange={() => onAnswerSelect(index)}
+                  disabled={isValidated}
+                  className="sr-only"
+                />
+                <div
+                  className={`w-4 h-4 rounded-full border-2 mr-3 flex items-center justify-center ${
+                    selectedAnswer === index
+                      ? isValidated
+                        ? index === question.answer
+                          ? "border-green-500"
+                          : "border-red-500"
+                        : "border-indigo-500"
+                      : "border-gray-400"
+                  }`}
+                >
+                  {selectedAnswer === index && (
+                    <div
+                      className={`w-2 h-2 rounded-full ${
+                        isValidated ? (index === question.answer ? "bg-green-500" : "bg-red-500") : "bg-indigo-500"
+                      }`}
+                    />
+                  )}
+                </div>
+                <KatexRenderer key={`option-${question.id}-${index}-${refreshKey}`} className="text-gray-200 flex-1">
+                  {option}
+                </KatexRenderer>
+              </label>
+            ))}
+          </div>
+        )}
 
         <div className="flex justify-between items-center mb-4">
           <div className="text-sm text-gray-400">

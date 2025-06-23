@@ -7,7 +7,7 @@ import Footer from "./Footer"
 
 interface ExplanationBoxProps {
   question: QCM
-  selectedAnswer: number | null
+  selectedAnswer: number | string | null
   onNext: () => void
   onReturnToMenu: () => void
   isLastQuestion: boolean
@@ -56,7 +56,9 @@ export default function ExplanationBox({
     }
   }
 
-  const isCorrect = selectedAnswer === question.answer
+  const isCorrect = question.answerType === 'numeric' 
+    ? selectedAnswer?.toString() === question.answer?.toString()
+    : selectedAnswer === question.answer
 
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col">
@@ -92,7 +94,7 @@ export default function ExplanationBox({
             className={`inline-flex items-center justify-center w-16 h-16 rounded-full mb-4 ${
               skippedQuestion
                 ? "bg-gray-600 text-gray-300"
-                : selectedAnswer === question.answer
+                : isCorrect
                   ? "bg-green-900/20 text-green-400"
                   : "bg-red-900/20 text-red-400"
             }`}
@@ -106,7 +108,7 @@ export default function ExplanationBox({
                   d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-            ) : selectedAnswer === question.answer ? (
+            ) : isCorrect ? (
               <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
@@ -119,10 +121,10 @@ export default function ExplanationBox({
 
           <h3
             className={`text-2xl font-bold mb-2 ${
-              skippedQuestion ? "text-gray-400" : selectedAnswer === question.answer ? "text-green-400" : "text-red-400"
+              skippedQuestion ? "text-gray-400" : isCorrect ? "text-green-400" : "text-red-400"
             }`}
           >
-            {skippedQuestion ? "Question passée" : selectedAnswer === question.answer ? "Correct !" : "Incorrect"}
+            {skippedQuestion ? "Question passée" : isCorrect ? "Correct !" : "Incorrect"}
           </h3>
         </div>
 
@@ -132,20 +134,30 @@ export default function ExplanationBox({
           </KatexRenderer>
 
           <div className="space-y-2 mb-4">
-            {!skippedQuestion && selectedAnswer !== null && (
+            {!skippedQuestion && selectedAnswer !== null && selectedAnswer !== "" && (
               <p className="text-gray-300">
                 <span className="font-medium">Votre réponse :</span>{" "}
-                <KatexRenderer key={`selected-${question.id}-${refreshKey}`} className={selectedAnswer === question.answer ? "text-green-400" : "text-red-400"}>
-                  {question.options[selectedAnswer]}
-                </KatexRenderer>
+                {question.answerType === 'numeric' ? (
+                  <span className={isCorrect ? "text-green-400" : "text-red-400"}>
+                    {selectedAnswer}
+                  </span>
+                ) : (
+                  <KatexRenderer key={`selected-${question.id}-${refreshKey}`} className={isCorrect ? "text-green-400" : "text-red-400"}>
+                    {question.options[selectedAnswer as number]}
+                  </KatexRenderer>
+                )}
               </p>
             )}
 
             <p className="text-gray-300">
               <span className="font-medium">Bonne réponse :</span>{" "}
-              <KatexRenderer key={`correct-${question.id}-${refreshKey}`} className="text-green-400">
-                {question.options[question.answer]}
-              </KatexRenderer>
+              {question.answerType === 'numeric' ? (
+                <span className="text-green-400">{question.answer}</span>
+              ) : (
+                <KatexRenderer key={`correct-${question.id}-${refreshKey}`} className="text-green-400">
+                  {question.options[question.answer as number]}
+                </KatexRenderer>
+              )}
             </p>
           </div>
         </div>
