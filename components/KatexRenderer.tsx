@@ -18,22 +18,16 @@ export default function KatexRenderer({
   displayMode = false 
 }: KatexRendererProps) {
   const containerRef = useRef<HTMLDivElement>(null)
-  const lastProcessedContent = useRef<string>("")
 
   const content = latex || children || ""
-  const processedContent = useMemo(() => content, [content])
 
   useEffect(() => {
-    if (containerRef.current && processedContent) {
+    if (containerRef.current && content) {
       try {
-        if (displayMode && latex) {
-          containerRef.current.innerHTML = `$$${processedContent}$$`
-        } else if (latex) {
-          containerRef.current.innerHTML = `$${processedContent}$`
-        } else {
-          containerRef.current.innerHTML = processedContent
-        }
+        // Set the raw HTML content first
+        containerRef.current.innerHTML = content
         
+        // Then process LaTeX
         renderMathInElement(containerRef.current, {
           delimiters: [
             { left: "$$", right: "$$", display: true },
@@ -43,24 +37,43 @@ export default function KatexRenderer({
           ],
           throwOnError: false,
           ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
-          trust: true,
+          trust: (context) => ['\\htmlId', '\\href'].includes(context.command),
           strict: false,
+          fleqn: false,
+          macros: {
+            "\\RR": "\\mathbb{R}",
+            "\\NN": "\\mathbb{N}",
+            "\\ZZ": "\\mathbb{Z}",
+            "\\QQ": "\\mathbb{Q}",
+            "\\CC": "\\mathbb{C}",
+          }
         })
-        
-        lastProcessedContent.current = processedContent
       } catch (error) {
-        console.error("KaTeX rendering error:", error, "Content:", processedContent)
+        console.error("KaTeX rendering error:", error, "Content:", content)
         if (containerRef.current) {
-          containerRef.current.innerHTML = processedContent
+          containerRef.current.textContent = content.replace(/<[^>]*>/g, '')
         }
       }
     }
-  }, [processedContent, displayMode, latex])
+  }, [content])
+
+  if (displayMode && latex) {
+    // For display mode, we directly render the LaTeX
+    return (
+      <div 
+        ref={containerRef}
+        className={className}
+        dangerouslySetInnerHTML={{ __html: `$$${content}$$` }}
+      />
+    )
+  }
 
   return (
     <div 
       ref={containerRef} 
       className={className}
+      dangerouslySetInnerHTML={{ __html: content }}
     />
   )
 } 
+

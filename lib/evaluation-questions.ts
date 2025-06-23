@@ -37,7 +37,7 @@ export const EVALUATION_QUESTIONS: QCM[] = [
       "Impossible à calculer"
     ],
     answer: 1,
-    explanation: "**Calcul étape par étape :**\n\n**Avec $P = \\top$, $Q = \\perp$, $R = \\top$ :**\n\n1. $P \\Rightarrow Q = \\top \\Rightarrow \\perp = \\perp$\n2. $Q \\Rightarrow R = \\perp \\Rightarrow \\top = \\top$\n3. $(P \\Rightarrow Q) \\wedge (Q \\Rightarrow R) = \\perp \\wedge \\top = \\perp$\n\n**Résultat :** **Faux**\n\n**Explication :** Bien que $Q \\Rightarrow R$ soit vraie, $P \\Rightarrow Q$ est fausse car on a $P$ vrai et $Q$ faux, ce qui rend toute la conjonction fausse.",
+    explanation: "**Calcul étape par étape :**\n\n**Avec $P = \\top$, $Q = \\perp$, $R = \\top$ :**\n\n1. $P \\Rightarrow Q = \\top \\Rightarrow \\perp = \\perp$\n2. $Q \\Rightarrow R = \\perp \\Rightarrow \\top = \\top$\n3. $(P \\Rightarrow Q) \\wedge (Q \\Rightarrow R) = \\perp \\wedge \\top = \\perp$\n\n**Résultat :** **Faux**\n\n**Explication :** Bien que $Q \\Rightarrow R$ soit vraie, $P \\Rightarrow Q$ est fausse car on a P vrai et Q faux, ce qui rend toute la conjonction fausse.",
     difficulty: "facile" as DifficultyLevel
   },
   {
@@ -102,7 +102,7 @@ export const EVALUATION_QUESTIONS: QCM[] = [
       "Indéterminé"
     ],
     answer: 1,
-    explanation: "**Calcul étape par étape :**\n\n**Avec $P = \\top$, $Q = \\top$, $R = \\perp$ :**\n\n1. $P \\Leftrightarrow Q = \\top \\Leftrightarrow \\top = \\top$ (même valeur)\n2. $Q \\Leftrightarrow R = \\top \\Leftrightarrow \\perp = \\perp$ (valeurs différentes)\n3. $(P \\Leftrightarrow Q) \\wedge (Q \\Leftrightarrow R) = \\top \\wedge \\perp = \\perp$\n\n**Résultat :** **Faux**\n\n**Explication :** Bien que $P$ et $Q$ aient la même valeur, $Q$ et $R$ ont des valeurs différentes, donc la seconde équivalence est fausse, rendant toute la conjonction fausse.",
+    explanation: "**Calcul étape par étape :**\n\n**Avec $P = \\top$, $Q = \\top$, $R = \\perp$ :**\n\n1. $P \\Leftrightarrow Q = \\top \\Leftrightarrow \\top = \\top$ (même valeur)\n2. $Q \\Leftrightarrow R = \\top \\Leftrightarrow \\perp = \\perp$ (valeurs différentes)\n3. $(P \\Leftrightarrow Q) \\wedge (Q \\Leftrightarrow R) = \\top \\wedge \\perp = \\perp$\n\n**Résultat :** **Faux**\n\n**Explication :** Bien que P et Q aient la même valeur, Q et R ont des valeurs différentes, donc la seconde équivalence est fausse, rendant toute la conjonction fausse.",
     difficulty: "facile" as DifficultyLevel
   },
   {
@@ -128,7 +128,7 @@ export const EVALUATION_QUESTIONS: QCM[] = [
       "Indéterminé"
     ],
     answer: 1,
-    explanation: "**Calcul détaillé :**\n\n**Avec $P = \\perp$, $Q = \\perp$, $R = \\top$ :**\n\n1. $P \\vee Q = \\perp \\vee \\perp = \\perp$\n2. $(P \\vee Q) \\Rightarrow R = \\perp \\Rightarrow \\top = \\top$\n3. $P \\wedge Q = \\perp \\wedge \\perp = \\perp$\n4. $R \\Rightarrow (P \\wedge Q) = \\top \\Rightarrow \\perp = \\perp$\n5. $((P \\vee Q) \\Rightarrow R) \\wedge (R \\Rightarrow (P \\wedge Q)) = \\top \\wedge \\perp = \\perp$\n\n**Résultat :** **Faux**\n\n**Analyse :** Bien que la première implication soit vraie (antécédent faux), la seconde est fausse car $R$ est vrai mais $P \\wedge Q$ est faux.",
+    explanation: "**Calcul détaillé :**\n\n**Avec $P = \\perp$, $Q = \\perp$, $R = \\top$ :**\n\n1. $P \\vee Q = \\perp \\vee \\perp = \\perp$\n2. $(P \\vee Q) \\Rightarrow R = \\perp \\Rightarrow \\top = \\top$\n3. $P \\wedge Q = \\perp \\wedge \\perp = \\perp$\n4. $R \\Rightarrow (P \\wedge Q) = \\top \\Rightarrow \\perp = \\perp$\n5. $((P \\vee Q) \\Rightarrow R) \\wedge (R \\Rightarrow (P \\wedge Q)) = \\top \\wedge \\perp = \\perp$\n\n**Résultat :** **Faux**\n\n**Analyse :** Bien que la première implication soit vraie (antécédent faux), la seconde est fausse car R est vrai mais $P \\wedge Q$ est faux.",
     difficulty: "moyen" as DifficultyLevel
   }
 ] 
