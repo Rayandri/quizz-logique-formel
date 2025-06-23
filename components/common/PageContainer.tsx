@@ -22,7 +22,7 @@ export default function PageContainer({
   className = ""
 }: PageContainerProps) {
   return (
-    <div className="min-h-screen bg-card">
+    <div className="min-h-screen bg-[#1e293b]">
       <Header 
         title={title}
         showBackButton={showBackButton}
