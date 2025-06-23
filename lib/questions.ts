@@ -100,14 +100,14 @@ const EXISTING_QUESTIONS: QCM[] = [
     question: "Quelle est la forme DNF (Forme Normale Disjonctive) correcte ?",
     options: ["(A ∧ B) ∨ (C ∧ ¬D)", "(A ∨ B) ∧ (C ∨ D)", "A ∨ (B ∧ C)", "A ∧ (B ∨ C)"],
     answer: 0,
-    explanation: "La **Forme Normale Disjonctive (DNF)** est une disjonction (∨) de conjonctions (∧) de littéraux.\n\n**Structure :** C'est la forme duale de la CNF.\n\nLa formule (A ∧ B) ∨ (C $\wedge \neg$D) est en DNF :\n• C'est un OU de deux termes\n• Chaque terme est un ET de littéraux\n\n**Interprétation :** La DNF représente directement les cas où la formule est vraie.\nElle est vraie si (A ∧ B) est vrai OU si (C $\wedge \neg$D) est vrai.",
+    explanation: "La **Forme Normale Disjonctive (DNF)** est une disjonction (∨) de conjonctions (∧) de littéraux.\n\n**Structure :** C'est la forme duale de la CNF.\n\nLa formule (A ∧ B) ∨ (C $\\wedge \\neg D$) est en DNF :\n• C'est un OU de deux termes\n• Chaque terme est un ET de littéraux\n\n**Interprétation :** La DNF représente directement les cas où la formule est vraie.\nElle est vraie si (A ∧ B) est vrai OU si (C $\\wedge \\neg D$) est vrai.",
   },
   {
     id: 9,
     question: "Quelle formule est toujours insatisfiable (contradiction) ?",
     options: ["A ∧ ¬A", "A ∨ ¬A", "A ⇒ A", "A"],
     answer: 0,
-    explanation: "La formule A $\wedge \neg$A est une **contradiction classique** (antilogie).\n\n**Principe violé :** Elle viole le **principe de non-contradiction** - une proposition ne peut être à la fois vraie et fausse.\n\n**Valeur de vérité :** Cette formule a pour valeur ⊥ (faux) pour toute valuation, la rendant insatisfiable.\n\n**Opposé :** C'est l'opposé de la tautologie A $\vee \neg$A (principe du tiers exclu).",
+    explanation: "La formule A $\\wedge \\neg A$ est une **contradiction classique** (antilogie).\n\n**Principe violé :** Elle viole le **principe de non-contradiction** - une proposition ne peut être à la fois vraie et fausse.\n\n**Valeur de vérité :** Cette formule a pour valeur ⊥ (faux) pour toute valuation, la rendant insatisfiable.\n\n**Opposé :** C'est l'opposé de la tautologie A $\\vee \\neg A$ (principe du tiers exclu).",
   },
   {
     id: 10,
@@ -122,21 +122,21 @@ const EXISTING_QUESTIONS: QCM[] = [
     question: "La formule (A ∨ ¬A) est :",
     options: ["Une tautologie", "Une contradiction", "Satisfiable mais pas tautologique", "Insatisfiable"],
     answer: 0,
-    explanation: "(A $\vee \neg$A) est une **tautologie**, connue sous le nom de **loi du tiers exclu**.\n\n**Principe :** Pour toute proposition A, soit A est vraie, soit ¬A est vraie (il n'y a pas de troisième possibilité).\n\n**Vérification :**\n• Si v(A) = ⊤, alors v(A $\vee \neg$A) = $\top \vee \perp$ = ⊤\n• Si v(A) = ⊥, alors v(A $\vee \neg$A) = $\perp \vee \top$ = ⊤\n\n**Statut :** Pilier de la logique classique (rejetée en logique intuitionniste).",
+    explanation: "(A $\\vee \\neg A$) est une **tautologie**, connue sous le nom de **loi du tiers exclu**.\n\n**Principe :** Pour toute proposition A, soit A est vraie, soit ¬A est vraie (il n'y a pas de troisième possibilité).\n\n**Vérification :**\n• Si v(A) = ⊤, alors v(A $\\vee \\neg A$) = $\\top \\vee \\bot$ = ⊤\n• Si v(A) = ⊥, alors v(A $\\vee \\neg A$) = $\\bot \\vee \\top$ = ⊤\n\n**Statut :** Pilier de la logique classique (rejetée en logique intuitionniste).",
   },
   {
     id: 12,
     question: "La formule (A ∧ ¬A) est :",
     options: ["Une tautologie", "Une contradiction", "Satisfiable mais pas tautologique", "Une antilogie"],
     answer: 1,
-    explanation: "(A $\wedge \neg$A) est une **contradiction** (aussi appelée **antilogie**).\n\n**Principe violé :** Le **principe de non-contradiction** - une proposition ne peut être simultanément vraie et fausse.\n\n**Vérification pour toute valuation v :**\n• Si v(A) = ⊤, alors v(¬A) = ⊥, donc v(A $\wedge \neg$A) = $\top \wedge \perp$ = ⊥\n• Si v(A) = ⊥, alors v(¬A) = ⊤, donc v(A $\wedge \neg$A) = $\perp \wedge \top$ = ⊥\n\n**Opposé :** C'est l'opposé logique de la tautologie A $\vee \neg$A.",
+    explanation: "(A $\\wedge \\neg A$) est une **contradiction** (aussi appelée **antilogie**).\n\n**Principe violé :** Le **principe de non-contradiction** - une proposition ne peut être simultanément vraie et fausse.\n\n**Vérification pour toute valuation v :**\n• Si v(A) = ⊤, alors v(¬A) = ⊥, donc v(A $\\wedge \\neg A$) = $\\top \\wedge \\bot$ = ⊥\n• Si v(A) = ⊥, alors v(¬A) = ⊤, donc v(A $\\wedge \\neg A$) = $\\bot \\wedge \\top$ = ⊥\n\n**Opposé :** C'est l'opposé logique de la tautologie A $\\vee \\neg A$.",
   },
   {
     id: 13,
     question: "P ⇒ Q est logiquement équivalent à :",
     options: ["¬P ∨ Q", "P ∨ Q", "¬Q ∨ P", "P ∧ Q"],
     answer: 0,
-    explanation: "L'équivalence P ⇒ Q $\equiv \neg$P ∨ Q est la **définition de l'implication matérialisée**.\n\n**Démonstration par table de vérité :**\nL'implication P ⇒ Q n'est fausse que lorsque P est vrai et Q est faux.\n\nDans ce cas : ¬P ∨ Q = $\perp \vee \perp$ = ⊥\n\nDans tous les autres cas, au moins l'un des termes ¬P ou Q est vrai, rendant la disjonction vraie.\n\n**Utilité :** Cette équivalence permet d'éliminer l'implication des formules logiques.",
+    explanation: "L'équivalence P ⇒ Q $\\equiv \\neg P \\vee Q$ est la **définition de l'implication matérialisée**.\n\n**Démonstration par table de vérité :**\nL'implication P ⇒ Q n'est fausse que lorsque P est vrai et Q est faux.\n\nDans ce cas : ¬P ∨ Q = $\\bot \\vee \\bot$ = ⊥\n\nDans tous les autres cas, au moins l'un des termes ¬P ou Q est vrai, rendant la disjonction vraie.\n\n**Utilité :** Cette équivalence permet d'éliminer l'implication des formules logiques.",
   },
   {
     id: 14,
@@ -155,7 +155,7 @@ const EXISTING_QUESTIONS: QCM[] = [
     question: "La loi de double négation : ¬(¬A) ≡ ?",
     options: ["A", "¬A", "A ∨ ¬A", "A ∧ ¬A"],
     answer: 0,
-    explanation: "La **loi de double négation** établit que ¬(¬A) ≡ A.\n\n**Principe :** En logique classique, nier deux fois une proposition revient à affirmer la proposition originale.\n\n**Vérification par table de vérité :**\n• Si v(A) = ⊤, alors v(¬A) = ⊥ et v(¬(¬A)) = ¬\perp$ = ⊤ = v(A)\n• Si v(A) = ⊥, alors v(¬A) = ⊤ et v(¬(¬A)) = ¬\top$ = ⊥ = v(A)\n\n**Application :** Cette loi permet de simplifier les formules en éliminant les doubles négations.",
+    explanation: "La **loi de double négation** établit que ¬(¬A) ≡ A.\n\n**Principe :** En logique classique, nier deux fois une proposition revient à affirmer la proposition originale.\n\n**Vérification par table de vérité :**\n• Si v(A) = ⊤, alors v(¬A) = ⊥ et v(¬(¬A)) = $\\neg \\bot$ = ⊤ = v(A)\n• Si v(A) = ⊥, alors v(¬A) = ⊤ et v(¬(¬A)) = $\\neg \\top$ = ⊥ = v(A)\n\n**Application :** Cette loi permet de simplifier les formules en éliminant les doubles négations.",
   },
   {
     id: 16,
@@ -237,7 +237,7 @@ const EXISTING_QUESTIONS: QCM[] = [
       "ET de littéraux uniquement",
     ],
     answer: 0,
-    explanation: "La **Forme Normale Disjonctive (DNF)** a la structure : **disjonction** (∨) de **conjonctions** (∧) de **littéraux**.\n\n**Définition d'un littéral :** Une variable ou sa négation.\n\n**Formalisation :** ⋁ᵢ₌₁ⁿ ⋀ⱼ₌₁ᵐⁱ ℓᵢ,ⱼ où chaque ℓᵢ,ⱼ est un littéral\n\n**Exemple :** (A $\wedge \neg$B) ∨ (¬A ∧ C) ∨ (B ∧ C)\n\n**Interprétation :** La DNF représente explicitement tous les cas où la formule est vraie - chaque terme de la disjonction correspond à une combinaison de valeurs rendant la formule vraie.",
+    explanation: "La **Forme Normale Disjonctive (DNF)** a la structure : **disjonction** (∨) de **conjonctions** (∧) de **littéraux**.\n\n**Définition d'un littéral :** Une variable ou sa négation.\n\n**Formalisation :** ⋁ᵢ₌₁ⁿ ⋀ⱼ₌₁ᵐⁱ ℓᵢ,ⱼ où chaque ℓᵢ,ⱼ est un littéral\n\n**Exemple :** (A $\\wedge \\neg B$) ∨ (¬A ∧ C) ∨ (B ∧ C)\n\n**Interprétation :** La DNF représente explicitement tous les cas où la formule est vraie - chaque terme de la disjonction correspond à une combinaison de valeurs rendant la formule vraie.",
   },
   {
     id: 24,
@@ -300,7 +300,7 @@ const EXISTING_QUESTIONS: QCM[] = [
       "Un littéral isolé",
     ],
     answer: 0,
-    explanation: "En **Forme Normale Conjonctive (CNF)**, une **clause** est une **disjonction de littéraux** :\n\n**Structure d'une clause :** ℓ₁ ∨ ℓ₂ ∨ ⋯ ∨ ℓₖ où chaque ℓᵢ est un littéral (variable ou sa négation)\n\n**Structure CNF complète :** Une **conjonction de clauses** : C₁ ∧ C₂ ∧ ⋯ ∧ Cₙ\n\n**Exemple :** Dans (A $\vee \neg$B ∨ C) ∧ (¬A ∨ D), les clauses sont :\n• (A $\vee \neg$B ∨ C)\n• (¬A ∨ D)\n\n**Avantage :** Cette structure est optimale pour les SAT-solvers basés sur la résolution.",
+    explanation: "En **Forme Normale Conjonctive (CNF)**, une **clause** est une **disjonction de littéraux** :\n\n**Structure d'une clause :** ℓ₁ ∨ ℓ₂ ∨ ⋯ ∨ ℓₖ où chaque ℓᵢ est un littéral (variable ou sa négation)\n\n**Structure CNF complète :** Une **conjonction de clauses** : C₁ ∧ C₂ ∧ ⋯ ∧ Cₙ\n\n**Exemple :** Dans (A $\\vee \\neg B$ ∨ C) ∧ (¬A ∨ D), les clauses sont :\n• (A $\\vee \\neg B$ ∨ C)\n• (¬A ∨ D)\n\n**Avantage :** Cette structure est optimale pour les SAT-solvers basés sur la résolution.",
   },
   {
     id: 30,
@@ -383,7 +383,7 @@ const EXISTING_QUESTIONS: QCM[] = [
       "En forme normale disjonctive",
     ],
     answer: 0,
-    explanation: "Une **antilogie** (ou **contradiction**) est une formule qui est **fausse sous toute valuation**.\n\n**Définition formelle :** φ est une antilogie si ∀v : v(φ) = ⊥, ou de manière équivalente, ⊨ ¬\phi$\n\n**Exemple classique :** A $\wedge \neg$A\n\n**Propriété :** Les antilogies sont **insatisfiables** - elles n'ont aucun modèle.\n\n**Principe sous-jacent :** En logique classique, le principe de non-contradiction garantit qu'aucune proposition ne peut être simultanément vraie et fausse.\n\n**Opposé :** C'est l'opposé d'une tautologie.",
+    explanation: "Une **antilogie** (ou **contradiction**) est une formule qui est **fausse sous toute valuation**.\n\n**Définition formelle :** φ est une antilogie si ∀v : v(φ) = ⊥, ou de manière équivalente, ⊨ $\\neg \\phi$\n\n**Exemple classique :** A $\\wedge \\neg A$\n\n**Propriété :** Les antilogies sont **insatisfiables** - elles n'ont aucun modèle.\n\n**Principe sous-jacent :** En logique classique, le principe de non-contradiction garantit qu'aucune proposition ne peut être simultanément vraie et fausse.\n\n**Opposé :** C'est l'opposé d'une tautologie.",
   },
   {
     id: 38,
@@ -470,7 +470,7 @@ const EXISTING_QUESTIONS: QCM[] = [
       "Conversion directe en DNF",
     ],
     answer: 0,
-    explanation: "La **transformation en CNF** suit un algorithme systématique :\n\n**(1) Élimination des équivalences :**\nA ⇔ B ↝ (A ⇒ B) ∧ (B ⇒ A)\n\n**(2) Élimination des implications :**\nA ⇒ B ↝ ¬A ∨ B\n\n**(3) Poussée des négations (De Morgan) :**\n• ¬(A ∧ B) ↝ ¬A $\vee \neg$B\n• ¬(A ∨ B) ↝ ¬A $\wedge \neg$B\n\n**(4) Élimination des doubles négations :**\n¬\neg$A ↝ A\n\n**(5) Distributivité :**\nPour obtenir la forme conjonctive finale",
+    explanation: "La **transformation en CNF** suit un algorithme systématique :\n\n**(1) Élimination des équivalences :**\nA ⇔ B ↝ (A ⇒ B) ∧ (B ⇒ A)\n\n**(2) Élimination des implications :**\nA ⇒ B ↝ ¬A ∨ B\n\n**(3) Poussée des négations (De Morgan) :**\n• ¬(A ∧ B) ↝ $\\neg A \\vee \\neg B$\n• ¬(A ∨ B) ↝ $\\neg A \\wedge \\neg B$\n\n**(4) Élimination des doubles négations :**\n$\\neg \\neg A$ ↝ A\n\n**(5) Distributivité :**\nPour obtenir la forme conjonctive finale",
   },
   {
     id: 46,
@@ -506,7 +506,7 @@ const EXISTING_QUESTIONS: QCM[] = [
       "A ∧ A est toujours fausse",
     ],
     answer: 0,
-    explanation: "La **loi du tiers exclu** (latin : *tertium non datur*) affirme que A $\vee \neg$A est une **tautologie** pour toute proposition A.\n\n**Principe :** Il n'existe pas de \"troisième possibilité\" entre vrai et faux - toute proposition est soit vraie, soit fausse.\n\n**Statut en logique classique :** C'est un pilier de la **logique classique**\n\n**Rejet en logique intuitionniste :** Cette loi est rejetée en **logique intuitionniste**, où une proposition n'est vraie que si on peut la construire/prouver.\n\n**Conséquence :** Le rejet du tiers exclu mène à des mathématiques constructives différentes.",
+    explanation: "La **loi du tiers exclu** (latin : *tertium non datur*) affirme que A $\\vee \\neg A$ est une **tautologie** pour toute proposition A.\n\n**Principe :** Il n'existe pas de \"troisième possibilité\" entre vrai et faux - toute proposition est soit vraie, soit fausse.\n\n**Statut en logique classique :** C'est un pilier de la **logique classique**\n\n**Rejet en logique intuitionniste :** Cette loi est rejetée en **logique intuitionniste**, où une proposition n'est vraie que si on peut la construire/prouver.\n\n**Conséquence :** Le rejet du tiers exclu mène à des mathématiques constructives différentes.",
   },
   {
     id: 49,
