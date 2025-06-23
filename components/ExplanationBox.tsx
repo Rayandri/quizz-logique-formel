@@ -69,7 +69,7 @@ export default function ExplanationBox({
               className="px-2 py-1 bg-orange-600 hover:bg-orange-500 text-white text-xs rounded transition-colors duration-200"
               title="Réparer l'affichage LaTeX"
             >
-              🔧 LaTeX
+              Réparer LaTeX
             </button>
           </div>
         </div>
