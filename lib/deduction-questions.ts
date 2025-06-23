@@ -25,7 +25,7 @@ export const DEDUCTION_QUESTIONS: QCM[] = [
   },
   {
     id: 2,
-    question: "Dans l'arbre de preuve suivant, quelle règle manque ?\n\n```\nA    A ⇒ B\n―――――――――\n    B\n```",
+    question: "Dans l'arbre de preuve suivant, quelle règle manque ?\n\n```\nA    A $\\Rightarrow$ B\n―――――――――――――――\n        B\n```",
     options: [
       "$[\\Rightarrow\\text{E}]$ (Modus Ponens)",
       "$[\\Rightarrow\\text{I}]$",
@@ -33,7 +33,7 @@ export const DEDUCTION_QUESTIONS: QCM[] = [
       "$[\\vee\\text{I}]$"
     ],
     answer: 0,
-    explanation: "Cette structure correspond à la règle $[\\Rightarrow\\text{E}]$ (**élimination de l'implication**), aussi appelée **Modus Ponens**.\n\n**Règle formelle :**\n```\nA    A ⇒ B\n―――――――――― ⇒E\n    B\n```\n\n**Principe :** Si on a prouvé A et A ⇒ B, alors on peut conclure B.\n\n**Usage :** C'est l'une des règles les plus fondamentales pour \"utiliser\" une implication dans une preuve."
+    explanation: "Cette structure correspond à la règle $[\\Rightarrow\\text{E}]$ (**élimination de l'implication**), aussi appelée **Modus Ponens**.\n\n**Règle formelle :**\n```\nA    A $\\Rightarrow$ B\n―――――――――――――――― $\\Rightarrow$E\n        B\n```\n\n**Principe :** Si on a prouvé A et A $\\Rightarrow$ B, alors on peut conclure B.\n\n**Usage :** C'est l'une des règles les plus fondamentales pour \"utiliser\" une implication dans une preuve."
   },
   {
     id: 3,
@@ -94,7 +94,7 @@ export const DEDUCTION_QUESTIONS: QCM[] = [
       "De $A \\Rightarrow B$, dériver B"
     ],
     answer: 0,
-    explanation: "La règle $[\\wedge\\text{E}]$ (**élimination de la conjonction**) a deux formes :\n\n$[\\wedge\\text{E}_1]$ :\n```\nA ∧ B\n―――――― ∧E₁\n  A\n```\n\n$[\\wedge\\text{E}_2]$ :\n```\nA ∧ B\n―――――― ∧E₂\n  B\n```\n\n**Principe :** Si on a prouvé \"$A \\wedge B$\", alors on peut conclure A (ou B) séparément.\n\n**Usage :** Permet d'extraire l'information nécessaire d'une conjonction."
+    explanation: "La règle $[\\wedge\\text{E}]$ (**élimination de la conjonction**) a deux formes :\n\n$[\\wedge\\text{E}_1]$ :\n```\nA $\\wedge$ B\n―――――――――― $\\wedge$E₁\n     A\n```\n\n$[\\wedge\\text{E}_2]$ :\n```\nA $\\wedge$ B\n―――――――――― $\\wedge$E₂\n     B\n```\n\n**Principe :** Si on a prouvé \"$A \\wedge B$\", alors on peut conclure A (ou B) séparément.\n\n**Usage :** Permet d'extraire l'information nécessaire d'une conjonction."
   },
   {
     id: 8,
@@ -106,7 +106,7 @@ export const DEDUCTION_QUESTIONS: QCM[] = [
       "De $A \\Rightarrow B$, dériver $A \\vee B$"
     ],
     answer: 0,
-    explanation: "La règle $[\\vee\\text{I}]$ (**introduction de la disjonction**) a deux formes :\n\n$[\\vee\\text{I}_1]$ :\n```\n  A\n―――――― ∨I₁\nA ∨ B\n```\n\n$[\\vee\\text{I}_2]$ :\n```\n  B\n―――――― ∨I₂\nA ∨ B\n```\n\n**Principe :** Si on a prouvé A, alors \"$A \\vee B$\" est vrai, quel que soit B.\n\n**Affaiblissement :** Cette règle \"affaiblit\" l'information - on passe d'une certitude à une alternative."
+    explanation: "La règle $[\\vee\\text{I}]$ (**introduction de la disjonction**) a deux formes :\n\n$[\\vee\\text{I}_1]$ :\n```\n    A\n―――――――― $\\vee$I₁\nA $\\vee$ B\n```\n\n$[\\vee\\text{I}_2]$ :\n```\n    B\n―――――――― $\\vee$I₂\nA $\\vee$ B\n```\n\n**Principe :** Si on a prouvé A, alors \"$A \\vee B$\" est vrai, quel que soit B.\n\n**Affaiblissement :** Cette règle \"affaiblit\" l'information - on passe d'une certitude à une alternative."
   },
   {
     id: 9,
@@ -118,7 +118,7 @@ export const DEDUCTION_QUESTIONS: QCM[] = [
       "On l'ignore"
     ],
     answer: 0,
-    explanation: "Pour **$A \\wedge B$** en tableaux sémantiques, on applique la **règle α** :\n\n**Extension linéaire :**\n```\nA ∧ B\n  |\n  A\n  B\n```\n\n**Principe :** Pour que $A \\wedge B$ soit vraie, il faut que A soit vraie ET B soit vraie simultanément.\n\n**Une seule branche :** Contrairement à la disjonction, la conjonction ne crée pas de branchement.\n\n**Règles α :** Les formules conjonctives ($\\wedge$, $\\neg\\vee$, $\\neg\\Rightarrow$) étendent linéairement."
+    explanation: "Pour **$A \\wedge B$** en tableaux sémantiques, on applique la **règle α** :\n\n**Extension linéaire :**\n```\nA $\\wedge$ B\n     |\n     A\n     B\n```\n\n**Principe :** Pour que $A \\wedge B$ soit vraie, il faut que A soit vraie ET B soit vraie simultanément.\n\n**Une seule branche :** Contrairement à la disjonction, la conjonction ne crée pas de branchement.\n\n**Règles α :** Les formules conjonctives ($\\wedge$, $\\neg\\vee$, $\\neg\\Rightarrow$) étendent linéairement."
   },
   {
     id: 10,
@@ -130,7 +130,7 @@ export const DEDUCTION_QUESTIONS: QCM[] = [
       "Élimination de disjonction"
     ],
     answer: 0,
-    explanation: "Cette formule exprime la **transitivité de l'implication**. La preuve utilise :\n\n**Structure :**\n```\n[A ⇒ B]¹\n[B ⇒ C]²\n[A]³\n  |\n  B     (⇒E sur A ⇒ B et A)\n  |\n  C     (⇒E sur B ⇒ C et B)\n  |\nA ⇒ C   (⇒I,³)\n  |\n(B ⇒ C) ⇒ (A ⇒ C)   (⇒I,²)\n  |\n(A ⇒ B) ⇒ ((B ⇒ C) ⇒ (A ⇒ C))   (⇒I,¹)\n```\n\n**Stratégie :** Trois $[\\Rightarrow\\text{I}]$ imbriquées suivies de deux $[\\Rightarrow\\text{E}]$ pour la chaîne de déduction.",
+    explanation: "Cette formule exprime la **transitivité de l'implication**. La preuve utilise :\n\n**Structure :**\n```\n[A $\\Rightarrow$ B]¹\n[B $\\Rightarrow$ C]²\n[A]³\n    |\n    B     ($\\Rightarrow$E sur A $\\Rightarrow$ B et A)\n    |\n    C     ($\\Rightarrow$E sur B $\\Rightarrow$ C et B)\n    |\nA $\\Rightarrow$ C   ($\\Rightarrow$I,³)\n    |\n(B $\\Rightarrow$ C) $\\Rightarrow$ (A $\\Rightarrow$ C)   ($\\Rightarrow$I,²)\n    |\n(A $\\Rightarrow$ B) $\\Rightarrow$ ((B $\\Rightarrow$ C) $\\Rightarrow$ (A $\\Rightarrow$ C))   ($\\Rightarrow$I,¹)\n```\n\n**Stratégie :** Trois $[\\Rightarrow\\text{I}]$ imbriquées suivies de deux $[\\Rightarrow\\text{E}]$ pour la chaîne de déduction.",
     difficulty: "dur"
   }
 ] 
