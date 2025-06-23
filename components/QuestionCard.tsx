@@ -1,5 +1,6 @@
 "use client"
 
+import { useMemo } from "react"
 import type { QCM } from "@/lib/questions"
 import KatexRenderer from "./KatexRenderer"
 import Footer from "./Footer"
@@ -27,6 +28,8 @@ export default function QuestionCard({
   isValidated,
   currentScore,
 }: QuestionCardProps) {
+  const memoizedOptions = useMemo(() => question.options, [question.id])
+
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col">
       <div className="flex-1 flex items-center justify-center p-4">
@@ -50,9 +53,9 @@ export default function QuestionCard({
         </div>
 
         <div className="space-y-3 mb-8">
-          {question.options.map((option, index) => (
+          {memoizedOptions.map((option, index) => (
             <label
-              key={index}
+              key={`${question.id}-${index}`}
               className={`flex items-center p-4 rounded-lg border cursor-pointer transition-colors duration-200 ${
                 isValidated
                   ? index === question.answer
