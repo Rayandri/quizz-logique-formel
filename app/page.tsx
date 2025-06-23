@@ -196,6 +196,12 @@ export default function Home() {
     setSkippedQuestion(false)
   }
 
+  const handleReturnToMenu = () => {
+    if (confirm("Êtes-vous sûr de vouloir retourner au menu ? Votre progression sera sauvegardée.")) {
+      setGameState("config")
+    }
+  }
+
   if (gameState === "config") {
     return <QuizConfig onStart={handleStart} />
   }
@@ -218,6 +224,7 @@ export default function Home() {
             onAnswerSelect={handleAnswerSelect}
             onValidate={handleValidate}
             onSkip={handleSkip}
+            onReturnToMenu={handleReturnToMenu}
             isValidated={isValidated}
             currentScore={currentScore}
           />
@@ -232,6 +239,7 @@ export default function Home() {
         question={selectedQuestions[currentQuestionIndex]}
         selectedAnswer={selectedAnswer}
         onNext={handleNext}
+        onReturnToMenu={handleReturnToMenu}
         isLastQuestion={currentQuestionIndex === selectedQuestions.length - 1}
         skippedQuestion={skippedQuestion}
       />

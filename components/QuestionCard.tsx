@@ -14,6 +14,7 @@ interface QuestionCardProps {
   onAnswerSelect: (answer: number) => void
   onValidate: () => void
   onSkip: () => void
+  onReturnToMenu: () => void
   isValidated: boolean
   currentScore: number
 }
@@ -26,6 +27,7 @@ export default function QuestionCard({
   onAnswerSelect,
   onValidate,
   onSkip,
+  onReturnToMenu,
   isValidated,
   currentScore,
 }: QuestionCardProps) {
@@ -36,10 +38,42 @@ export default function QuestionCard({
     setRefreshKey(prev => prev + 1)
   }
 
+  const handleClearCache = () => {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("quiz-logique-state")
+      alert("Cache vidé !")
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col">
       <div className="flex-1 flex items-center justify-center p-4">
         <div className="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-2xl">
+        <div className="flex justify-between items-center mb-4">
+          <button
+            onClick={onReturnToMenu}
+            className="px-3 py-2 bg-gray-600 hover:bg-gray-500 text-white text-sm rounded-md transition-colors duration-200"
+          >
+            ← Menu
+          </button>
+          <div className="flex gap-2">
+            <button
+              onClick={handleClearCache}
+              className="px-2 py-1 bg-red-600 hover:bg-red-500 text-white text-xs rounded transition-colors duration-200"
+              title="Vider le cache"
+            >
+              🗑️ Cache
+            </button>
+            <button
+              onClick={handleRepairLatex}
+              className="px-2 py-1 bg-orange-600 hover:bg-orange-500 text-white text-xs rounded transition-colors duration-200"
+              title="Réparer l'affichage LaTeX"
+            >
+              🔧 LaTeX
+            </button>
+          </div>
+        </div>
+
         <div className="mb-6">
           <div className="flex justify-between items-center mb-4">
             <div className="flex items-center gap-3">
@@ -48,20 +82,11 @@ export default function QuestionCard({
               </span>
               <DifficultyBadge difficulty={question.difficulty || "facile"} />
             </div>
-            <div className="flex items-center gap-2">
-              <button
-                onClick={handleRepairLatex}
-                className="px-2 py-1 bg-orange-600 hover:bg-orange-500 text-white text-xs rounded transition-colors duration-200"
-                title="Réparer l'affichage LaTeX"
-              >
-                🔧 LaTeX
-              </button>
-              <div className="w-full max-w-xs bg-gray-700 rounded-full h-2 ml-2">
-                <div
-                  className="bg-indigo-600 h-2 rounded-full transition-all duration-300"
-                  style={{ width: `${(questionNumber / totalQuestions) * 100}%` }}
-                />
-              </div>
+            <div className="w-full max-w-xs bg-gray-700 rounded-full h-2 ml-4">
+              <div
+                className="bg-indigo-600 h-2 rounded-full transition-all duration-300"
+                style={{ width: `${(questionNumber / totalQuestions) * 100}%` }}
+              />
             </div>
           </div>
 
