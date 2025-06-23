@@ -269,9 +269,7 @@ export default function Home() {
   }
 
   const handleReturnToMenu = () => {
-    if (confirm("Êtes-vous sûr de vouloir retourner au menu ? Votre progression sera sauvegardée.")) {
-      setGameState("config")
-    }
+    setGameState("config")
   }
 
   const handleBackToSubjects = () => {

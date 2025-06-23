@@ -125,23 +125,26 @@ export default function QuizConfig({ subject, onStart, onBackToSubjects }: QuizC
 
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col">
-      <div className="flex-1 flex items-center justify-center p-4">
-        <div className="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-md">
-        <div className="flex items-center justify-between mb-4">
+      {/* Menu principal toujours visible */}
+      <div className="w-full bg-gray-800 shadow-lg p-4">
+        <div className="max-w-md mx-auto flex items-center justify-between">
           <button
             onClick={onBackToSubjects}
             className="text-gray-400 hover:text-gray-200 transition-colors duration-200"
           >
-            ← Retour
+            ← Menu Principal
           </button>
-          <h1 className="text-2xl font-bold text-gray-200">
+          <h1 className="text-xl font-bold text-gray-200">
             Quiz de {subject === "logique" ? "Logique Formelle" : 
                      subject === "droit" ? "Droit" : 
                      subject === "risques" ? "Gestion des Risques" : 
                      "Probabilités & Statistiques"}
           </h1>
-          <div className="w-16"></div>
         </div>
+      </div>
+
+      <div className="flex-1 flex items-center justify-center p-4">
+        <div className="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-md">
         
         {/* Notification de sauvegarde */}
         {hasSavedQuiz && (
