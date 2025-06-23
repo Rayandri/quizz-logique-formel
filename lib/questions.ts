@@ -22,23 +22,23 @@ const EXISTING_QUESTIONS: QCM[] = [
     id: 1,
     question: "Quelle est la forme CNF (Forme Normale Conjonctive) ?",
     options: [
-      "$(A \vee B) \wedge (\neg C \vee D)$",
+      "$(A \vee B) \wedge (\neg C \vee D)$ $",
       "$(A \wedge B) \vee (C \wedge D)$",
-      "$A \vee (B \wedge C)$",
-      "$A \wedge (B \vee C \vee D)$"
+      "$ $A \vee (B \wedge C)$",
+      "$A \wedge (B \vee C \vee D)$ $"
     ],
     answer: 0,
-    explanation: "La **Forme Normale Conjonctive (CNF)** est une conjonction (∧) de disjonctions (∨) de littéraux.\n\nUn littéral est soit une variable propositionnelle, soit sa négation.\n\nLa formule $(A \vee B) \wedge (\neg C \vee D)$ respecte cette structure : c'est un ET de deux clauses, chaque clause étant un OU de littéraux.\n\n**Propriété importante :** Toute formule peut être transformée en CNF par les lois de De Morgan et la distributivité.",
+    explanation: "La **Forme Normale Conjonctive (CNF)** est une conjonction (∧) de disjonctions (∨) de littéraux.\n\nUn littéral est soit une variable propositionnelle, soit sa négation.\n\nLa formule$(A \vee B) \wedge (\neg C \vee D)$respecte cette structure : c'est un ET de deux clauses, chaque clause étant un OU de littéraux.\n\n**Propriété importante :** Toute formule peut être transformée en CNF par les lois de De Morgan et la distributivité.",
     difficulty: "cours"
   },
   {
     id: 2,
     question: "La règle de De Morgan correcte est :",
     options: [
-      "$\neg(A \wedge B) \equiv (\neg A \vee \neg B)$", 
-      "$\neg(A \wedge B) \equiv (\neg A \wedge \neg B)$", 
+      "$ $\neg(A \wedge B) \equiv (\neg A \vee \neg B)$", 
+      "$\neg(A \wedge B) \equiv (\neg A \wedge \neg B)$ $", 
       "$\neg(A \vee B) \equiv (\neg A \vee \neg B)$", 
-      "$A \vee B \equiv A \wedge B$"
+      "$ $A \vee B \equiv A \wedge B$"
     ],
     answer: 0,
     explanation:
@@ -46,24 +46,24 @@ const EXISTING_QUESTIONS: QCM[] = [
   },
   {
     id: 3,
-    question: "La contraposée de $A \Rightarrow B$ est :",
+    question: "La contraposée de $A \Rightarrow B$ $est :",
     options: [
       "$\neg B \Rightarrow \neg A$", 
-      "$\neg A \Rightarrow \neg B$", 
-      "$B \Rightarrow A$", 
+      "$ $\neg A \Rightarrow \neg B$", 
+      "$B \Rightarrow A$ $", 
       "$A \Rightarrow \neg B$"
     ],
     answer: 0,
-    explanation: "La **contraposée** d'une implication A ⇒ B est ¬B $\Rightarrow \neg$A.\n\n**Équivalence fondamentale :** A ⇒ B $\equiv \neg$B $\Rightarrow \neg$A\n\nLa preuve se fait par table de vérité ou en utilisant l'équivalence A ⇒ B $\equiv \neg$A ∨ B.\n\n**Important :** La contraposée conserve la valeur de vérité de l'implication originale, contrairement à la réciproque B ⇒ A qui n'est pas équivalente.",
+    explanation: "La **contraposée** d'une implication A ⇒ B est ¬B$ $\Rightarrow \neg$A.\n\n**Équivalence fondamentale :** A ⇒ B $\equiv \neg$ $B$\Rightarrow \neg$A\n\nLa preuve se fait par table de vérité ou en utilisant l'équivalence A ⇒ B$ $\equiv \neg$A ∨ B.\n\n**Important :** La contraposée conserve la valeur de vérité de l'implication originale, contrairement à la réciproque B ⇒ A qui n'est pas équivalente.",
   },
   {
     id: 4,
     question: "Quel connecteur logique est à la fois commutatif et associatif ?",
     options: [
-      "$\vee$ (disjonction)", 
-      "$\Rightarrow$ (implication)", 
-      "$\neg$ (négation)", 
-      "$\mapsto$ (fonction)"
+      "$\v$ $(disjonction)", 
+      "$\Rightarrow$(implication)", 
+      "$ $\neg$ (négation)", 
+      "$\mapsto$ $(fonction)"
     ],
     answer: 0,
     explanation: "La **disjonction** ∨ possède deux propriétés importantes :\n\n**Commutativité :** A ∨ B ≡ B ∨ A\n**Associativité :** (A ∨ B) ∨ C ≡ A ∨ (B ∨ C)\n\nCes propriétés permettent de réorganiser les termes d'une disjonction sans changer sa valeur de vérité.\n\n**Note :** La conjonction ∧ possède également ces propriétés.\n\n**Contre-exemple :** L'implication ⇒ n'est ni commutative (A ⇒ B ≢ B ⇒ A) ni associative.",
@@ -89,29 +89,29 @@ const EXISTING_QUESTIONS: QCM[] = [
   },
   {
     id: 7,
-    question: "L'implication matérialisée : $A \Rightarrow B$ équivaut à :",
+    question: "L'implication matérialisée :$A \Rightarrow B$équivaut à :",
     options: [
-      "$\\neg A \\vee B$", 
-      "$A \\wedge B$", 
+      "$ $\\neg A \\vee B$", 
+      "$A \\wedge B$ $", 
       "$\\neg B \\vee A$", 
-      "$B \\wedge \\neg A$"
+      "$ $B \\wedge \\neg A$"
     ],
     answer: 0,
-    explanation: "L'**implication matérialisée** définit : $A \Rightarrow B \equiv \neg A \vee B$\n\n**Vérification par table de vérité :**\nL'implication n'est fausse que quand l'antécédent est vrai et le conséquent faux.\n\nDans tous les autres cas (A faux ou B vrai), l'implication est vraie.\n\n**Utilité :** Cette définition permet d'éliminer le connecteur $\Rightarrow$ lors de la transformation en formes normales, en utilisant uniquement $\neg$, $\wedge$ et $\vee$.",
+    explanation: "L'**implication matérialisée** définit : $A \Rightarrow B \equiv \neg A \vee B$ $\n\n**Vérification par table de vérité :**\nL'implication n'est fausse que quand l'antécédent est vrai et le conséquent faux.\n\nDans tous les autres cas (A faux ou B vrai), l'implication est vraie.\n\n**Utilité :** Cette définition permet d'éliminer le connecteur$\Rightarrow$lors de la transformation en formes normales, en utilisant uniquement$ $\neg$, $\wedge$ $et$\v$.",
   },
   {
     id: 8,
     question: "Quelle est la forme DNF (Forme Normale Disjonctive) correcte ?",
     options: ["(A ∧ B) ∨ (C ∧ ¬D)", "(A ∨ B) ∧ (C ∨ D)", "A ∨ (B ∧ C)", "A ∧ (B ∨ C)"],
     answer: 0,
-    explanation: "La **Forme Normale Disjonctive (DNF)** est une disjonction (∨) de conjonctions (∧) de littéraux.\n\n**Structure :** C'est la forme duale de la CNF.\n\nLa formule (A ∧ B) ∨ (C $\wedge \neg D$) est en DNF :\n• C'est un OU de deux termes\n• Chaque terme est un ET de littéraux\n\n**Interprétation :** La DNF représente directement les cas où la formule est vraie.\nElle est vraie si (A ∧ B) est vrai OU si (C $\wedge \neg D$) est vrai.",
+    explanation: "La **Forme Normale Disjonctive (DNF)** est une disjonction (∨) de conjonctions (∧) de littéraux.\n\n**Structure :** C'est la forme duale de la CNF.\n\nLa formule (A ∧ B) ∨ (C$ $\wedge \neg D$) est en DNF :\n• C'est un OU de deux termes\n• Chaque terme est un ET de littéraux\n\n**Interprétation :** La DNF représente directement les cas où la formule est vraie.\nElle est vraie si (A ∧ B) est vrai OU si (C $\wedge \neg D$ $) est vrai.",
   },
   {
     id: 9,
     question: "Quelle formule est toujours insatisfiable (contradiction) ?",
     options: ["A ∧ ¬A", "A ∨ ¬A", "A ⇒ A", "A"],
     answer: 0,
-    explanation: "La formule A $\wedge \neg A$ est une **contradiction classique** (antilogie).\n\n**Principe violé :** Elle viole le **principe de non-contradiction** - une proposition ne peut être à la fois vraie et fausse.\n\n**Valeur de vérité :** Cette formule a pour valeur ⊥ (faux) pour toute valuation, la rendant insatisfiable.\n\n**Opposé :** C'est l'opposé de la tautologie A $\vee \neg A$ (principe du tiers exclu).",
+    explanation: "La formule A$\wedge \neg A$est une **contradiction classique** (antilogie).\n\n**Principe violé :** Elle viole le **principe de non-contradiction** - une proposition ne peut être à la fois vraie et fausse.\n\n**Valeur de vérité :** Cette formule a pour valeur ⊥ (faux) pour toute valuation, la rendant insatisfiable.\n\n**Opposé :** C'est l'opposé de la tautologie A$ $\vee \neg A$ (principe du tiers exclu).",
   },
   {
     id: 10,
@@ -126,21 +126,21 @@ const EXISTING_QUESTIONS: QCM[] = [
     question: "La formule (A ∨ ¬A) est :",
     options: ["Une tautologie", "Une contradiction", "Satisfiable mais pas tautologique", "Insatisfiable"],
     answer: 0,
-    explanation: "(A $\vee \neg A$) est une **tautologie**, connue sous le nom de **loi du tiers exclu**.\n\n**Principe :** Pour toute proposition A, soit A est vraie, soit ¬A est vraie (il n'y a pas de troisième possibilité).\n\n**Vérification :**\n• Si v(A) = ⊤, alors v(A $\vee \neg A$) = $\top \vee \bot$ = ⊤\n• Si v(A) = ⊥, alors v(A $\vee \neg A$) = $\bot \vee \top$ = ⊤\n\n**Statut :** Pilier de la logique classique (rejetée en logique intuitionniste).",
+    explanation: "(A $\vee \neg A$ $) est une **tautologie**, connue sous le nom de **loi du tiers exclu**.\n\n**Principe :** Pour toute proposition A, soit A est vraie, soit ¬A est vraie (il n'y a pas de troisième possibilité).\n\n**Vérification :**\n• Si v(A) = ⊤, alors v(A$\vee \neg A$) =$ $\top \vee \bot$ = ⊤\n• Si v(A) = ⊥, alors v(A $\vee \neg A$ $) =$\bot \vee \top$= ⊤\n\n**Statut :** Pilier de la logique classique (rejetée en logique intuitionniste).",
   },
   {
     id: 12,
     question: "La formule (A ∧ ¬A) est :",
     options: ["Une tautologie", "Une contradiction", "Satisfiable mais pas tautologique", "Une antilogie"],
     answer: 1,
-    explanation: "(A $\wedge \neg A$) est une **contradiction** (aussi appelée **antilogie**).\n\n**Principe violé :** Le **principe de non-contradiction** - une proposition ne peut être simultanément vraie et fausse.\n\n**Vérification pour toute valuation v :**\n• Si v(A) = ⊤, alors v(¬A) = ⊥, donc v(A $\wedge \neg A$) = $\top \wedge \bot$ = ⊥\n• Si v(A) = ⊥, alors v(¬A) = ⊤, donc v(A $\wedge \neg A$) = $\bot \wedge \top$ = ⊥\n\n**Opposé :** C'est l'opposé logique de la tautologie A $\vee \neg A$.",
+    explanation: "(A$ $\wedge \neg A$) est une **contradiction** (aussi appelée **antilogie**).\n\n**Principe violé :** Le **principe de non-contradiction** - une proposition ne peut être simultanément vraie et fausse.\n\n**Vérification pour toute valuation v :**\n• Si v(A) = ⊤, alors v(¬A) = ⊥, donc v(A $\wedge \neg A$ $) =$\top \wedge \bot$= ⊥\n• Si v(A) = ⊥, alors v(¬A) = ⊤, donc v(A$ $\wedge \neg A$) = $\bot \wedge \top$ $= ⊥\n\n**Opposé :** C'est l'opposé logique de la tautologie A$\vee \neg A$.",
   },
   {
     id: 13,
     question: "P ⇒ Q est logiquement équivalent à :",
     options: ["¬P ∨ Q", "P ∨ Q", "¬Q ∨ P", "P ∧ Q"],
     answer: 0,
-    explanation: "L'équivalence P ⇒ Q $\equiv \neg P \vee Q$ est la **définition de l'implication matérialisée**.\n\n**Démonstration par table de vérité :**\nL'implication P ⇒ Q n'est fausse que lorsque P est vrai et Q est faux.\n\nDans ce cas : ¬P ∨ Q = $\bot \vee \bot$ = ⊥\n\nDans tous les autres cas, au moins l'un des termes ¬P ou Q est vrai, rendant la disjonction vraie.\n\n**Utilité :** Cette équivalence permet d'éliminer l'implication des formules logiques.",
+    explanation: "L'équivalence P ⇒ Q$ $\equiv \neg P \vee Q$ est la **définition de l'implication matérialisée**.\n\n**Démonstration par table de vérité :**\nL'implication P ⇒ Q n'est fausse que lorsque P est vrai et Q est faux.\n\nDans ce cas : ¬P ∨ Q = $\bot \vee \bot$ $= ⊥\n\nDans tous les autres cas, au moins l'un des termes ¬P ou Q est vrai, rendant la disjonction vraie.\n\n**Utilité :** Cette équivalence permet d'éliminer l'implication des formules logiques.",
   },
   {
     id: 14,
@@ -152,14 +152,14 @@ const EXISTING_QUESTIONS: QCM[] = [
       "Un arbre de preuve",
     ],
     answer: 0,
-    explanation: "Un **modèle** d'une formule φ est une **valuation** v telle que v(φ) = ⊤.\n\n**Définition :** Une valuation assigne des valeurs booléennes aux variables propositionnelles.\n\n**Propriétés importantes :**\n• L'ensemble des modèles caractérise complètement la sémantique d'une formule\n• Si φ a au moins un modèle → elle est satisfiable\n• Si tous les modèles de φ sont aussi modèles de $\psi \to \phi$ ⊨ ψ\n\n**Fondement :** Cette notion est centrale pour la sémantique de la logique propositionnelle.",
+    explanation: "Un **modèle** d'une formule φ est une **valuation** v telle que v(φ) = ⊤.\n\n**Définition :** Une valuation assigne des valeurs booléennes aux variables propositionnelles.\n\n**Propriétés importantes :**\n• L'ensemble des modèles caractérise complètement la sémantique d'une formule\n• Si φ a au moins un modèle → elle est satisfiable\n• Si tous les modèles de φ sont aussi modèles de$\psi \to \phi$⊨ ψ\n\n**Fondement :** Cette notion est centrale pour la sémantique de la logique propositionnelle.",
   },
   {
     id: 15,
     question: "La loi de double négation : ¬(¬A) ≡ ?",
     options: ["A", "¬A", "A ∨ ¬A", "A ∧ ¬A"],
     answer: 0,
-    explanation: "La **loi de double négation** établit que ¬(¬A) ≡ A.\n\n**Principe :** En logique classique, nier deux fois une proposition revient à affirmer la proposition originale.\n\n**Vérification par table de vérité :**\n• Si v(A) = ⊤, alors v(¬A) = ⊥ et v(¬(¬A)) = $\neg \bot$ = ⊤ = v(A)\n• Si v(A) = ⊥, alors v(¬A) = ⊤ et v(¬(¬A)) = $\neg \top$ = ⊥ = v(A)\n\n**Application :** Cette loi permet de simplifier les formules en éliminant les doubles négations.",
+    explanation: "La **loi de double négation** établit que ¬(¬A) ≡ A.\n\n**Principe :** En logique classique, nier deux fois une proposition revient à affirmer la proposition originale.\n\n**Vérification par table de vérité :**\n• Si v(A) = ⊤, alors v(¬A) = ⊥ et v(¬(¬A)) =$ $\neg \bot$ = ⊤ = v(A)\n• Si v(A) = ⊥, alors v(¬A) = ⊤ et v(¬(¬A)) = $\neg \top$ $= ⊥ = v(A)\n\n**Application :** Cette loi permet de simplifier les formules en éliminant les doubles négations.",
   },
   {
     id: 16,
@@ -241,11 +241,11 @@ const EXISTING_QUESTIONS: QCM[] = [
       "ET de littéraux uniquement",
     ],
     answer: 0,
-    explanation: "La **Forme Normale Disjonctive (DNF)** a la structure : **disjonction** (∨) de **conjonctions** (∧) de **littéraux**.\n\n**Définition d'un littéral :** Une variable ou sa négation.\n\n**Formalisation :** ⋁ᵢ₌₁ⁿ ⋀ⱼ₌₁ᵐⁱ ℓᵢ,ⱼ où chaque ℓᵢ,ⱼ est un littéral\n\n**Exemple :** (A $\wedge \neg B$) ∨ (¬A ∧ C) ∨ (B ∧ C)\n\n**Interprétation :** La DNF représente explicitement tous les cas où la formule est vraie - chaque terme de la disjonction correspond à une combinaison de valeurs rendant la formule vraie.",
+    explanation: "La **Forme Normale Disjonctive (DNF)** a la structure : **disjonction** (∨) de **conjonctions** (∧) de **littéraux**.\n\n**Définition d'un littéral :** Une variable ou sa négation.\n\n**Formalisation :** ⋁ᵢ₌₁ⁿ ⋀ⱼ₌₁ᵐⁱ ℓᵢ,ⱼ où chaque ℓᵢ,ⱼ est un littéral\n\n**Exemple :** (A$\wedge \neg B$) ∨ (¬A ∧ C) ∨ (B ∧ C)\n\n**Interprétation :** La DNF représente explicitement tous les cas où la formule est vraie - chaque terme de la disjonction correspond à une combinaison de valeurs rendant la formule vraie.",
   },
   {
     id: 24,
-    question: "En déduction naturelle, la règle $[\wedge\text{I}]$ permet de :",
+    question: "En déduction naturelle, la règle$ $[\wedge\text{I}]$ permet de :",
     options: [
       "Introduire une conjonction",
       "Éliminer une conjonction",
@@ -253,14 +253,14 @@ const EXISTING_QUESTIONS: QCM[] = [
       "Éliminer une disjonction",
     ],
     answer: 0,
-    explanation: "La règle $[\wedge\text{I}]$ (**introduction de la conjonction**) permet de former une conjonction à partir de ses deux composants.\n\n**Règle formelle :** De A et B, on peut dériver $A \wedge B$\n\n**Principe :** Si on a prouvé A et prouvé B séparément, alors on peut conclure $A \wedge B$.\n\n**Intuition :** Pour établir \"A et B\", il faut établir A d'une part et B d'autre part.\n\n**Statut :** C'est l'une des règles fondamentales de la déduction naturelle de Gentzen.",
+    explanation: "La règle $[\wedge\text{I}]$ $(**introduction de la conjonction**) permet de former une conjonction à partir de ses deux composants.\n\n**Règle formelle :** De A et B, on peut dériver$A \wedge B$\n\n**Principe :** Si on a prouvé A et prouvé B séparément, alors on peut conclure$ $A \wedge B$.\n\n**Intuition :** Pour établir \"A et B\", il faut établir A d'une part et B d'autre part.\n\n**Statut :** C'est l'une des règles fondamentales de la déduction naturelle de Gentzen.",
   },
   {
     id: 25,
     question: "Quelle règle élimine une implication en déduction naturelle ?",
-    options: ["$[\Rightarrow\text{E}]$ (Modus Ponens)", "$[\Rightarrow\text{I}]$", "$[\vee\text{I}]$", "$[\neg\text{I}]$"],
+    options: ["$[\Rightarrow\text{E}]$ $(Modus Ponens)", "$[\Rightarrow\text{I}]$", "$ $[\vee\text{I}]$", "$[\neg\text{I}]$ $"],
     answer: 0,
-    explanation: "La règle $[\Rightarrow\text{E}]$ (**élimination de l'implication**), aussi appelée **Modus Ponens**, permet d'utiliser une implication.\n\n**Règle formelle :** De $A \Rightarrow B$ et A, on peut dériver B\n\n**Condition :** Si on a prouvé $A \Rightarrow B$ et prouvé A, alors on peut conclure B.\n\n**Principe fondamental :** \"Si A implique B et que A est vrai, alors B est vrai\"\n\n**Importance :** C'est l'une des règles d'inférence les plus utilisées en logique.",
+    explanation: "La règle$[\Rightarrow\text{E}]$(**élimination de l'implication**), aussi appelée **Modus Ponens**, permet d'utiliser une implication.\n\n**Règle formelle :** De$ $A \Rightarrow B$ et A, on peut dériver B\n\n**Condition :** Si on a prouvé $A \Rightarrow B$ $et prouvé A, alors on peut conclure B.\n\n**Principe fondamental :** \"Si A implique B et que A est vrai, alors B est vrai\"\n\n**Importance :** C'est l'une des règles d'inférence les plus utilisées en logique.",
   },
   {
     id: 26,
@@ -304,7 +304,7 @@ const EXISTING_QUESTIONS: QCM[] = [
       "Un littéral isolé",
     ],
     answer: 0,
-    explanation: "En **Forme Normale Conjonctive (CNF)**, une **clause** est une **disjonction de littéraux** :\n\n**Structure d'une clause :** ℓ₁ ∨ ℓ₂ ∨ ⋯ ∨ ℓₖ où chaque ℓᵢ est un littéral (variable ou sa négation)\n\n**Structure CNF complète :** Une **conjonction de clauses** : C₁ ∧ C₂ ∧ ⋯ ∧ Cₙ\n\n**Exemple :** Dans (A $\vee \neg B$ ∨ C) ∧ (¬A ∨ D), les clauses sont :\n• (A $\vee \neg B$ ∨ C)\n• (¬A ∨ D)\n\n**Avantage :** Cette structure est optimale pour les SAT-solvers basés sur la résolution.",
+    explanation: "En **Forme Normale Conjonctive (CNF)**, une **clause** est une **disjonction de littéraux** :\n\n**Structure d'une clause :** ℓ₁ ∨ ℓ₂ ∨ ⋯ ∨ ℓₖ où chaque ℓᵢ est un littéral (variable ou sa négation)\n\n**Structure CNF complète :** Une **conjonction de clauses** : C₁ ∧ C₂ ∧ ⋯ ∧ Cₙ\n\n**Exemple :** Dans (A$\vee \neg B$∨ C) ∧ (¬A ∨ D), les clauses sont :\n• (A$ $\vee \neg B$ ∨ C)\n• (¬A ∨ D)\n\n**Avantage :** Cette structure est optimale pour les SAT-solvers basés sur la résolution.",
   },
   {
     id: 30,
@@ -337,11 +337,11 @@ const EXISTING_QUESTIONS: QCM[] = [
     question: "En λ-calcul, le terme I = λx.x a pour type :",
     options: ["σ → σ (fonction identité)", "σ × τ (produit)", "σ ∨ τ (somme)", "σ → τ → σ (fonction constante)"],
     answer: 0,
-    explanation: "Le **combinateur identité** I = λx.x a pour type $\sigma \to \sigma$ pour tout type σ.\n\n**Polymorphisme :** C'est un **type polymorphe** - I peut être appliqué à un argument de n'importe quel type et retourne un résultat du même type.\n\n**Système de Hindley-Milner :** I : ∀\alpha$.$\alpha \to \alpha$\n\n**Sémantique :** I est la fonction identité : I(x) = x\n\n**Propriété algébrique :** C'est l'élément neutre de la composition de fonctions : f ∘ I = I ∘ f = f", }, { id: 33, question: "Dans l'arbre syntaxique de (A ∧ B) ∨ (C ∧ D), la racine est :", options: ["∨ (disjonction)", "∧ (conjonction)", "A (variable)", "B (variable)"], answer: 0, explanation: "L'**arbre syntaxique** (ou **arbre de décomposition**) représente la structure hiérarchique d'une formule selon la priorité des connecteurs.\n\n**Pour (A ∧ B) ∨ (C ∧ D) :**\nLe **connecteur principal** est ∨ car il a la plus faible priorité et n'est pas parenthésé.\n\n**Structure de l'arbre :**\n• **Racine :** ∨\n• **Sous-arbre gauche :** (A ∧ B) avec racine ∧, feuilles A et B\n• **Sous-arbre droit :** (C ∧ D) avec racine ∧, feuilles C et D\n\n**Principe :** Le connecteur principal détermine la racine de l'arbre syntaxique.", }, { id: 34, question: "Avec la valuation ν(A)=1, ν(B)=0, que vaut (A ∧ B) ?", options: ["0 (faux)", "1 (vrai)", "Indéterminé", "Impossible à calculer"], answer: 0, explanation: "Avec ν(A) = 1 (vrai) et ν(B) = 0 (faux), appliquons la **table de vérité de la conjonction** :\n\n**Calcul :** ν(A ∧ B) = ν(A) ∧ ν(B) = 1 ∧ 0 = 0\n\n**Règle de la conjonction :** Elle n'est vraie que si **tous** ses opérandes sont vrais.\n\n**Ici :** Puisque B est faux, la conjonction A ∧ B est fausse, indépendamment de la valeur de A.\n\n**Comportement \"court-circuit\" :** Dès qu'un opérande est faux, le résultat de l'opérateur ET est faux.", }, { id: 35, question: "En λ-calcul, le combinateur K = λx.λy.x a pour type principal :", options: [ "σ → τ → σ (fonction constante)", "σ → σ (fonction identité)", "σ × τ (produit cartésien)", "σ → τ (fonction simple)", ], answer: 0, explanation: "Le **combinateur K** (fonction constante) K = λx.λy.x a pour type$\sigma \to \tau \to \sigma$.\n\n**Comportement :** Il prend deux arguments de types possiblement différents et retourne le premier, ignorant le second.\n\n**Sémantique :** K(a)(b) = a pour tous a, b\n\n**Logique combinatoire :** K avec S = λx.λy.λz.(xz)(yz) forme une base complète - toute fonction calculable peut s'exprimer avec K et S.\n\n**Type polymorphe complet :** ∀\alpha \beta$. $\alpha \to \beta \to \alpha$",
+    explanation: "Le **combinateur identité** I = λx.x a pour type $\sigma \to \sigma$ $pour tout type σ.\n\n**Polymorphisme :** C'est un **type polymorphe** - I peut être appliqué à un argument de n'importe quel type et retourne un résultat du même type.\n\n**Système de Hindley-Milner :** I : ∀\alpha$.$\alpha \to \alpha$ $\n\n**Sémantique :** I est la fonction identité : I(x) = x\n\n**Propriété algébrique :** C'est l'élément neutre de la composition de fonctions : f ∘ I = I ∘ f = f", }, { id: 33, question: "Dans l'arbre syntaxique de (A ∧ B) ∨ (C ∧ D), la racine est :", options: ["∨ (disjonction)", "∧ (conjonction)", "A (variable)", "B (variable)"], answer: 0, explanation: "L'**arbre syntaxique** (ou **arbre de décomposition**) représente la structure hiérarchique d'une formule selon la priorité des connecteurs.\n\n**Pour (A ∧ B) ∨ (C ∧ D) :**\nLe **connecteur principal** est ∨ car il a la plus faible priorité et n'est pas parenthésé.\n\n**Structure de l'arbre :**\n• **Racine :** ∨\n• **Sous-arbre gauche :** (A ∧ B) avec racine ∧, feuilles A et B\n• **Sous-arbre droit :** (C ∧ D) avec racine ∧, feuilles C et D\n\n**Principe :** Le connecteur principal détermine la racine de l'arbre syntaxique.", }, { id: 34, question: "Avec la valuation ν(A)=1, ν(B)=0, que vaut (A ∧ B) ?", options: ["0 (faux)", "1 (vrai)", "Indéterminé", "Impossible à calculer"], answer: 0, explanation: "Avec ν(A) = 1 (vrai) et ν(B) = 0 (faux), appliquons la **table de vérité de la conjonction** :\n\n**Calcul :** ν(A ∧ B) = ν(A) ∧ ν(B) = 1 ∧ 0 = 0\n\n**Règle de la conjonction :** Elle n'est vraie que si **tous** ses opérandes sont vrais.\n\n**Ici :** Puisque B est faux, la conjonction A ∧ B est fausse, indépendamment de la valeur de A.\n\n**Comportement \"court-circuit\" :** Dès qu'un opérande est faux, le résultat de l'opérateur ET est faux.", }, { id: 35, question: "En λ-calcul, le combinateur K = λx.λy.x a pour type principal :", options: [ "σ → τ → σ (fonction constante)", "σ → σ (fonction identité)", "σ × τ (produit cartésien)", "σ → τ (fonction simple)", ], answer: 0, explanation: "Le **combinateur K** (fonction constante) K = λx.λy.x a pour type$\sigma \to \tau \to \sigma$.\n\n**Comportement :** Il prend deux arguments de types possiblement différents et retourne le premier, ignorant le second.\n\n**Sémantique :** K(a)(b) = a pour tous a, b\n\n**Logique combinatoire :** K avec S = λx.λy.λz.(xz)(yz) forme une base complète - toute fonction calculable peut s'exprimer avec K et S.\n\n**Type polymorphe complet :** ∀\alpha \beta$ $.$\alpha \to \beta \to \alpha$",
   },
   {
     id: 36,
-    question: "La règle $[\vee\text{E}]$ (élimination de la disjonction) s'utilise pour :",
+    question: "La règle$ $[\vee\text{E}]$ (élimination de la disjonction) s'utilise pour :",
     options: [
       "Raisonner par cas sur une disjonction",
       "Introduire une disjonction",
@@ -349,7 +349,7 @@ const EXISTING_QUESTIONS: QCM[] = [
       "Introduire une conjonction",
     ],
     answer: 0,
-    explanation: "La règle $[\vee\text{E}]$ (**élimination de la disjonction**) formalise le **raisonnement par cas**.\n\n**Principe :** Si on a prouvé A ∨ B, et qu'on peut :\n• Dériver C en supposant A\n• Dériver C en supposant B\n\nAlors on peut conclure C.\n\n**Intuition :** \"Si A ou B est vrai, et que dans les deux cas on peut prouver C, alors C est vrai\"\n\n**Importance :** C'est essentiel pour exploiter les disjonctions en déduction naturelle.",
+    explanation: "La règle $[\vee\text{E}]$ $(**élimination de la disjonction**) formalise le **raisonnement par cas**.\n\n**Principe :** Si on a prouvé A ∨ B, et qu'on peut :\n• Dériver C en supposant A\n• Dériver C en supposant B\n\nAlors on peut conclure C.\n\n**Intuition :** \"Si A ou B est vrai, et que dans les deux cas on peut prouver C, alors C est vrai\"\n\n**Importance :** C'est essentiel pour exploiter les disjonctions en déduction naturelle.",
   },
   {
     id: 37,
@@ -361,7 +361,7 @@ const EXISTING_QUESTIONS: QCM[] = [
       "En forme normale disjonctive",
     ],
     answer: 0,
-    explanation: "Une **antilogie** (ou **contradiction**) est une formule qui est **fausse sous toute valuation**.\n\n**Définition formelle :** φ est une antilogie si ∀v : v(φ) = ⊥, ou de manière équivalente, ⊨ $\neg \phi$\n\n**Exemple classique :** A $\wedge \neg A$\n\n**Propriété :** Les antilogies sont **insatisfiables** - elles n'ont aucun modèle.\n\n**Principe sous-jacent :** En logique classique, le principe de non-contradiction garantit qu'aucune proposition ne peut être simultanément vraie et fausse.\n\n**Opposé :** C'est l'opposé d'une tautologie.",
+    explanation: "Une **antilogie** (ou **contradiction**) est une formule qui est **fausse sous toute valuation**.\n\n**Définition formelle :** φ est une antilogie si ∀v : v(φ) = ⊥, ou de manière équivalente, ⊨$\neg \phi$\n\n**Exemple classique :** A$ $\wedge \neg A$\n\n**Propriété :** Les antilogies sont **insatisfiables** - elles n'ont aucun modèle.\n\n**Principe sous-jacent :** En logique classique, le principe de non-contradiction garantit qu'aucune proposition ne peut être simultanément vraie et fausse.\n\n**Opposé :** C'est l'opposé d'une tautologie.",
   },
   {
     id: 38,
@@ -390,7 +390,7 @@ const EXISTING_QUESTIONS: QCM[] = [
   },
   {
     id: 40,
-    question: "En déduction naturelle, la règle $[\neg\text{I}]$ sert à :",
+    question: "En déduction naturelle, la règle $[\neg\text{I}]$ $sert à :",
     options: [
       "Introduire une négation par l'absurde",
       "Éliminer une négation",
@@ -398,7 +398,7 @@ const EXISTING_QUESTIONS: QCM[] = [
       "Éliminer une disjonction",
     ],
     answer: 0,
-    explanation: "La règle $[\neg\text{I}]$ (**introduction de la négation**) formalise le **raisonnement par l'absurde**.\n\n**Principe :** Pour prouver ¬A, on suppose A et on dérive une contradiction (⊥)\n\n**Intuition :** \"Si supposer A mène à une contradiction, alors A doit être faux, donc ¬A est vrai\"\n\n**Puissance :** C'est l'une des règles les plus puissantes de la logique classique.\n\n**Avantage :** Elle permet de prouver des négations sans avoir à les établir directement.",
+    explanation: "La règle$[\neg\text{I}]$(**introduction de la négation**) formalise le **raisonnement par l'absurde**.\n\n**Principe :** Pour prouver ¬A, on suppose A et on dérive une contradiction (⊥)\n\n**Intuition :** \"Si supposer A mène à une contradiction, alors A doit être faux, donc ¬A est vrai\"\n\n**Puissance :** C'est l'une des règles les plus puissantes de la logique classique.\n\n**Avantage :** Elle permet de prouver des négations sans avoir à les établir directement.",
   },
   {
     id: 41,
@@ -424,7 +424,7 @@ const EXISTING_QUESTIONS: QCM[] = [
       "Seulement les preuves logiques",
     ],
     answer: 0,
-    explanation: "Le **λ-calcul non typé** est **Turing-complet** : il peut exprimer toute fonction calculable.\n\n**Équivalence fondamentale :** Cette équivalence avec les machines de Turing (thèse de Church-Turing) fait du λ-calcul un **modèle universel de calcul**.\n\n**Encodages possibles :**\n• Entiers (codage de Church)\n• Booléens\n• Listes\n• Récursion (combinateur de point fixe Y)\n\n**Paradoxe :** Cette expressivité totale rend le système **non fortement normalisant** - certains termes (comme $\Omega$ = (λx.xx)(λx.xx)) ne terminent jamais leur évaluation.",
+    explanation: "Le **λ-calcul non typé** est **Turing-complet** : il peut exprimer toute fonction calculable.\n\n**Équivalence fondamentale :** Cette équivalence avec les machines de Turing (thèse de Church-Turing) fait du λ-calcul un **modèle universel de calcul**.\n\n**Encodages possibles :**\n• Entiers (codage de Church)\n• Booléens\n• Listes\n• Récursion (combinateur de point fixe Y)\n\n**Paradoxe :** Cette expressivité totale rend le système **non fortement normalisant** - certains termes (comme$ $\Omega$ = (λx.xx)(λx.xx)) ne terminent jamais leur évaluation.",
   },
   {
     id: 44,
@@ -448,7 +448,7 @@ const EXISTING_QUESTIONS: QCM[] = [
       "Conversion directe en DNF",
     ],
     answer: 0,
-    explanation: "La **transformation en CNF** suit un algorithme systématique :\n\n**(1) Élimination des équivalences :**\nA ⇔ B ↝ (A ⇒ B) ∧ (B ⇒ A)\n\n**(2) Élimination des implications :**\nA ⇒ B ↝ ¬A ∨ B\n\n**(3) Poussée des négations (De Morgan) :**\n• ¬(A ∧ B) ↝ $\neg A \vee \neg B$\n• ¬(A ∨ B) ↝ $\neg A \wedge \neg B$\n\n**(4) Élimination des doubles négations :**\n$\neg \neg A$ ↝ A\n\n**(5) Distributivité :**\nPour obtenir la forme conjonctive finale",
+    explanation: "La **transformation en CNF** suit un algorithme systématique :\n\n**(1) Élimination des équivalences :**\nA ⇔ B ↝ (A ⇒ B) ∧ (B ⇒ A)\n\n**(2) Élimination des implications :**\nA ⇒ B ↝ ¬A ∨ B\n\n**(3) Poussée des négations (De Morgan) :**\n• ¬(A ∧ B) ↝ $\neg A \vee \neg B$ $\n• ¬(A ∨ B) ↝$\neg A \wedge \neg B$\n\n**(4) Élimination des doubles négations :**\n$ $\neg \neg A$ ↝ A\n\n**(5) Distributivité :**\nPour obtenir la forme conjonctive finale",
   },
   {
     id: 46,
@@ -472,7 +472,7 @@ const EXISTING_QUESTIONS: QCM[] = [
       "Calculer une forme normale conjonctive",
     ],
     answer: 0,
-    explanation: "La **substitution** t[x := s] remplace toutes les occurrences libres de la variable x dans le terme t par le terme s.\n\n**Rôle fondamental :** C'est l'opération centrale de la **β-réduction** :\n(λx.t)s $\toβ t[x := s]\n\n**Précaution importante :** La substitution doit éviter la **capture de variables**\n\n**Capture de variables :** Si s contient des variables libres qui deviendraient liées après substitution, on doit renommer les variables liées de t (α-conversion)\n\n**Exemple :** (λx.x + y)[y := x] = λz.z + x (renommage nécessaire)", }, { id: 48, question: "La loi du tiers exclu (principe du milieu exclu) énonce que :", options: [ "A ∨ ¬A est toujours vraie", "A ∧ ¬A est toujours vraie", "A ∨ A est toujours fausse", "A ∧ A est toujours fausse", ], answer: 0, explanation: "La **loi du tiers exclu** (latin : *tertium non datur*) affirme que A$\vee \\neg A$est une **tautologie** pour toute proposition A.\n\n**Principe :** Il n'existe pas de \"troisième possibilité\" entre vrai et faux - toute proposition est soit vraie, soit fausse.\n\n**Statut en logique classique :** C'est un pilier de la **logique classique**\n\n**Rejet en logique intuitionniste :** Cette loi est rejetée en **logique intuitionniste**, où une proposition n'est vraie que si on peut la construire/prouver.\n\n**Conséquence :** Le rejet du tiers exclu mène à des mathématiques constructives différentes.", }, { id: 49, question: "Le type du terme λx.λy.y en λ-calcul simplement typé est :", options: ["σ → τ → τ", "σ → τ → σ", "σ → σ", "τ → σ"], answer: 0, explanation: "Le terme λx.λy.y prend deux arguments et retourne le **second**.\n\n**Type :**$\sigma \to \tau \to \tau$\n\n**Comportement :** Il accepte un argument de type σ (qu'il ignore), puis un argument de type τ (qu'il retourne)\n\n**Nom en logique combinatoire :** C'est le **combinateur KI** (\"faux\" en logique combinatoire)\n\n**Association à droite :** En notation currifiée, σ → τ → τ s'associe à droite : σ → (τ → τ)\n\n**Type polymorphe complet :** ∀α β. α → β → β", }, { id: 50, question: "La propriété de réflexivité de l'équivalence logique (≡) s'énonce :", options: [ "φ ≡ φ (toute formule est équivalente à elle-même)", "φ ≡ ψ (toute formule équivaut à une autre)", "φ ⇒ φ (toute formule s'implique)", "φ ⇔ ψ (équivalence matérielle)", ], answer: 0, explanation: "La **réflexivité** de l'équivalence logique établit que$\phi \equiv \phi$: toute formule est **logiquement équivalente à elle-même**.\n\n**Avec les autres propriétés :**\n• **Symétrie :**$\phi \equiv \psi \Rightarrow \psi \equiv \phi$\n• **Transitivité :**$\phi \equiv \psi \wedge \psi \equiv \chi \Rightarrow \phi \equiv \chi$\n\n**Conséquence :** Ces trois propriétés font de ≡ une **relation d'équivalence** sur l'ensemble des formules.\n\n**Évidence de la réflexivité :** φ et φ ont exactement les mêmes modèles, donc φ ⊨ ψ et ψ ⊨ φ.",
+    explanation: "La **substitution** t[x := s] remplace toutes les occurrences libres de la variable x dans le terme t par le terme s.\n\n**Rôle fondamental :** C'est l'opération centrale de la **β-réduction** :\n(λx.t)s $\toβ t[x := s]\n\n**Précaution importante :** La substitution doit éviter la **capture de variables**\n\n**Capture de variables :** Si s contient des variables libres qui deviendraient liées après substitution, on doit renommer les variables liées de t (α-conversion)\n\n**Exemple :** (λx.x + y)[y := x] = λz.z + x (renommage nécessaire)", }, { id: 48, question: "La loi du tiers exclu (principe du milieu exclu) énonce que :", options: [ "A ∨ ¬A est toujours vraie", "A ∧ ¬A est toujours vraie", "A ∨ A est toujours fausse", "A ∧ A est toujours fausse", ], answer: 0, explanation: "La **loi du tiers exclu** (latin : *tertium non datur*) affirme que A$ $\vee \\neg A$est une **tautologie** pour toute proposition A.\n\n**Principe :** Il n'existe pas de \"troisième possibilité\" entre vrai et faux - toute proposition est soit vraie, soit fausse.\n\n**Statut en logique classique :** C'est un pilier de la **logique classique**\n\n**Rejet en logique intuitionniste :** Cette loi est rejetée en **logique intuitionniste**, où une proposition n'est vraie que si on peut la construire/prouver.\n\n**Conséquence :** Le rejet du tiers exclu mène à des mathématiques constructives différentes.", }, { id: 49, question: "Le type du terme λx.λy.y en λ-calcul simplement typé est :", options: ["σ → τ → τ", "σ → τ → σ", "σ → σ", "τ → σ"], answer: 0, explanation: "Le terme λx.λy.y prend deux arguments et retourne le **second**.\n\n**Type :**$\sigma \to \tau \to \tau$ $\n\n**Comportement :** Il accepte un argument de type σ (qu'il ignore), puis un argument de type τ (qu'il retourne)\n\n**Nom en logique combinatoire :** C'est le **combinateur KI** (\"faux\" en logique combinatoire)\n\n**Association à droite :** En notation currifiée, σ → τ → τ s'associe à droite : σ → (τ → τ)\n\n**Type polymorphe complet :** ∀α β. α → β → β", }, { id: 50, question: "La propriété de réflexivité de l'équivalence logique (≡) s'énonce :", options: [ "φ ≡ φ (toute formule est équivalente à elle-même)", "φ ≡ ψ (toute formule équivaut à une autre)", "φ ⇒ φ (toute formule s'implique)", "φ ⇔ ψ (équivalence matérielle)", ], answer: 0, explanation: "La **réflexivité** de l'équivalence logique établit que$\phi \equiv \phi$: toute formule est **logiquement équivalente à elle-même**.\n\n**Avec les autres propriétés :**\n• **Symétrie :**$ $\phi \equiv \psi \Rightarrow \psi \equiv \phi$\n• **Transitivité :**$\phi \equiv \psi \wedge \psi \equiv \chi \Rightarrow \phi \equiv \chi$\n\n**Conséquence :** Ces trois propriétés font de ≡ une **relation d'équivalence** sur l'ensemble des formules.\n\n**Évidence de la réflexivité :** φ et φ ont exactement les mêmes modèles, donc φ ⊨ ψ et ψ ⊨ φ.",
   },
 ]
 
