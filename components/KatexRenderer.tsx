@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import renderMathInElement from "katex/dist/contrib/auto-render"
 import "katex/dist/katex.min.css"
 
@@ -18,12 +18,14 @@ export default function KatexRenderer({
   displayMode = false 
 }: KatexRendererProps) {
   const containerRef = useRef<HTMLDivElement>(null)
+  const [renderError, setRenderError] = useState<string | null>(null)
   const content = latex || children || ""
 
   useEffect(() => {
     if (!containerRef.current || !content) return
 
     try {
+      setRenderError(null)
       containerRef.current.innerHTML = content
       
       renderMathInElement(containerRef.current, {
@@ -45,13 +47,64 @@ export default function KatexRenderer({
           "\\CC": "\\mathbb{C}",
           "\\text": "\\text",
           "\\Cov": "\\text{Cov}",
+          "\\leq": "\\leq",
+          "\\geq": "\\geq",
+          "\\sim": "\\sim",
+          "\\chi": "\\chi",
+          "\\lambda": "\\lambda",
+          "\\sigma": "\\sigma",
+          "\\mu": "\\mu",
+          "\\exp": "\\exp",
+          "\\frac": "\\frac",
+          "\\sqrt": "\\sqrt",
+          "\\sum": "\\sum",
+          "\\prod": "\\prod",
+          "\\int": "\\int",
+          "\\partial": "\\partial",
+          "\\infty": "\\infty",
+          "\\alpha": "\\alpha",
+          "\\beta": "\\beta",
+          "\\gamma": "\\gamma",
+          "\\delta": "\\delta",
+          "\\epsilon": "\\epsilon",
+          "\\theta": "\\theta",
+          "\\pi": "\\pi",
+          "\\varphi": "\\varphi",
+          "\\phi": "\\phi",
+          "\\psi": "\\psi",
+          "\\omega": "\\omega",
+          "\\Gamma": "\\Gamma",
+          "\\Delta": "\\Delta",
+          "\\Theta": "\\Theta",
+          "\\Lambda": "\\Lambda",
+          "\\Xi": "\\Xi",
+          "\\Pi": "\\Pi",
+          "\\Sigma": "\\Sigma",
+          "\\Phi": "\\Phi",
+          "\\Psi": "\\Psi",
+          "\\Omega": "\\Omega"
         }
       })
+
+      // Vérifier si le rendu a réussi
+      setTimeout(() => {
+        if (containerRef.current) {
+          const hasKatex = containerRef.current.querySelector('.katex') !== null
+          const hasUnrenderedMath = /\$[^$]*\$/.test(containerRef.current.textContent || "")
+          const shouldHaveMath = /\$[^$]*\$/.test(content)
+          
+          if (shouldHaveMath && (hasUnrenderedMath || !hasKatex)) {
+            setRenderError("LaTeX non rendu correctement")
+          }
+        }
+      }, 100)
+
     } catch (error) {
       console.error("KaTeX rendering error:", error)
+      setRenderError("Erreur de rendu LaTeX")
       if (containerRef.current) {
-        containerRef.current.innerHTML = content.replace(/\$[^$]*\$/g, (match) => {
-          return `<span style="color: #cc0000; font-family: monospace;">[LaTeX Error: ${match}]</span>`
+        containerRef.current.innerHTML = content.replace(/\$([^$]*)\$/g, (match, mathContent) => {
+          return `<span style="color: #cc0000; font-family: monospace; background-color: #330000; padding: 2px 4px; border-radius: 3px;">[LaTeX Error: ${mathContent}]</span>`
         })
       }
     }
@@ -59,18 +112,20 @@ export default function KatexRenderer({
 
   if (displayMode && latex) {
     return (
-      <div 
-        ref={containerRef}
-        className={className}
-      />
+      <div ref={containerRef} className={className}>
+        {renderError && (
+          <div className="text-red-400 text-xs mb-2">⚠️ {renderError}</div>
+        )}
+      </div>
     )
   }
 
   return (
-    <div 
-      ref={containerRef} 
-      className={`${className} leading-relaxed`}
-    />
+    <div ref={containerRef} className={`${className} leading-relaxed`}>
+      {renderError && (
+        <div className="text-red-400 text-xs mb-2">⚠️ {renderError}</div>
+      )}
+    </div>
   )
 } 
 

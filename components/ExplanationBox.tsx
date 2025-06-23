@@ -75,22 +75,24 @@ export default function ExplanationBox({
           >
             ← Menu
           </button>
-          <div className="flex gap-2">
-            <button
-              onClick={handleClearCache}
-              className="px-2 py-1 bg-red-600 hover:bg-red-500 text-white text-xs rounded transition-colors duration-200"
-              title="Vider le cache"
-            >
-              🗑️ Cache
-            </button>
-            <button
-              onClick={handleRepairLatex}
-              className="px-2 py-1 bg-orange-600 hover:bg-orange-500 text-white text-xs rounded transition-colors duration-200"
-              title="Réparer l'affichage LaTeX"
-            >
-              Réparer LaTeX
-            </button>
-          </div>
+          {needsLatex && (
+            <div className="flex gap-2">
+              <button
+                onClick={handleClearCache}
+                className="px-2 py-1 bg-red-600 hover:bg-red-500 text-white text-xs rounded transition-colors duration-200"
+                title="Vider le cache"
+              >
+                🗑️ Cache
+              </button>
+              <button
+                onClick={handleRepairLatex}
+                className="px-2 py-1 bg-orange-600 hover:bg-orange-500 text-white text-xs rounded transition-colors duration-200"
+                title="Réparer l'affichage LaTeX"
+              >
+                Réparer LaTeX
+              </button>
+            </div>
+          )}
         </div>
 
         <div className="text-center mb-6">
