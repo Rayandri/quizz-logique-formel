@@ -1,5 +1,6 @@
 import { DEDUCTION_QUESTIONS } from './deduction-questions'
 import { LAMBDA_CALCULUS_QUESTIONS } from './lambda-calculus-questions'
+import { EVALUATION_QUESTIONS } from './evaluation-questions'
 
 export type DifficultyLevel = "cours" | "facile" | "moyen" | "dur"
 
@@ -574,5 +575,6 @@ const EXISTING_QUESTIONS: QCM[] = [
 export const QUESTIONS: QCM[] = [
   ...EXISTING_QUESTIONS.map(q => ({ ...q, difficulty: (q as any).difficulty || "facile" as DifficultyLevel })),
   ...DEDUCTION_QUESTIONS.map(q => ({ ...q, id: q.id + 1000, difficulty: (q as any).difficulty || "moyen" as DifficultyLevel })),
-  ...LAMBDA_CALCULUS_QUESTIONS.map(q => ({ id: q.id + 2000, question: q.question, options: q.options, answer: q.answer, explanation: q.explanation, difficulty: q.points && q.points >= 3 ? "dur" : "moyen" as DifficultyLevel }))
+  ...LAMBDA_CALCULUS_QUESTIONS.map(q => ({ id: q.id + 2000, question: q.question, options: q.options, answer: q.answer, explanation: q.explanation, difficulty: q.points && q.points >= 3 ? "dur" : "moyen" as DifficultyLevel })),
+  ...EVALUATION_QUESTIONS.map(q => ({ ...q, id: q.id + 3000, difficulty: q.difficulty }))
 ]
