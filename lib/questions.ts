@@ -249,14 +249,14 @@ const EXISTING_QUESTIONS: QCM[] = [
       "Éliminer une disjonction",
     ],
     answer: 0,
-    explanation: "La règle $[\\wedge\\text{I}]$ (**introduction de la conjonction**) permet de former une conjonction à partir de ses deux composants.\n\n**Règle formelle :** De A et B, on peut dériver A ∧ B\n\n**Principe :** Si on a prouvé A et prouvé B séparément, alors on peut conclure A ∧ B.\n\n**Intuition :** Pour établir \"A et B\", il faut établir A d'une part et B d'autre part.\n\n**Statut :** C'est l'une des règles fondamentales de la déduction naturelle de Gentzen.",
+    explanation: "La règle $[\\wedge\\text{I}]$ (**introduction de la conjonction**) permet de former une conjonction à partir de ses deux composants.\n\n**Règle formelle :** De A et B, on peut dériver $A \\wedge B$\n\n**Principe :** Si on a prouvé A et prouvé B séparément, alors on peut conclure $A \\wedge B$.\n\n**Intuition :** Pour établir \"A et B\", il faut établir A d'une part et B d'autre part.\n\n**Statut :** C'est l'une des règles fondamentales de la déduction naturelle de Gentzen.",
   },
   {
     id: 25,
     question: "Quelle règle élimine une implication en déduction naturelle ?",
     options: ["$[\\Rightarrow\\text{E}]$ (Modus Ponens)", "$[\\Rightarrow\\text{I}]$", "$[\\vee\\text{I}]$", "$[\\neg\\text{I}]$"],
     answer: 0,
-    explanation: "La règle $[\\Rightarrow\\text{E}]$ (**élimination de l'implication**), aussi appelée **Modus Ponens**, permet d'utiliser une implication.\n\n**Règle formelle :** De A ⇒ B et A, on peut dériver B\n\n**Condition :** Si on a prouvé A ⇒ B et prouvé A, alors on peut conclure B.\n\n**Principe fondamental :** \"Si A implique B et que A est vrai, alors B est vrai\"\n\n**Importance :** C'est l'une des règles d'inférence les plus utilisées en logique.",
+    explanation: "La règle $[\\Rightarrow\\text{E}]$ (**élimination de l'implication**), aussi appelée **Modus Ponens**, permet d'utiliser une implication.\n\n**Règle formelle :** De $A \\Rightarrow B$ et A, on peut dériver B\n\n**Condition :** Si on a prouvé $A \\Rightarrow B$ et prouvé A, alors on peut conclure B.\n\n**Principe fondamental :** \"Si A implique B et que A est vrai, alors B est vrai\"\n\n**Importance :** C'est l'une des règles d'inférence les plus utilisées en logique.",
   },
   {
     id: 26,

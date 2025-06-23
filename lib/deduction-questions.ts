@@ -57,7 +57,7 @@ export const DEDUCTION_QUESTIONS: QCM[] = [
       "L'application du modus ponens"
     ],
     answer: 0,
-    explanation: "La règle $[\\vee\\text{E}]$ formalise le **raisonnement par cas** :\n\n**Structure complète :**\n```\n      [A]¹  [B]²\n       ⋮     ⋮\nA ∨ B  C     C\n―――――――――――――――― ∨E,¹,²\n       C\n```\n\n**Principe :** Si on a A ∨ B, et qu'on peut dériver C en supposant A et dériver C en supposant B, alors C est vrai.\n\n**Intuition :** \"Dans tous les cas possibles, C est vrai, donc C est vrai.\"",
+    explanation: "La règle $[\\vee\\text{E}]$ formalise le **raisonnement par cas** :\n\n**Structure complète :**\n```\n      [A]¹  [B]²\n       ⋮     ⋮\nA ∨ B  C     C\n―――――――――――――――― ∨E,¹,²\n       C\n```\n\n**Principe :** Si on a $A \\vee B$, et qu'on peut dériver C en supposant A et dériver C en supposant B, alors C est vrai.\n\n**Intuition :** \"Dans tous les cas possibles, C est vrai, donc C est vrai.\"",
     difficulty: "moyen"
   },
   {
@@ -94,7 +94,7 @@ export const DEDUCTION_QUESTIONS: QCM[] = [
       "De $A \\Rightarrow B$, dériver B"
     ],
     answer: 0,
-    explanation: "La règle $[\\wedge\\text{E}]$ (**élimination de la conjonction**) a deux formes :\n\n$[\\wedge\\text{E}_1]$ :\n```\nA ∧ B\n―――――― ∧E₁\n  A\n```\n\n$[\\wedge\\text{E}_2]$ :\n```\nA ∧ B\n―――――― ∧E₂\n  B\n```\n\n**Principe :** Si on a prouvé \"A et B\", alors on peut conclure A (ou B) séparément.\n\n**Usage :** Permet d'extraire l'information nécessaire d'une conjonction."
+    explanation: "La règle $[\\wedge\\text{E}]$ (**élimination de la conjonction**) a deux formes :\n\n$[\\wedge\\text{E}_1]$ :\n```\nA ∧ B\n―――――― ∧E₁\n  A\n```\n\n$[\\wedge\\text{E}_2]$ :\n```\nA ∧ B\n―――――― ∧E₂\n  B\n```\n\n**Principe :** Si on a prouvé \"$A \\wedge B$\", alors on peut conclure A (ou B) séparément.\n\n**Usage :** Permet d'extraire l'information nécessaire d'une conjonction."
   },
   {
     id: 8,
@@ -106,7 +106,7 @@ export const DEDUCTION_QUESTIONS: QCM[] = [
       "De $A \\Rightarrow B$, dériver $A \\vee B$"
     ],
     answer: 0,
-    explanation: "La règle $[\\vee\\text{I}]$ (**introduction de la disjonction**) a deux formes :\n\n$[\\vee\\text{I}_1]$ :\n```\n  A\n―――――― ∨I₁\nA ∨ B\n```\n\n$[\\vee\\text{I}_2]$ :\n```\n  B\n―――――― ∨I₂\nA ∨ B\n```\n\n**Principe :** Si on a prouvé A, alors \"A ou B\" est vrai, quel que soit B.\n\n**Affaiblissement :** Cette règle \"affaiblit\" l'information - on passe d'une certitude à une alternative."
+    explanation: "La règle $[\\vee\\text{I}]$ (**introduction de la disjonction**) a deux formes :\n\n$[\\vee\\text{I}_1]$ :\n```\n  A\n―――――― ∨I₁\nA ∨ B\n```\n\n$[\\vee\\text{I}_2]$ :\n```\n  B\n―――――― ∨I₂\nA ∨ B\n```\n\n**Principe :** Si on a prouvé A, alors \"$A \\vee B$\" est vrai, quel que soit B.\n\n**Affaiblissement :** Cette règle \"affaiblit\" l'information - on passe d'une certitude à une alternative."
   },
   {
     id: 9,
@@ -118,7 +118,7 @@ export const DEDUCTION_QUESTIONS: QCM[] = [
       "On l'ignore"
     ],
     answer: 0,
-    explanation: "Pour **A ∧ B** en tableaux sémantiques, on applique la **règle α** :\n\n**Extension linéaire :**\n```\nA ∧ B\n  |\n  A\n  B\n```\n\n**Principe :** Pour que A ∧ B soit vraie, il faut que A soit vraie ET B soit vraie simultanément.\n\n**Une seule branche :** Contrairement à la disjonction, la conjonction ne crée pas de branchement.\n\n**Règles α :** Les formules conjonctives (∧, $\neg∨, ¬\Rightarrow$) étendent linéairement."
+    explanation: "Pour **$A \\wedge B$** en tableaux sémantiques, on applique la **règle α** :\n\n**Extension linéaire :**\n```\nA ∧ B\n  |\n  A\n  B\n```\n\n**Principe :** Pour que $A \\wedge B$ soit vraie, il faut que A soit vraie ET B soit vraie simultanément.\n\n**Une seule branche :** Contrairement à la disjonction, la conjonction ne crée pas de branchement.\n\n**Règles α :** Les formules conjonctives ($\\wedge$, $\\neg\\vee$, $\\neg\\Rightarrow$) étendent linéairement."
   },
   {
     id: 10,

@@ -64,17 +64,17 @@ export function LambdaTypingRules() {
               {/* Produit (Paires) */}
               <div className="space-y-3">
                 <h3 className="font-semibold text-blue-300 border-b border-blue-600 pb-1">
-                  Produit (×)
+                  Produit ($\\times$)
                 </h3>
                 <div className="space-y-2">
                   <div className="bg-gray-800 p-3 rounded border border-gray-600">
-                    <div className="font-medium text-sm text-gray-400 mb-1">Introduction [×I]</div>
+                    <div className="font-medium text-sm text-gray-400 mb-1">Introduction [$\\times$I]</div>
                     <KatexRenderer className="text-gray-200">
                       {"$$\\frac{\\Gamma \\vdash M : \\sigma \\quad \\Gamma \\vdash N : \\tau}{\\Gamma \\vdash \\langle M, N \\rangle : \\sigma \\times \\tau}$$"}
                     </KatexRenderer>
                   </div>
                   <div className="bg-gray-800 p-3 rounded border border-gray-600">
-                    <div className="font-medium text-sm text-gray-400 mb-1">Élimination [×E₁] et [×E₂]</div>
+                    <div className="font-medium text-sm text-gray-400 mb-1">Élimination [$\\times$E₁] et [$\\times$E₂]</div>
                     <KatexRenderer className="text-gray-200">
                       {"$$\\frac{\\Gamma \\vdash M : \\sigma \\times \\tau}{\\Gamma \\vdash \\Pi_1(M) : \\sigma} \\quad \\frac{\\Gamma \\vdash M : \\sigma \\times \\tau}{\\Gamma \\vdash \\Pi_2(M) : \\tau}$$"}
                     </KatexRenderer>
@@ -85,17 +85,17 @@ export function LambdaTypingRules() {
               {/* Union (Somme) */}
               <div className="space-y-3">
                 <h3 className="font-semibold text-blue-300 border-b border-blue-600 pb-1">
-                  Union (∪)
+                  Union ($\\cup$)
                 </h3>
                 <div className="space-y-2">
                   <div className="bg-gray-800 p-3 rounded border border-gray-600">
-                    <div className="font-medium text-sm text-gray-400 mb-1">Introduction [∪I₁] et [∪I₂]</div>
+                    <div className="font-medium text-sm text-gray-400 mb-1">Introduction [$\\cup$I₁] et [$\\cup$I₂]</div>
                     <KatexRenderer className="text-gray-200">
                       {"$$\\frac{\\Gamma \\vdash M : \\sigma}{\\Gamma \\vdash K_1(M) : \\sigma \\cup \\tau} \\quad \\frac{\\Gamma \\vdash M : \\tau}{\\Gamma \\vdash K_2(M) : \\sigma \\cup \\tau}$$"}
                     </KatexRenderer>
                   </div>
                   <div className="bg-gray-800 p-3 rounded border border-gray-600">
-                    <div className="font-medium text-sm text-gray-400 mb-1">Élimination [∪E]</div>
+                    <div className="font-medium text-sm text-gray-400 mb-1">Élimination [$\\cup$E]</div>
                     <KatexRenderer className="text-gray-200">
                       {"$$\\frac{\\Gamma \\vdash M : \\sigma \\cup \\tau \\quad \\Gamma, u : \\sigma \\vdash U : \\mu \\quad \\Gamma, v : \\tau \\vdash V : \\mu}{\\Gamma \\vdash \\oplus(\\lambda u \\cdot U, \\lambda v \\cdot V, M) : \\mu}$$"}
                     </KatexRenderer>
@@ -108,10 +108,10 @@ export function LambdaTypingRules() {
             {/* Type vide */}
             <div className="border-t border-blue-600 pt-4">
               <h3 className="font-semibold text-blue-300 mb-3">
-                Type vide (∅)
+                Type vide ($\\emptyset$)
               </h3>
               <div className="bg-gray-800 p-3 rounded border border-gray-600">
-                <div className="font-medium text-sm text-gray-400 mb-1">Élimination [∅E]</div>
+                <div className="font-medium text-sm text-gray-400 mb-1">Élimination [$\\emptyset$E]</div>
                 <KatexRenderer className="text-gray-200">
                   {"$$\\frac{\\Gamma \\vdash M : \\emptyset}{\\Gamma \\vdash \\varepsilon(M) : \\sigma}$$"}
                 </KatexRenderer>
