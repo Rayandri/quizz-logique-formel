@@ -79,7 +79,7 @@ export const LAMBDA_CALCULUS_QUESTIONS: LambdaQuestion[] = [
   },
   {
     id: 6,
-    question: "Soit $C = \\lambda a b \\cdot a B b$ où $B(n) = n^2 + 2n$. Que calcule $C(\\overline{2})(\\overline{3})$ ?",
+    question: "Soit $C = \\lambda a b \\cdot a B b$ où $B(n) = 4n + 3$. Que calcule $C(\\overline{2})(\\overline{3})$ ?",
     options: [
       "$\\overline{63}$",
       "$\\overline{39}$",
@@ -87,7 +87,7 @@ export const LAMBDA_CALCULUS_QUESTIONS: LambdaQuestion[] = [
       "$\\overline{15}$"
     ],
     answer: 0,
-    explanation: "Analysons $C = \\lambda a b \\cdot a B b$ avec $B(n) = n^2 + 2n$ :\n\n$C(\\overline{2})(\\overline{3})$ applique $\\overline{2}$ fois la fonction B à l'argument $\\overline{3}$.\n\n**Étape 1 :** $B(3) = 3^2 + 2 \\cdot 3 = 9 + 6 = 15$\n\n**Étape 2 :** $B(15) = 15^2 + 2 \\cdot 15 = 225 + 30 = 255$\n\nMais attention ! Dans l'encodage de Church, nous devons interpréter correctement...\n\n**Correction :** En fait, $B(3) = 15$, puis on applique encore B :\n$B(15) = 15^2 + 2 \\cdot 15 = 225 + 30 = 255$\n\nNon, relisons : $B(n) = n(n+2)$, donc $B(3) = 3 \\cdot 5 = 15$, $B(15) = 15 \\cdot 17 = 255$.\n\nErreur dans mes calculs - la réponse correcte nécessite une analyse plus précise.",
+    explanation: "Analysons $C = \\lambda a b \\cdot a B b$ avec $B(n) = 4n + 3$ :\n\n$C(\\overline{2})(\\overline{3})$ se réduit à $\\overline{2} \\, B \\, \\overline{3}$.\n\nDans l'encodage de Church, $\\overline{2} \\, f \\, x$ applique $f$ exactement 2 fois à $x$.\n\nDonc $\\overline{2} \\, B \\, \\overline{3} = B(B(3))$.\n\n**Calcul :**\n\n**Première application :** $B(3) = 4 \\cdot 3 + 3 = 12 + 3 = 15$\n\n**Deuxième application :** $B(15) = 4 \\cdot 15 + 3 = 60 + 3 = 63$\n\n**Résultat :** $C(\\overline{2})(\\overline{3}) = \\overline{63}$",
     points: 3
   },
   {
