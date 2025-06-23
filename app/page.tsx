@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { QUESTIONS, type QCM, type DifficultyLevel } from "@/lib/questions"
 import { COPYRIGHT_QUESTIONS } from "@/lib/copyright-questions"
+import { RISK_MANAGEMENT_QUESTIONS } from "@/lib/risk-management-questions"
 import SubjectSelection from "@/components/SubjectSelection"
 import QuizConfig from "@/components/QuizConfig"
 import QuestionCard from "@/components/QuestionCard"
@@ -13,7 +14,7 @@ import { LambdaTypingRules } from "@/components/LambdaTypingRules"
 
 type GameState = "subject-selection" | "config" | "question" | "explanation" | "score"
 type SelectionMode = "random" | "difficulty" | "multi-difficulty"
-type Subject = "logique" | "droit"
+type Subject = "logique" | "droit" | "risques"
 
 interface QuizState {
   gameState: GameState
@@ -63,9 +64,10 @@ export default function Home() {
   const loadState = () => {
     if (typeof window !== "undefined") {
       try {
-        // Try to load logique first, then droit
+        // Try to load logique first, then droit, then risques
         const logiqueState = localStorage.getItem("quiz-logique-state")
         const droitState = localStorage.getItem("quiz-droit-state")
+        const risquesState = localStorage.getItem("quiz-risques-state")
         
         if (logiqueState) {
           const state: QuizState = JSON.parse(logiqueState)
@@ -91,11 +93,24 @@ export default function Home() {
           setCurrentScore(state.currentScore)
           setSkippedQuestion(state.skippedQuestion)
           return true
+        } else if (risquesState) {
+          const state: QuizState = JSON.parse(risquesState)
+          setSubject("risques")
+          setGameState(state.gameState)
+          setSelectedQuestions(state.selectedQuestions)
+          setCurrentQuestionIndex(state.currentQuestionIndex)
+          setSelectedAnswer(state.selectedAnswer)
+          setIsValidated(state.isValidated)
+          setScore(state.score)
+          setCurrentScore(state.currentScore)
+          setSkippedQuestion(state.skippedQuestion)
+          return true
         }
       } catch (error) {
         console.error("Erreur lors du chargement de l'état:", error)
         localStorage.removeItem("quiz-logique-state")
         localStorage.removeItem("quiz-droit-state")
+        localStorage.removeItem("quiz-risques-state")
       }
     }
     return false
@@ -153,7 +168,9 @@ export default function Home() {
 
   const handleStart = (numQuestions: number, mode: SelectionMode, difficulty?: DifficultyLevel, difficulties?: DifficultyLevel[]) => {
     // Get questions based on subject
-    const currentQuestions = subject === "droit" ? COPYRIGHT_QUESTIONS : QUESTIONS.filter(q => q.id < 5000)
+    const currentQuestions = subject === "droit" ? COPYRIGHT_QUESTIONS : 
+                            subject === "risques" ? RISK_MANAGEMENT_QUESTIONS : 
+                            QUESTIONS.filter(q => q.id < 5000)
     
     let questionsPool = currentQuestions
 

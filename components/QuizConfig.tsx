@@ -5,11 +5,12 @@ import { useState, useMemo, useEffect } from "react"
 import Footer from "./Footer"
 import { QUESTIONS, type DifficultyLevel } from "@/lib/questions"
 import { COPYRIGHT_QUESTIONS } from "@/lib/copyright-questions"
+import { RISK_MANAGEMENT_QUESTIONS } from "@/lib/risk-management-questions"
 
 type SelectionMode = "random" | "difficulty" | "multi-difficulty"
 
 interface QuizConfigProps {
-  subject: "logique" | "droit"
+  subject: "logique" | "droit" | "risques"
   onStart: (numQuestions: number, mode: SelectionMode, difficulty?: DifficultyLevel, difficulties?: DifficultyLevel[]) => void
   onBackToSubjects: () => void
 }
@@ -24,7 +25,9 @@ export default function QuizConfig({ subject, onStart, onBackToSubjects }: QuizC
   const STORAGE_KEY = `quiz-${subject}-state`
 
   // Get questions based on subject
-  const currentQuestions = subject === "droit" ? COPYRIGHT_QUESTIONS : QUESTIONS.filter(q => q.id < 5000)
+  const currentQuestions = subject === "droit" ? COPYRIGHT_QUESTIONS : 
+                          subject === "risques" ? RISK_MANAGEMENT_QUESTIONS : 
+                          QUESTIONS.filter(q => q.id < 5000)
 
   // Vérifier s'il y a une sauvegarde
   useEffect(() => {
@@ -130,7 +133,7 @@ export default function QuizConfig({ subject, onStart, onBackToSubjects }: QuizC
             ← Retour
           </button>
           <h1 className="text-2xl font-bold text-gray-200">
-            Quiz de {subject === "logique" ? "Logique" : "Droit"}
+            Quiz de {subject === "logique" ? "Logique Formelle" : subject === "droit" ? "Droit" : "Gestion des Risques"}
           </h1>
           <div className="w-16"></div>
         </div>

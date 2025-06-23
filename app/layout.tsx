@@ -6,9 +6,10 @@ import { Analytics } from '@vercel/analytics/react'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Quiz de Logique Formelle',
-  description: 'Testez vos connaissances en logique formelle avec ce quiz interactif',
+  title: 'Révision Exam - Quiz EPITA',
+  description: 'Quiz de révision pour les examens EPITA : Logique Formelle, Droit, Gestion des Risques',
   generator: 'Next.js',
+  keywords: ['EPITA', 'révision', 'examen', 'logique formelle', 'droit', 'gestion des risques', 'quiz', 'QCM'],
   icons: {
     icon: [
       { url: '/favicon.svg', type: 'image/svg+xml' },
