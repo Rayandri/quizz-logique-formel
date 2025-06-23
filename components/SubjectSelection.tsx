@@ -9,15 +9,15 @@ export default function SubjectSelection({ onSelectSubject }: SubjectSelectionPr
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col">
       <div className="flex-1 flex items-center justify-center p-4">
-        <div className="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-md">
-          <h1 className="text-3xl font-bold text-gray-200 text-center mb-6">
+        <div className="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-4xl">
+          <h1 className="text-3xl font-bold text-gray-200 text-center mb-8">
             Révision Exam - Choisissez votre matière
           </h1>
           
-          <div className="space-y-4">
+          <div className="grid grid-cols-2 gap-6">
             <button
               onClick={() => onSelectSubject("logique")}
-              className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-6 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-800 group"
+              className="bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-6 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-800 group h-32"
             >
               <div className="text-center">
                 <div className="text-2xl mb-2">🧠</div>
@@ -30,7 +30,7 @@ export default function SubjectSelection({ onSelectSubject }: SubjectSelectionPr
 
             <button
               onClick={() => onSelectSubject("droit")}
-              className="w-full bg-amber-600 hover:bg-amber-500 text-white font-medium py-6 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-gray-800 group"
+              className="bg-amber-600 hover:bg-amber-500 text-white font-medium py-6 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-gray-800 group h-32"
             >
               <div className="text-center">
                 <div className="text-2xl mb-2">⚖️</div>
@@ -43,7 +43,7 @@ export default function SubjectSelection({ onSelectSubject }: SubjectSelectionPr
 
             <button
               onClick={() => onSelectSubject("risques")}
-              className="w-full bg-red-600 hover:bg-red-500 text-white font-medium py-6 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-800 group"
+              className="bg-red-600 hover:bg-red-500 text-white font-medium py-6 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-800 group h-32"
             >
               <div className="text-center">
                 <div className="text-2xl mb-2">🛡️</div>
@@ -56,7 +56,7 @@ export default function SubjectSelection({ onSelectSubject }: SubjectSelectionPr
 
             <button
               onClick={() => onSelectSubject("probabilites")}
-              className="w-full bg-purple-600 hover:bg-purple-500 text-white font-medium py-6 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-800 group"
+              className="bg-purple-600 hover:bg-purple-500 text-white font-medium py-6 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-800 group h-32"
             >
               <div className="text-center">
                 <div className="text-2xl mb-2">📊</div>
@@ -68,7 +68,7 @@ export default function SubjectSelection({ onSelectSubject }: SubjectSelectionPr
             </button>
           </div>
 
-          <div className="mt-6 text-center text-sm text-gray-400">
+          <div className="mt-8 text-center text-sm text-gray-400">
             Sélectionnez la matière pour commencer le quiz
           </div>
         </div>
