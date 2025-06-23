@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { QUESTIONS, type QCM } from "@/lib/questions"
+import { QUESTIONS, type QCM, type DifficultyLevel } from "@/lib/questions"
 import QuizConfig from "@/components/QuizConfig"
 import QuestionCard from "@/components/QuestionCard"
 import ExplanationBox from "@/components/ExplanationBox"
@@ -10,6 +10,7 @@ import { DeductionRules } from "@/components/DeductionRules"
 import { LambdaTypingRules } from "@/components/LambdaTypingRules"
 
 type GameState = "config" | "question" | "explanation" | "score"
+type SelectionMode = "random" | "difficulty"
 
 export default function Home() {
   const [gameState, setGameState] = useState<GameState>("config")
@@ -54,9 +55,17 @@ export default function Home() {
     }
   }
 
-  const handleStart = (numQuestions: number) => {
-    const shuffled = shuffleArray(QUESTIONS)
-    const selected = shuffled.slice(0, numQuestions).map(shuffleAnswers)
+  const handleStart = (numQuestions: number, mode: SelectionMode, difficulty?: DifficultyLevel) => {
+    let questionsPool = QUESTIONS
+
+    if (mode === "difficulty" && difficulty) {
+      questionsPool = QUESTIONS.filter(q => q.difficulty === difficulty)
+    }
+
+    const shuffled = shuffleArray(questionsPool)
+    const maxQuestions = Math.min(numQuestions, shuffled.length)
+    const selected = shuffled.slice(0, maxQuestions).map(shuffleAnswers)
+    
     setSelectedQuestions(selected)
     setCurrentQuestionIndex(0)
     setSelectedAnswer(null)
