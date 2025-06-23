@@ -225,26 +225,65 @@ export default function QuizSession({ subject, config }: QuizSessionProps) {
     const currentQuestion = selectedQuestions[currentQuestionIndex]
     const isDeductionQuestion = subject === "logique" && currentQuestion.id > 1000 && currentQuestion.id < 2000
     const isLambdaQuestion = subject === "logique" && currentQuestion.id >= 2000
+    const hasRules = isDeductionQuestion || isLambdaQuestion
     
-    return (
-      <div className="w-full max-w-4xl mx-auto">
-        {isDeductionQuestion && <DeductionRules />}
-        {isLambdaQuestion && <LambdaTypingRules />}
-        <QuestionCard
-          question={currentQuestion}
-          questionNumber={currentQuestionIndex + 1}
-          totalQuestions={selectedQuestions.length}
-          selectedAnswer={selectedAnswer}
-          onAnswerSelect={handleAnswerSelect}
-          onValidate={handleValidate}
-          onSkip={handleSkip}
-          onReturnToMenu={handleReturnToMenu}
-          isValidated={isValidated}
-          currentScore={currentScore}
-          subject={subject}
-        />
-      </div>
-    )
+    if (hasRules) {
+      return (
+        <div className="w-full max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Règles de rappel - Colonne de gauche sur grands écrans */}
+            <div className="lg:col-span-1 order-2 lg:order-1">
+              {isDeductionQuestion && (
+                <div className="sticky top-4">
+                  <DeductionRules />
+                </div>
+              )}
+              {isLambdaQuestion && (
+                <div className="sticky top-4">
+                  <LambdaTypingRules />
+                </div>
+              )}
+            </div>
+            
+            {/* Question principale - Colonne de droite, plus large */}
+            <div className="lg:col-span-2 order-1 lg:order-2">
+              <QuestionCard
+                question={currentQuestion}
+                questionNumber={currentQuestionIndex + 1}
+                totalQuestions={selectedQuestions.length}
+                selectedAnswer={selectedAnswer}
+                onAnswerSelect={handleAnswerSelect}
+                onValidate={handleValidate}
+                onSkip={handleSkip}
+                onReturnToMenu={handleReturnToMenu}
+                isValidated={isValidated}
+                currentScore={currentScore}
+                subject={subject}
+              />
+            </div>
+          </div>
+        </div>
+      )
+    } else {
+      // Layout centré pour les questions sans règles de rappel
+      return (
+        <div className="w-full max-w-4xl mx-auto">
+          <QuestionCard
+            question={currentQuestion}
+            questionNumber={currentQuestionIndex + 1}
+            totalQuestions={selectedQuestions.length}
+            selectedAnswer={selectedAnswer}
+            onAnswerSelect={handleAnswerSelect}
+            onValidate={handleValidate}
+            onSkip={handleSkip}
+            onReturnToMenu={handleReturnToMenu}
+            isValidated={isValidated}
+            currentScore={currentScore}
+            subject={subject}
+          />
+        </div>
+      )
+    }
   }
 
   if (gameState === "explanation") {
