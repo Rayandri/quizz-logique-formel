@@ -12,6 +12,17 @@ import { LambdaTypingRules } from "@/components/LambdaTypingRules"
 type GameState = "config" | "question" | "explanation" | "score"
 type SelectionMode = "random" | "difficulty" | "multi-difficulty"
 
+interface QuizState {
+  gameState: GameState
+  selectedQuestions: QCM[]
+  currentQuestionIndex: number
+  selectedAnswer: number | null
+  isValidated: boolean
+  score: number
+  currentScore: number
+  skippedQuestion: boolean
+}
+
 export default function Home() {
   const [gameState, setGameState] = useState<GameState>("config")
   const [selectedQuestions, setSelectedQuestions] = useState<QCM[]>([])
@@ -22,9 +33,67 @@ export default function Home() {
   const [currentScore, setCurrentScore] = useState(0)
   const [skippedQuestion, setSkippedQuestion] = useState(false)
 
+  // Clé pour le localStorage
+  const STORAGE_KEY = "quiz-logique-state"
+
+  // Sauvegarder l'état dans localStorage
+  const saveState = () => {
+    if (typeof window !== "undefined" && gameState !== "config") {
+      const state: QuizState = {
+        gameState,
+        selectedQuestions,
+        currentQuestionIndex,
+        selectedAnswer,
+        isValidated,
+        score,
+        currentScore,
+        skippedQuestion
+      }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
+    }
+  }
+
+  // Charger l'état depuis localStorage
+  const loadState = () => {
+    if (typeof window !== "undefined") {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY)
+        if (saved) {
+          const state: QuizState = JSON.parse(saved)
+          setGameState(state.gameState)
+          setSelectedQuestions(state.selectedQuestions)
+          setCurrentQuestionIndex(state.currentQuestionIndex)
+          setSelectedAnswer(state.selectedAnswer)
+          setIsValidated(state.isValidated)
+          setScore(state.score)
+          setCurrentScore(state.currentScore)
+          setSkippedQuestion(state.skippedQuestion)
+          return true
+        }
+      } catch (error) {
+        console.error("Erreur lors du chargement de l'état:", error)
+        localStorage.removeItem(STORAGE_KEY)
+      }
+    }
+    return false
+  }
+
+  // Effacer la sauvegarde
+  const clearSavedState = () => {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem(STORAGE_KEY)
+    }
+  }
+
   useEffect(() => {
     document.documentElement.classList.add("dark")
+    loadState()
   }, [])
+
+  // Sauvegarder automatiquement à chaque changement d'état
+  useEffect(() => {
+    saveState()
+  }, [gameState, selectedQuestions, currentQuestionIndex, selectedAnswer, isValidated, score, currentScore, skippedQuestion])
 
   const shuffleArray = <T,>(array: T[]): T[] => {
     const shuffled = [...array]
@@ -68,6 +137,7 @@ export default function Home() {
     const maxQuestions = Math.min(numQuestions, shuffled.length)
     const selected = shuffled.slice(0, maxQuestions).map(shuffleAnswers)
     
+    clearSavedState()
     setSelectedQuestions(selected)
     setCurrentQuestionIndex(0)
     setSelectedAnswer(null)
@@ -115,6 +185,7 @@ export default function Home() {
   }
 
   const handleRestart = () => {
+    clearSavedState()
     setGameState("config")
     setSelectedQuestions([])
     setCurrentQuestionIndex(0)

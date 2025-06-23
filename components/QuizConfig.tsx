@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import Footer from "./Footer"
 import { QUESTIONS, type DifficultyLevel } from "@/lib/questions"
 
@@ -16,6 +16,24 @@ export default function QuizConfig({ onStart }: QuizConfigProps) {
   const [selectionMode, setSelectionMode] = useState<SelectionMode>("random")
   const [selectedDifficulty, setSelectedDifficulty] = useState<DifficultyLevel>("facile")
   const [selectedDifficulties, setSelectedDifficulties] = useState<DifficultyLevel[]>(["facile", "moyen"])
+  const [hasSavedQuiz, setHasSavedQuiz] = useState(false)
+
+  const STORAGE_KEY = "quiz-logique-state"
+
+  // Vérifier s'il y a une sauvegarde
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem(STORAGE_KEY)
+      setHasSavedQuiz(!!saved)
+    }
+  }, [])
+
+  const clearSavedState = () => {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem(STORAGE_KEY)
+      setHasSavedQuiz(false)
+    }
+  }
 
   const questionsCount = useMemo(() => {
     const total = QUESTIONS.length
@@ -99,6 +117,26 @@ export default function QuizConfig({ onStart }: QuizConfigProps) {
       <div className="flex-1 flex items-center justify-center p-4">
         <div className="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-md">
         <h1 className="text-3xl font-bold text-gray-200 text-center mb-4">Quiz de Logique</h1>
+        
+        {/* Notification de sauvegarde */}
+        {hasSavedQuiz && (
+          <div className="mb-4 p-3 bg-blue-900/20 border border-blue-500 rounded-lg">
+            <div className="flex justify-between items-center">
+              <div className="text-sm text-blue-300">
+                📋 Quiz en cours sauvegardé
+              </div>
+              <button
+                onClick={clearSavedState}
+                className="px-2 py-1 bg-red-600 hover:bg-red-500 text-white text-xs rounded transition-colors duration-200"
+              >
+                Effacer
+              </button>
+            </div>
+            <div className="text-xs text-blue-400 mt-1">
+              Actualisez la page pour reprendre où vous étiez
+            </div>
+          </div>
+        )}
         
         {/* Affichage du nombre total de questions */}
         <div className="text-center mb-6 p-3 bg-gray-700 rounded-lg">

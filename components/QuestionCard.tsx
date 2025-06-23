@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import type { QCM } from "@/lib/questions"
 import KatexRenderer from "./KatexRenderer"
 import Footer from "./Footer"
@@ -29,7 +29,12 @@ export default function QuestionCard({
   isValidated,
   currentScore,
 }: QuestionCardProps) {
-  const memoizedOptions = useMemo(() => question.options, [question.id])
+  const [refreshKey, setRefreshKey] = useState(0)
+  const memoizedOptions = useMemo(() => question.options, [question.id, refreshKey])
+
+  const handleRepairLatex = () => {
+    setRefreshKey(prev => prev + 1)
+  }
 
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col">
@@ -43,15 +48,24 @@ export default function QuestionCard({
               </span>
               <DifficultyBadge difficulty={question.difficulty || "facile"} />
             </div>
-            <div className="w-full max-w-xs bg-gray-700 rounded-full h-2 ml-4">
-              <div
-                className="bg-indigo-600 h-2 rounded-full transition-all duration-300"
-                style={{ width: `${(questionNumber / totalQuestions) * 100}%` }}
-              />
+            <div className="flex items-center gap-2">
+              <button
+                onClick={handleRepairLatex}
+                className="px-2 py-1 bg-orange-600 hover:bg-orange-500 text-white text-xs rounded transition-colors duration-200"
+                title="Réparer l'affichage LaTeX"
+              >
+                🔧 LaTeX
+              </button>
+              <div className="w-full max-w-xs bg-gray-700 rounded-full h-2 ml-2">
+                <div
+                  className="bg-indigo-600 h-2 rounded-full transition-all duration-300"
+                  style={{ width: `${(questionNumber / totalQuestions) * 100}%` }}
+                />
+              </div>
             </div>
           </div>
 
-          <KatexRenderer className="text-xl font-semibold text-gray-200 mb-6">
+          <KatexRenderer key={`question-${question.id}-${refreshKey}`} className="text-xl font-semibold text-gray-200 mb-6">
             {question.question}
           </KatexRenderer>
         </div>
@@ -59,7 +73,7 @@ export default function QuestionCard({
         <div className="space-y-3 mb-8">
           {memoizedOptions.map((option, index) => (
             <label
-              key={`${question.id}-${index}`}
+              key={`${question.id}-${index}-${refreshKey}`}
               className={`flex items-center p-4 rounded-lg border cursor-pointer transition-colors duration-200 ${
                 isValidated
                   ? index === question.answer
@@ -100,7 +114,7 @@ export default function QuestionCard({
                   />
                 )}
               </div>
-              <KatexRenderer className="text-gray-200 flex-1">
+              <KatexRenderer key={`option-${question.id}-${index}-${refreshKey}`} className="text-gray-200 flex-1">
                 {option}
               </KatexRenderer>
             </label>
