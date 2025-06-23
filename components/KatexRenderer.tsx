@@ -19,7 +19,19 @@ export default function KatexRenderer({
 }: KatexRendererProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [renderError, setRenderError] = useState<string | null>(null)
-  const content = latex || children || ""
+  
+  const content = (() => {
+    const rawContent = latex || children || ""
+    
+    // Si c'est du contenu passé via la prop latex et qu'il n'a pas déjà de délimiteurs
+    if (latex && !latex.includes('$') && !latex.includes('\\(') && !latex.includes('\\[')) {
+      // Ajouter les délimiteurs appropriés selon le mode
+      return displayMode ? `$$${latex}$$` : `$${latex}$`
+    }
+    
+    // Sinon retourner le contenu tel quel (pour la compatibilité)
+    return rawContent
+  })()
 
   useEffect(() => {
     if (!containerRef.current || !content) return
