@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react"
 import type { QCM } from "@/lib/questions"
 import KatexRenderer from "./KatexRenderer"
+import SimpleTextRenderer from "./SimpleTextRenderer"
 
 import { DifficultyBadge } from "./DifficultyBadge"
 
@@ -17,6 +18,7 @@ interface QuestionCardProps {
   onReturnToMenu: () => void
   isValidated: boolean
   currentScore: number
+  subject?: "logique" | "droit" | "risques" | "probabilites"
 }
 
 export default function QuestionCard({
@@ -30,12 +32,15 @@ export default function QuestionCard({
   onReturnToMenu,
   isValidated,
   currentScore,
+  subject = "logique",
 }: QuestionCardProps) {
   const [refreshKey, setRefreshKey] = useState(0)
   const [numericAnswer, setNumericAnswer] = useState("")
   const memoizedOptions = useMemo(() => question.options, [question.id, refreshKey])
   
   const isNumericQuestion = question.answerType === 'numeric'
+  const needsLatex = subject === "logique" || subject === "probabilites"
+  const TextRenderer = needsLatex ? KatexRenderer : SimpleTextRenderer
 
   const handleRepairLatex = () => {
     // Force un re-rendu plus agressif
@@ -104,9 +109,9 @@ export default function QuestionCard({
             </div>
           </div>
 
-          <KatexRenderer key={`question-${question.id}-${refreshKey}`} className="text-xl font-semibold text-gray-200 mb-6 leading-relaxed">
+          <TextRenderer key={`question-${question.id}-${refreshKey}`} className="text-xl font-semibold text-gray-200 mb-6 leading-relaxed">
             {question.question}
-          </KatexRenderer>
+          </TextRenderer>
         </div>
 
         {isNumericQuestion ? (
@@ -186,9 +191,9 @@ export default function QuestionCard({
                     />
                   )}
                 </div>
-                <KatexRenderer key={`option-${question.id}-${index}-${refreshKey}`} className="text-gray-200 flex-1">
+                <TextRenderer key={`option-${question.id}-${index}-${refreshKey}`} className="text-gray-200 flex-1">
                   {option}
-                </KatexRenderer>
+                </TextRenderer>
               </label>
             ))}
           </div>

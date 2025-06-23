@@ -7,6 +7,7 @@ interface PageContainerProps {
   showBackButton?: boolean
   backHref?: string
   backText?: string
+  showMainMenu?: boolean
   children: React.ReactNode
   className?: string
 }
@@ -16,6 +17,7 @@ export default function PageContainer({
   showBackButton,
   backHref,
   backText,
+  showMainMenu,
   children,
   className = ""
 }: PageContainerProps) {
@@ -26,6 +28,7 @@ export default function PageContainer({
         showBackButton={showBackButton}
         backHref={backHref}
         backText={backText}
+        showMainMenu={showMainMenu}
       />
       
       <div className={`container mx-auto px-4 py-8 ${className}`}>

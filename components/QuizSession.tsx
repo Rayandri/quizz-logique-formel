@@ -241,6 +241,7 @@ export default function QuizSession({ subject, config }: QuizSessionProps) {
           onReturnToMenu={handleReturnToMenu}
           isValidated={isValidated}
           currentScore={currentScore}
+          subject={subject}
         />
       </div>
     )
@@ -255,6 +256,7 @@ export default function QuizSession({ subject, config }: QuizSessionProps) {
         onReturnToMenu={handleReturnToMenu}
         isLastQuestion={currentQuestionIndex === selectedQuestions.length - 1}
         skippedQuestion={skippedQuestion}
+        subject={subject}
       />
     )
   }

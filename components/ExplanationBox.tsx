@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react"
 import type { QCM } from "@/lib/questions"
 import KatexRenderer from "./KatexRenderer"
+import SimpleTextRenderer from "./SimpleTextRenderer"
 
 
 interface ExplanationBoxProps {
@@ -12,6 +13,7 @@ interface ExplanationBoxProps {
   onReturnToMenu: () => void
   isLastQuestion: boolean
   skippedQuestion: boolean
+  subject?: "logique" | "droit" | "risques" | "probabilites"
 }
 
 export default function ExplanationBox({
@@ -21,8 +23,12 @@ export default function ExplanationBox({
   onReturnToMenu,
   isLastQuestion,
   skippedQuestion,
+  subject = "logique",
 }: ExplanationBoxProps) {
   const [refreshKey, setRefreshKey] = useState(0)
+  
+  const needsLatex = subject === "logique" || subject === "probabilites"
+  const TextRenderer = needsLatex ? KatexRenderer : SimpleTextRenderer
   
   const processedExplanation = useMemo(() => {
     return question.explanation
@@ -127,9 +133,9 @@ export default function ExplanationBox({
         </div>
 
         <div className="mb-6">
-          <KatexRenderer key={`question-${question.id}-${refreshKey}`} className="text-lg font-semibold text-gray-200 mb-2 leading-relaxed">
+          <TextRenderer key={`question-${question.id}-${refreshKey}`} className="text-lg font-semibold text-gray-200 mb-2 leading-relaxed">
             {question.question}
-          </KatexRenderer>
+          </TextRenderer>
 
           <div className="space-y-2 mb-4">
             {!skippedQuestion && selectedAnswer !== null && selectedAnswer !== "" && (
@@ -140,9 +146,9 @@ export default function ExplanationBox({
                     {selectedAnswer}
                   </span>
                 ) : (
-                  <KatexRenderer key={`selected-${question.id}-${refreshKey}`} className={isCorrect ? "text-green-400" : "text-red-400"}>
+                  <TextRenderer key={`selected-${question.id}-${refreshKey}`} className={isCorrect ? "text-green-400" : "text-red-400"}>
                     {question.options[selectedAnswer as number]}
-                  </KatexRenderer>
+                  </TextRenderer>
                 )}
               </p>
             )}
@@ -152,9 +158,9 @@ export default function ExplanationBox({
               {question.answerType === 'numeric' ? (
                 <span className="text-green-400">{question.answer}</span>
               ) : (
-                <KatexRenderer key={`correct-${question.id}-${refreshKey}`} className="text-green-400">
+                <TextRenderer key={`correct-${question.id}-${refreshKey}`} className="text-green-400">
                   {question.options[question.answer as number]}
-                </KatexRenderer>
+                </TextRenderer>
               )}
             </p>
           </div>
@@ -162,9 +168,9 @@ export default function ExplanationBox({
 
         <div className="bg-gray-700/50 rounded-lg p-4 mb-8">
           <h5 className="font-semibold text-gray-200 mb-2">Explication :</h5>
-          <KatexRenderer key={`explanation-${question.id}-${refreshKey}`} className="text-gray-300 leading-relaxed prose prose-invert max-w-none">
+          <TextRenderer key={`explanation-${question.id}-${refreshKey}`} className="text-gray-300 leading-relaxed prose prose-invert max-w-none">
             {processedExplanation}
-          </KatexRenderer>
+          </TextRenderer>
         </div>
 
         <button

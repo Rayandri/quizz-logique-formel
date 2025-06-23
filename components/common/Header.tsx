@@ -7,13 +7,15 @@ interface HeaderProps {
   showBackButton?: boolean
   backHref?: string
   backText?: string
+  showMainMenu?: boolean
 }
 
 export default function Header({ 
   title, 
   showBackButton = false, 
   backHref = "/",
-  backText = "← Menu Principal" 
+  backText = "← Retour",
+  showMainMenu = true
 }: HeaderProps) {
   return (
     <div className="w-full bg-gray-800 shadow-lg p-4">
@@ -26,14 +28,23 @@ export default function Header({
             {backText}
           </Link>
         ) : (
-          <div></div>
+          <div className="w-24"></div>
         )}
         
         <h1 className="text-xl font-bold text-gray-200 text-center">
           {title}
         </h1>
         
-        <div className="w-24"></div>
+        {showMainMenu ? (
+          <Link
+            href="/"
+            className="px-3 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-sm rounded-md transition-colors duration-200"
+          >
+            Menu Principal
+          </Link>
+        ) : (
+          <div className="w-24"></div>
+        )}
       </div>
     </div>
   )
