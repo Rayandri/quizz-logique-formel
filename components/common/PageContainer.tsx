@@ -22,7 +22,7 @@ export default function PageContainer({
   className = ""
 }: PageContainerProps) {
   return (
-    <div className="min-h-screen bg-[#1e293b]">
+    <div className="min-h-screen bg-[#1e293b] flex flex-col items-center justify-center">
       <Header 
         title={title}
         showBackButton={showBackButton}
@@ -31,7 +31,7 @@ export default function PageContainer({
         showMainMenu={showMainMenu}
       />
       
-      <div className={`container mx-auto px-4 py-8 ${className}`}>
+      <div className={`container mx-auto px-4 py-8 flex flex-col items-center justify-center ${className}`}>
         {children}
       </div>
     </div>
