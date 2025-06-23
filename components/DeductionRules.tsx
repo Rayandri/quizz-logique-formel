@@ -27,12 +27,14 @@ export function DeductionRules() {
               
               {/* Implication */}
               <div className="space-y-3">
-                <h3 className="font-semibold text-blue-300 border-b border-blue-600 pb-1">
-                  Implication ($\\Rightarrow$)
+                <h3 className="font-semibold text-blue-300 border-b border-blue-600 pb-1 flex items-center gap-2">
+                  Implication (<KatexRenderer latex="\\Rightarrow" className="inline" />)
                 </h3>
                 <div className="space-y-2">
                   <div className="bg-gray-800 p-3 rounded border border-gray-600">
-                    <div className="font-medium text-sm text-gray-400 mb-1">Introduction [$\\Rightarrow$I]</div>
+                    <div className="font-medium text-sm text-gray-400 mb-1 flex items-center gap-1">
+                      Introduction [<KatexRenderer latex="\\Rightarrow" className="inline" />I]
+                    </div>
                     <KatexRenderer 
                       latex="\\frac{[A]^1 \\quad \\vdots \\quad B}{A \\Rightarrow B}^1" 
                       displayMode={true}
@@ -40,7 +42,9 @@ export function DeductionRules() {
                     />
                   </div>
                   <div className="bg-gray-800 p-3 rounded border border-gray-600">
-                    <div className="font-medium text-sm text-gray-400 mb-1">Élimination [$\\Rightarrow$E] (Modus Ponens)</div>
+                    <div className="font-medium text-sm text-gray-400 mb-1 flex items-center gap-1">
+                      Élimination [<KatexRenderer latex="\\Rightarrow" className="inline" />E] (Modus Ponens)
+                    </div>
                     <KatexRenderer 
                       latex="\\frac{A \\Rightarrow B \\quad A}{B}" 
                       displayMode={true}
@@ -52,12 +56,14 @@ export function DeductionRules() {
 
               {/* Conjonction */}
               <div className="space-y-3">
-                <h3 className="font-semibold text-blue-300 border-b border-blue-600 pb-1">
-                  Conjonction ($\\wedge$)
+                <h3 className="font-semibold text-blue-300 border-b border-blue-600 pb-1 flex items-center gap-2">
+                  Conjonction (<KatexRenderer latex="\\wedge" className="inline" />)
                 </h3>
                 <div className="space-y-2">
                   <div className="bg-gray-800 p-3 rounded border border-gray-600">
-                    <div className="font-medium text-sm text-gray-400 mb-1">Introduction [$\\wedge$I]</div>
+                    <div className="font-medium text-sm text-gray-400 mb-1 flex items-center gap-1">
+                      Introduction [<KatexRenderer latex="\\wedge" className="inline" />I]
+                    </div>
                     <KatexRenderer 
                       latex="\\frac{A \\quad B}{A \\wedge B}" 
                       displayMode={true}
@@ -65,7 +71,9 @@ export function DeductionRules() {
                     />
                   </div>
                   <div className="bg-gray-800 p-3 rounded border border-gray-600">
-                    <div className="font-medium text-sm text-gray-400 mb-1">Élimination [$\\wedge$E₁] et [$\\wedge$E₂]</div>
+                    <div className="font-medium text-sm text-gray-400 mb-1 flex items-center gap-1">
+                      Élimination [<KatexRenderer latex="\\wedge" className="inline" />E₁] et [<KatexRenderer latex="\\wedge" className="inline" />E₂]
+                    </div>
                     <KatexRenderer 
                       latex="\\frac{A \\wedge B}{A} \\quad \\frac{A \\wedge B}{B}" 
                       displayMode={true}
@@ -77,12 +85,14 @@ export function DeductionRules() {
 
               {/* Disjonction */}
               <div className="space-y-3">
-                <h3 className="font-semibold text-blue-300 border-b border-blue-600 pb-1">
-                  Disjonction ($\\vee$)
+                <h3 className="font-semibold text-blue-300 border-b border-blue-600 pb-1 flex items-center gap-2">
+                  Disjonction (<KatexRenderer latex="\\vee" className="inline" />)
                 </h3>
                 <div className="space-y-2">
                   <div className="bg-gray-800 p-3 rounded border border-gray-600">
-                    <div className="font-medium text-sm text-gray-400 mb-1">Introduction [$\\vee$I₁] et [$\\vee$I₂]</div>
+                    <div className="font-medium text-sm text-gray-400 mb-1 flex items-center gap-1">
+                      Introduction [<KatexRenderer latex="\\vee" className="inline" />I₁] et [<KatexRenderer latex="\\vee" className="inline" />I₂]
+                    </div>
                     <KatexRenderer 
                       latex="\\frac{A}{A \\vee B} \\quad \\frac{B}{A \\vee B}" 
                       displayMode={true}
@@ -90,7 +100,9 @@ export function DeductionRules() {
                     />
                   </div>
                   <div className="bg-gray-800 p-3 rounded border border-gray-600">
-                    <div className="font-medium text-sm text-gray-400 mb-1">Élimination [$\\vee$E] (Raisonnement par cas)</div>
+                    <div className="font-medium text-sm text-gray-400 mb-1 flex items-center gap-1">
+                      Élimination [<KatexRenderer latex="\\vee" className="inline" />E] (Raisonnement par cas)
+                    </div>
                     <KatexRenderer 
                       latex="\\frac{A \\vee B \\quad [A]^1 \\vdots C \\quad [B]^2 \\vdots C}{C}^{1,2}" 
                       displayMode={true}
@@ -102,12 +114,14 @@ export function DeductionRules() {
 
               {/* Négation */}
               <div className="space-y-3">
-                <h3 className="font-semibold text-blue-300 border-b border-blue-600 pb-1">
-                  Négation ($\\neg$)
+                <h3 className="font-semibold text-blue-300 border-b border-blue-600 pb-1 flex items-center gap-2">
+                  Négation (<KatexRenderer latex="\\neg" className="inline" />)
                 </h3>
                 <div className="space-y-2">
                   <div className="bg-gray-800 p-3 rounded border border-gray-600">
-                    <div className="font-medium text-sm text-gray-400 mb-1">Introduction [$\\neg$I] (Raisonnement par l'absurde)</div>
+                    <div className="font-medium text-sm text-gray-400 mb-1 flex items-center gap-1">
+                      Introduction [<KatexRenderer latex="\\neg" className="inline" />I] (Raisonnement par l'absurde)
+                    </div>
                     <KatexRenderer 
                       latex="\\frac{[A]^1 \\quad \\vdots \\quad \\perp}{\\neg A}^1" 
                       displayMode={true}
@@ -115,7 +129,9 @@ export function DeductionRules() {
                     />
                   </div>
                   <div className="bg-gray-800 p-3 rounded border border-gray-600">
-                    <div className="font-medium text-sm text-gray-400 mb-1">Élimination [$\\neg$E]</div>
+                    <div className="font-medium text-sm text-gray-400 mb-1 flex items-center gap-1">
+                      Élimination [<KatexRenderer latex="\\neg" className="inline" />E]
+                    </div>
                     <KatexRenderer 
                       latex="\\frac{A \\quad \\neg A}{\\perp}" 
                       displayMode={true}
@@ -123,7 +139,9 @@ export function DeductionRules() {
                     />
                   </div>
                   <div className="bg-gray-800 p-3 rounded border border-gray-600">
-                    <div className="font-medium text-sm text-gray-400 mb-1">Double négation [$\\neg\\neg$]</div>
+                    <div className="font-medium text-sm text-gray-400 mb-1 flex items-center gap-1">
+                      Double négation [<KatexRenderer latex="\\neg\\neg" className="inline" />]
+                    </div>
                     <KatexRenderer 
                       latex="\\frac{\\neg \\neg A}{A}" 
                       displayMode={true}
@@ -141,7 +159,9 @@ export function DeductionRules() {
                 Règle de l'absurdité
               </h3>
               <div className="bg-gray-800 p-3 rounded border border-gray-600">
-                <div className="font-medium text-sm text-gray-400 mb-1">Ex Falso Quodlibet [$\\perp$E]</div>
+                <div className="font-medium text-sm text-gray-400 mb-1 flex items-center gap-1">
+                  Ex Falso Quodlibet [<KatexRenderer latex="\\perp" className="inline" />E]
+                </div>
                 <KatexRenderer 
                   latex="\\frac{\\perp}{A}" 
                   displayMode={true}
