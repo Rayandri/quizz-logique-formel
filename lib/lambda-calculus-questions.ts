@@ -34,7 +34,7 @@ export const LAMBDA_CALCULUS_QUESTIONS: LambdaQuestion[] = [
       "$\\lambda f x \\cdot x$"
     ],
     answer: 0,
-    explanation: "Dans l'encodage de Church, l'entier $n$ est représenté par :\n$$\\overline{n} = \\lambda f x \\cdot f^n(x)$$\n\noù $f^n(x)$ signifie appliquer $f$ exactement $n$ fois à $x$.\n\n**Pour 3 :** $\\overline{3} = \\lambda f x \\cdot f(f(f(x)))$\n\n**Structure générale :**\n- $\\overline{0} = \\lambda f x \\cdot x$\n- $\\overline{1} = \\lambda f x \\cdot f(x)$\n- $\\overline{2} = \\lambda f x \\cdot f(f(x))$",
+    explanation: "Dans l'encodage de Church, l'entier $n$ est représenté par :\n$\\overline{n} = \\lambda f x \\cdot f^n(x)$\n\noù $f^n(x)$ signifie appliquer $f$ exactement $n$ fois à $x$.\n\n**Pour 3 :** $\\overline{3} = \\lambda f x \\cdot f(f(f(x)))$\n\n**Structure générale :**\n- $\\overline{0} = \\lambda f x \\cdot x$\n- $\\overline{1} = \\lambda f x \\cdot f(x)$\n- $\\overline{2} = \\lambda f x \\cdot f(f(x))$",
     points: 1,
     difficulty: "cours"
   },
@@ -48,7 +48,7 @@ export const LAMBDA_CALCULUS_QUESTIONS: LambdaQuestion[] = [
       "$n + 1$"
     ],
     answer: 0,
-    explanation: "Analysons $B = \\lambda v \\cdot v(Av)v$ étape par étape :\n\n1. $Av = A(v)$ est une fonction qui ajoute $v+1$\n2. $v(Av)v$ applique $v$ fois la fonction $A(v)$ à l'argument $v$\n\nChaque application de $A(v)$ ajoute $v+1$, donc après $v$ applications :\n$$v \\cdot (v+1) + v = v^2 + v + v = v^2 + 2v$$\n\n**Vérification avec $v=2$ :**\n- $A(2)$ ajoute 3\n- Appliquer 2 fois à 2 : $2 + 3 + 3 = 8$\n- Formule : $2^2 + 2 \\cdot 2 = 4 + 4 = 8$ ✓",
+    explanation: "Analysons $B = \\lambda v \\cdot v(Av)v$ étape par étape :\n\n1. $Av = A(v)$ est une fonction qui ajoute $v+1$\n2. $v(Av)v$ applique $v$ fois la fonction $A(v)$ à l'argument $v$\n\nChaque application de $A(v)$ ajoute $v+1$, donc après $v$ applications :\n$v \\cdot (v+1) + v = v^2 + v + v = v^2 + 2v$\n\n**Vérification avec $v=2$ :**\n- $A(2)$ ajoute 3\n- Appliquer 2 fois à 2 : $2 + 3 + 3 = 8$\n- Formule : $2^2 + 2 \\cdot 2 = 4 + 4 = 8$ ✓",
     points: 3
   },
   {
@@ -61,7 +61,7 @@ export const LAMBDA_CALCULUS_QUESTIONS: LambdaQuestion[] = [
       "$\\text{Succ}$"
     ],
     answer: 0,
-    explanation: "Calculons $\\overline{2} \\text{ Succ } \\overline{0}$ :\n\n**Définitions :**\n- $\\overline{2} = \\lambda f x \\cdot f(f(x))$\n- $\\overline{0} = \\lambda f x \\cdot x$\n- $\\text{Succ} = \\lambda n f x \\cdot f(nfx)$\n\n**Réduction :**\n$$\\overline{2} \\text{ Succ } \\overline{0} = (\\lambda f x \\cdot f(f(x))) \\text{ Succ } \\overline{0}$$\n$$= \\text{Succ}(\\text{Succ}(\\overline{0}))$$\n$$= \\text{Succ}(\\overline{1}) = \\overline{2}$$\n\n**Principe :** $\\overline{n}$ applique son premier argument $n$ fois au second.",
+    explanation: "Calculons $\\overline{2} \\text{ Succ } \\overline{0}$ :\n\n**Définitions :**\n- $\\overline{2} = \\lambda f x \\cdot f(f(x))$\n- $\\overline{0} = \\lambda f x \\cdot x$\n- $\\text{Succ} = \\lambda n f x \\cdot f(nfx)$\n\n**Réduction :**\n$\\overline{2} \\text{ Succ } \\overline{0} = (\\lambda f x \\cdot f(f(x))) \\text{ Succ } \\overline{0}$\n$= \\text{Succ}(\\text{Succ}(\\overline{0}))$\n$= \\text{Succ}(\\overline{1}) = \\overline{2}$\n\n**Principe :** $\\overline{n}$ applique son premier argument $n$ fois au second.",
     points: 2
   },
   {
@@ -74,7 +74,7 @@ export const LAMBDA_CALCULUS_QUESTIONS: LambdaQuestion[] = [
       "L'application currifiée"
     ],
     answer: 0,
-    explanation: "Le **combinateur Y** (ou combinateur de point fixe) permet de définir la récursion dans le lambda-calcul pur.\n\n**Propriété fondamentale :** $Y f = f(Y f)$\n\n**Définition :** $Y = \\lambda f \\cdot (\\lambda x \\cdot f(xx))(\\lambda x \\cdot f(xx))$\n\n**Usage :** Pour définir une fonction récursive $g$, on écrit :\n$$g = Y(\\lambda g' \\cdot \\lambda n \\cdot \\text{if } n=0 \\text{ then } \\text{base} \\text{ else } \\text{step}(g'(n-1)))$$\n\n**Exemple :** La factorielle utilise $Y$ pour se référencer elle-même.",
+    explanation: "Le **combinateur Y** (ou combinateur de point fixe) permet de définir la récursion dans le lambda-calcul pur.\n\n**Propriété fondamentale :** $Y f = f(Y f)$\n\n**Définition :** $Y = \\lambda f \\cdot (\\lambda x \\cdot f(xx))(\\lambda x \\cdot f(xx))$\n\n**Usage :** Pour définir une fonction récursive $g$, on écrit :\n$g = Y(\\lambda g' \\cdot \\lambda n \\cdot \\text{if } n=0 \\text{ then } \\text{base} \\text{ else } \\text{step}(g'(n-1)))$\n\n**Exemple :** La factorielle utilise $Y$ pour se référencer elle-même.",
     points: 2
   },
   {
@@ -100,7 +100,7 @@ export const LAMBDA_CALCULUS_QUESTIONS: LambdaQuestion[] = [
       "Réduction lazy"
     ],
     answer: 0,
-    explanation: "La **réduction normale** (leftmost-outermost) garantit de trouver la forme normale si elle existe.\n\n**Principe :** Réduire toujours le redex le plus à gauche et le plus externe.\n\n**Théorème de standardisation :** Si un terme a une forme normale, la stratégie normale l'atteindra.\n\n**Exemple problématique pour l'applicative :**\n$$(\\lambda x \\cdot y)((\\lambda z \\cdot zz)(\\lambda z \\cdot zz))$$\n\n- **Normale :** réduit $(\\lambda x \\cdot y)$ d'abord → $y$\n- **Applicative :** boucle sur $(\\lambda z \\cdot zz)(\\lambda z \\cdot zz)$\n\n**Call-by-need** est une optimisation de la stratégie normale.",
+    explanation: "La **réduction normale** (leftmost-outermost) garantit de trouver la forme normale si elle existe.\n\n**Principe :** Réduire toujours le redex le plus à gauche et le plus externe.\n\n**Théorème de standardisation :** Si un terme a une forme normale, la stratégie normale l'atteindra.\n\n**Exemple problématique pour l'applicative :**\n$(\\lambda x \\cdot y)((\\lambda z \\cdot zz)(\\lambda z \\cdot zz))$\n\n- **Normale :** réduit $(\\lambda x \\cdot y)$ d'abord $\to y$\n- **Applicative :** boucle sur $(\\lambda z \\cdot zz)(\\lambda z \\cdot zz)$\n\n**Call-by-need** est une optimisation de la stratégie normale.",
     points: 2
   },
   {
@@ -140,7 +140,7 @@ export const LAMBDA_CALCULUS_QUESTIONS: LambdaQuestion[] = [
       "Il représente la fonction identité"
     ],
     answer: 0,
-    explanation: "Le terme $\\Omega = (\\lambda x \\cdot xx)(\\lambda x \\cdot xx)$ est l'exemple classique d'un terme **sans forme normale**.\n\n**Réduction :**\n$$\\Omega = (\\lambda x \\cdot xx)(\\lambda x \\cdot xx)$$\n$$\\to (\\lambda x \\cdot xx)(\\lambda x \\cdot xx) = \\Omega$$\n\n**Boucle infinie :** $\\Omega \\to \\Omega \\to \\Omega \\to \\ldots$\n\n**Usage théorique :** Démontre que tous les termes n'ont pas de forme normale.\n\n**Combinateur $Y$ :** Utilise une construction similaire pour créer la récursion :\n$$Y = \\lambda f \\cdot (\\lambda x \\cdot f(xx))(\\lambda x \\cdot f(xx))$$",
+    explanation: "Le terme $\\Omega = (\\lambda x \\cdot xx)(\\lambda x \\cdot xx)$ est l'exemple classique d'un terme **sans forme normale**.\n\n**Réduction :**\n$\\Omega = (\\lambda x \\cdot xx)(\\lambda x \\cdot xx)$\n$\\to (\\lambda x \\cdot xx)(\\lambda x \\cdot xx) = \\Omega$\n\n**Boucle infinie :** $\\Omega \\to \\Omega \\to \\Omega \\to \\ldots$\n\n**Usage théorique :** Démontre que tous les termes n'ont pas de forme normale.\n\n**Combinateur $Y$ :** Utilise une construction similaire pour créer la récursion :\n$Y = \\lambda f \\cdot (\\lambda x \\cdot f(xx))(\\lambda x \\cdot f(xx))$",
     points: 2
   }
 ] 

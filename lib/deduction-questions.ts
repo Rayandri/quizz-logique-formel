@@ -20,7 +20,7 @@ export const DEDUCTION_QUESTIONS: QCM[] = [
       "$[\\vee\\text{E}]$ : élimination de disjonction"
     ],
     answer: 0,
-    explanation: "La règle $[\\Rightarrow\\text{I}]$ (**introduction de l'implication**) permet de prouver A ⇒ B en supposant A et en dérivant B.\n\n**Structure de la preuve :**\n```\n[A]¹\n ⋮\n B\n―――――― ⇒I,¹\nA ⇒ B\n```\n\n**Principe :** Pour établir \"si A alors B\", on suppose A et on montre que cela implique B.\n\n**Décharge d'hypothèse :** L'hypothèse A est déchargée (marquée par l'exposant) lors de l'application de la règle.",
+    explanation: "La règle $[\\Rightarrow\\text{I}]$ (**introduction de l'implication**) permet de prouver A $\Rightarrow$ B en supposant A et en dérivant B.\n\n**Structure de la preuve :**\n```\n[A]¹\n ⋮\n B\n―――――― $\Rightarrow$I,¹\nA $\Rightarrow$ B\n```\n\n**Principe :** Pour établir \"si A alors B\", on suppose A et on montre que cela implique B.\n\n**Décharge d'hypothèse :** L'hypothèse A est déchargée (marquée par l'exposant) lors de l'application de la règle.",
     difficulty: "cours"
   },
   {
@@ -33,7 +33,7 @@ export const DEDUCTION_QUESTIONS: QCM[] = [
       "$[\\vee\\text{I}]$"
     ],
     answer: 0,
-    explanation: "Cette structure correspond à la règle $[\\Rightarrow\\text{E}]$ (**élimination de l'implication**), aussi appelée **Modus Ponens**.\n\n**Règle formelle :**\n```\nA    A ⇒ B\n―――――――――― ⇒E\n    B\n```\n\n**Principe :** Si on a prouvé A et A ⇒ B, alors on peut conclure B.\n\n**Usage :** C'est l'une des règles les plus fondamentales pour \"utiliser\" une implication dans une preuve."
+    explanation: "Cette structure correspond à la règle $[\\Rightarrow\\text{E}]$ (**élimination de l'implication**), aussi appelée **Modus Ponens**.\n\n**Règle formelle :**\n```\nA    A $\Rightarrow$ B\n―――――――――― $\Rightarrow$E\n    B\n```\n\n**Principe :** Si on a prouvé A et A $\Rightarrow$ B, alors on peut conclure B.\n\n**Usage :** C'est l'une des règles les plus fondamentales pour \"utiliser\" une implication dans une preuve."
   },
   {
     id: 3,
@@ -45,7 +45,7 @@ export const DEDUCTION_QUESTIONS: QCM[] = [
       "Supposer $A \\wedge B$ directement"
     ],
     answer: 0,
-    explanation: "La règle $[\\wedge\\text{I}]$ (**introduction de la conjonction**) requiert les deux composants :\n\n**Règle formelle :**\n```\nA    B\n―――――― ∧I\nA ∧ B\n```\n\n**Principe :** Pour établir \"A et B\", il faut établir A d'une part et B d'autre part.\n\n**Preuves indépendantes :** A et B peuvent être prouvés dans des sous-arbres séparés avant d'être combinés."
+    explanation: "La règle $[\\wedge\\text{I}]$ (**introduction de la conjonction**) requiert les deux composants :\n\n**Règle formelle :**\n```\nA    B\n―――――― $\wedge$I\nA $\wedge$ B\n```\n\n**Principe :** Pour établir \"A et B\", il faut établir A d'une part et B d'autre part.\n\n**Preuves indépendantes :** A et B peuvent être prouvés dans des sous-arbres séparés avant d'être combinés."
   },
   {
     id: 4,
@@ -57,7 +57,7 @@ export const DEDUCTION_QUESTIONS: QCM[] = [
       "L'application du modus ponens"
     ],
     answer: 0,
-    explanation: "La règle $[\\vee\\text{E}]$ formalise le **raisonnement par cas** :\n\n**Structure complète :**\n```\n      [A]¹  [B]²\n       ⋮     ⋮\nA ∨ B  C     C\n―――――――――――――――― ∨E,¹,²\n       C\n```\n\n**Principe :** Si on a A ∨ B, et qu'on peut dériver C en supposant A et dériver C en supposant B, alors C est vrai.\n\n**Intuition :** \"Dans tous les cas possibles, C est vrai, donc C est vrai.\"",
+    explanation: "La règle $[\\vee\\text{E}]$ formalise le **raisonnement par cas** :\n\n**Structure complète :**\n```\n      [A]¹  [B]²\n       ⋮     ⋮\nA $\vee$ B  C     C\n―――――――――――――――― $\vee$E,¹,²\n       C\n```\n\n**Principe :** Si on a A $\vee$ B, et qu'on peut dériver C en supposant A et dériver C en supposant B, alors C est vrai.\n\n**Intuition :** \"Dans tous les cas possibles, C est vrai, donc C est vrai.\"",
     difficulty: "moyen"
   },
   {
@@ -70,7 +70,7 @@ export const DEDUCTION_QUESTIONS: QCM[] = [
       "Appliquer $[\\vee\\text{I}]$ sur $A$"
     ],
     answer: 0,
-    explanation: "La règle $[\\neg\\text{I}]$ (**introduction de la négation**) utilise le **raisonnement par l'absurde** :\n\n**Structure :**\n```\n[A]¹\n ⋮\n ⊥\n―――― ¬I,¹\n¬A\n```\n\n**Principe :** Pour prouver ¬A, on suppose A et on montre que cela mène à une contradiction.\n\n**Absurdité :** ⊥ représente une contradiction (comme B ∧ ¬B).\n\n**Puissance :** Cette règle permet de prouver des négations de manière indirecte."
+    explanation: "La règle $[\\neg\\text{I}]$ (**introduction de la négation**) utilise le **raisonnement par l'absurde** :\n\n**Structure :**\n```\n[A]¹\n ⋮\n $\perp$\n―――― $\neg$I,¹\n$\neg$A\n```\n\n**Principe :** Pour prouver $\neg$A, on suppose A et on montre que cela mène à une contradiction.\n\n**Absurdité :** $\perp$ représente une contradiction (comme B $\wedge \neg$B).\n\n**Puissance :** Cette règle permet de prouver des négations de manière indirecte."
   },
   {
     id: 6,
@@ -82,7 +82,7 @@ export const DEDUCTION_QUESTIONS: QCM[] = [
       "Elle ne contient aucune formule"
     ],
     answer: 0,
-    explanation: "Une **branche fermée** contient une **contradiction explicite** : A et ¬A pour la même formule A.\n\n**Notation :** On marque la fermeture par ×\n\n**Signification :** Cette branche ne peut correspondre à aucun modèle car elle viole le principe de non-contradiction.\n\n**Objectif :** Si toutes les branches se ferment, la formule initiale est insatisfiable.\n\n**Exemple :**\n```\nA ∧ ¬A\n   |\nA, ¬A  ×\n```"
+    explanation: "Une **branche fermée** contient une **contradiction explicite** : A et $\neg$A pour la même formule A.\n\n**Notation :** On marque la fermeture par $\times$\n\n**Signification :** Cette branche ne peut correspondre à aucun modèle car elle viole le principe de non-contradiction.\n\n**Objectif :** Si toutes les branches se ferment, la formule initiale est insatisfiable.\n\n**Exemple :**\n```\nA $\wedge \neg$A\n   |\nA, $\neg$A  $\times$\n```"
   },
   {
     id: 7,
@@ -94,7 +94,7 @@ export const DEDUCTION_QUESTIONS: QCM[] = [
       "De $A \\Rightarrow B$, dériver $B$"
     ],
     answer: 0,
-    explanation: "La règle $[\\wedge\\text{E}]$ (**élimination de la conjonction**) a deux formes :\n\n$[\\wedge\\text{E}_1]$ :\n```\nA ∧ B\n―――――― ∧E₁\n  A\n```\n\n$[\\wedge\\text{E}_2]$ :\n```\nA ∧ B\n―――――― ∧E₂\n  B\n```\n\n**Principe :** Si on a prouvé \"A et B\", alors on peut conclure A (ou B) séparément.\n\n**Usage :** Permet d'extraire l'information nécessaire d'une conjonction."
+    explanation: "La règle $[\\wedge\\text{E}]$ (**élimination de la conjonction**) a deux formes :\n\n$[\\wedge\\text{E}_1]$ :\n```\nA $\wedge$ B\n―――――― $\wedge$E₁\n  A\n```\n\n$[\\wedge\\text{E}_2]$ :\n```\nA $\wedge$ B\n―――――― $\wedge$E₂\n  B\n```\n\n**Principe :** Si on a prouvé \"A et B\", alors on peut conclure A (ou B) séparément.\n\n**Usage :** Permet d'extraire l'information nécessaire d'une conjonction."
   },
   {
     id: 8,
@@ -106,7 +106,7 @@ export const DEDUCTION_QUESTIONS: QCM[] = [
       "De $A \\Rightarrow B$, dériver $A \\vee B$"
     ],
     answer: 0,
-    explanation: "La règle $[\\vee\\text{I}]$ (**introduction de la disjonction**) a deux formes :\n\n$[\\vee\\text{I}_1]$ :\n```\n  A\n―――――― ∨I₁\nA ∨ B\n```\n\n$[\\vee\\text{I}_2]$ :\n```\n  B\n―――――― ∨I₂\nA ∨ B\n```\n\n**Principe :** Si on a prouvé A, alors \"A ou B\" est vrai, quel que soit B.\n\n**Affaiblissement :** Cette règle \"affaiblit\" l'information - on passe d'une certitude à une alternative."
+    explanation: "La règle $[\\vee\\text{I}]$ (**introduction de la disjonction**) a deux formes :\n\n$[\\vee\\text{I}_1]$ :\n```\n  A\n―――――― $\vee$I₁\nA $\vee$ B\n```\n\n$[\\vee\\text{I}_2]$ :\n```\n  B\n―――――― $\vee$I₂\nA $\vee$ B\n```\n\n**Principe :** Si on a prouvé A, alors \"A ou B\" est vrai, quel que soit B.\n\n**Affaiblissement :** Cette règle \"affaiblit\" l'information - on passe d'une certitude à une alternative."
   },
   {
     id: 9,
@@ -118,7 +118,7 @@ export const DEDUCTION_QUESTIONS: QCM[] = [
       "On l'ignore"
     ],
     answer: 0,
-    explanation: "Pour **A ∧ B** en tableaux sémantiques, on applique la **règle α** :\n\n**Extension linéaire :**\n```\nA ∧ B\n  |\n  A\n  B\n```\n\n**Principe :** Pour que A ∧ B soit vraie, il faut que A soit vraie ET B soit vraie simultanément.\n\n**Une seule branche :** Contrairement à la disjonction, la conjonction ne crée pas de branchement.\n\n**Règles α :** Les formules conjonctives (∧, ¬∨, ¬⇒) étendent linéairement."
+    explanation: "Pour **A $\wedge$ B** en tableaux sémantiques, on applique la **règle $\alpha$** :\n\n**Extension linéaire :**\n```\nA $\wedge$ B\n  |\n  A\n  B\n```\n\n**Principe :** Pour que A $\wedge$ B soit vraie, il faut que A soit vraie ET B soit vraie simultanément.\n\n**Une seule branche :** Contrairement à la disjonction, la conjonction ne crée pas de branchement.\n\n**Règles $\alpha$ :** Les formules conjonctives ($\wedge$, $\neg$\vee$, $\neg$\Rightarrow$) étendent linéairement."
   },
   {
     id: 10,
@@ -130,7 +130,7 @@ export const DEDUCTION_QUESTIONS: QCM[] = [
       "Élimination de disjonction"
     ],
     answer: 0,
-    explanation: "Cette formule exprime la **transitivité de l'implication**. La preuve utilise :\n\n**Structure :**\n```\n[A ⇒ B]¹\n[B ⇒ C]²\n[A]³\n  |\n  B     (⇒E sur A ⇒ B et A)\n  |\n  C     (⇒E sur B ⇒ C et B)\n  |\nA ⇒ C   (⇒I,³)\n  |\n(B ⇒ C) ⇒ (A ⇒ C)   (⇒I,²)\n  |\n(A ⇒ B) ⇒ ((B ⇒ C) ⇒ (A ⇒ C))   (⇒I,¹)\n```\n\n**Stratégie :** Trois $[\\Rightarrow\\text{I}]$ imbriquées suivies de deux $[\\Rightarrow\\text{E}]$ pour la chaîne de déduction.",
+    explanation: "Cette formule exprime la **transitivité de l'implication**. La preuve utilise :\n\n**Structure :**\n```\n[A $\Rightarrow$ B]¹\n[B $\Rightarrow$ C]²\n[A]³\n  |\n  B     ($\Rightarrow$E sur A $\Rightarrow$ B et A)\n  |\n  C     ($\Rightarrow$E sur B $\Rightarrow$ C et B)\n  |\nA $\Rightarrow$ C   ($\Rightarrow$I,³)\n  |\n(B $\Rightarrow$ C) $\Rightarrow$ (A $\Rightarrow$ C)   ($\Rightarrow$I,²)\n  |\n(A $\Rightarrow$ B) $\Rightarrow$ ((B $\Rightarrow$ C) $\Rightarrow$ (A $\Rightarrow$ C))   ($\Rightarrow$I,¹)\n```\n\n**Stratégie :** Trois $[\\Rightarrow\\text{I}]$ imbriquées suivies de deux $[\\Rightarrow\\text{E}]$ pour la chaîne de déduction.",
     difficulty: "dur"
   }
 ] 
