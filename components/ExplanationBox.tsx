@@ -127,7 +127,7 @@ export default function ExplanationBox({
         </div>
 
         <div className="mb-6">
-          <KatexRenderer key={`question-${question.id}-${refreshKey}`} className="text-lg font-semibold text-gray-200 mb-2">
+          <KatexRenderer key={`question-${question.id}-${refreshKey}`} className="text-lg font-semibold text-gray-200 mb-2 leading-relaxed">
             {question.question}
           </KatexRenderer>
 

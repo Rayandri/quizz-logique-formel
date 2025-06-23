@@ -103,7 +103,7 @@ export default function QuestionCard({
             </div>
           </div>
 
-          <KatexRenderer key={`question-${question.id}-${refreshKey}`} className="text-xl font-semibold text-gray-200 mb-6">
+          <KatexRenderer key={`question-${question.id}-${refreshKey}`} className="text-xl font-semibold text-gray-200 mb-6 leading-relaxed">
             {question.question}
           </KatexRenderer>
         </div>

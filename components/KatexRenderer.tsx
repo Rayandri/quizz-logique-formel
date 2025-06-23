@@ -21,13 +21,22 @@ export default function KatexRenderer({
 
   const content = latex || children || ""
 
+  const processedContent = useMemo(() => {
+    if (!content) return ""
+    
+    return content
+      .replace(/,\s*(?=\$[^$]*\$|[A-Z])/g, ',<br/>')
+      .replace(/\s+avec\s+/gi, '<br/>avec ')
+      .replace(/\s+la formule\s+/gi, '<br/>la formule ')
+      .replace(/\s*:\s*$/gm, ' :')
+      .replace(/(\$[^$]*\$)\s*(?=est|vaut|signifie)/gi, '$1<br/>')
+  }, [content])
+
   useEffect(() => {
-    if (containerRef.current && content) {
+    if (containerRef.current && processedContent) {
       try {
-        // Set the raw HTML content first
-        containerRef.current.innerHTML = content
+        containerRef.current.innerHTML = processedContent
         
-        // Then process LaTeX
         renderMathInElement(containerRef.current, {
           delimiters: [
             { left: "$$", right: "$$", display: true },
@@ -49,21 +58,20 @@ export default function KatexRenderer({
           }
         })
       } catch (error) {
-        console.error("KaTeX rendering error:", error, "Content:", content)
+        console.error("KaTeX rendering error:", error, "Content:", processedContent)
         if (containerRef.current) {
-          containerRef.current.textContent = content.replace(/<[^>]*>/g, '')
+          containerRef.current.textContent = processedContent.replace(/<[^>]*>/g, '')
         }
       }
     }
-  }, [content])
+  }, [processedContent])
 
   if (displayMode && latex) {
-    // For display mode, we directly render the LaTeX
     return (
       <div 
         ref={containerRef}
         className={className}
-        dangerouslySetInnerHTML={{ __html: `$$${content}$$` }}
+        dangerouslySetInnerHTML={{ __html: `$$${processedContent}$$` }}
       />
     )
   }
@@ -71,8 +79,8 @@ export default function KatexRenderer({
   return (
     <div 
       ref={containerRef} 
-      className={className}
-      dangerouslySetInnerHTML={{ __html: content }}
+      className={`${className} leading-relaxed`}
+      dangerouslySetInnerHTML={{ __html: processedContent }}
     />
   )
 } 
