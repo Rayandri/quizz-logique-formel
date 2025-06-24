@@ -1,6 +1,7 @@
 "use client"
 
-import { notFound } from "next/navigation"
+import { notFound, useSearchParams } from "next/navigation"
+import { useEffect, useState } from "react"
 import QuizSession from "@/components/QuizSession"
 import PageContainer from "@/components/common/PageContainer"
 import { getSubjectById } from "@/lib/subjects"
@@ -13,6 +14,8 @@ interface SubcategoryQuizPageProps {
 }
 
 export default function SubcategoryQuizPage({ params }: SubcategoryQuizPageProps) {
+  const searchParams = useSearchParams()
+  const [config, setConfig] = useState<any>(null)
   const subject = getSubjectById(params.subject)
   
   if (!subject) {
@@ -29,6 +32,36 @@ export default function SubcategoryQuizPage({ params }: SubcategoryQuizPageProps
     notFound()
   }
 
+  useEffect(() => {
+    const configParam = searchParams.get("config")
+    if (configParam) {
+      try {
+        const parsedConfig = JSON.parse(decodeURIComponent(configParam))
+        setConfig(parsedConfig)
+      } catch (error) {
+        console.error("Error parsing config:", error)
+        notFound()
+      }
+    } else {
+      notFound()
+    }
+  }, [searchParams])
+
+  if (!config) {
+    return (
+      <PageContainer 
+        title={`Quiz - ${subcategory.name}`}
+        showBackButton={true}
+        backHref={`/${params.subject}/${params.subcategory}`}
+        backText={`← Retour à la configuration`}
+      >
+        <div className="text-center text-white">
+          Chargement...
+        </div>
+      </PageContainer>
+    )
+  }
+
   return (
     <PageContainer 
       title={`Quiz - ${subcategory.name}`}
@@ -36,7 +69,7 @@ export default function SubcategoryQuizPage({ params }: SubcategoryQuizPageProps
       backHref={`/${params.subject}/${params.subcategory}`}
       backText={`← Retour à la configuration`}
     >
-      <QuizSession subject={params.subcategory as any} />
+      <QuizSession subject={params.subcategory as any} config={config} />
     </PageContainer>
   )
 } 
