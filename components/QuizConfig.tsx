@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { QUESTIONS, type DifficultyLevel } from "@/lib/questions"
 import { COPYRIGHT_QUESTIONS } from "@/lib/copyright-questions"
+import { APPLIED_COPYRIGHT_QUESTIONS } from "@/lib/applied-copyright-questions"
 import { RISK_MANAGEMENT_QUESTIONS } from "@/lib/risk-management-questions"
 import { PROBABILITY_QUESTIONS } from "@/lib/probability-questions"
 import { getSubjectName } from "@/lib/subjects"
@@ -11,7 +12,7 @@ import { getSubjectName } from "@/lib/subjects"
 type SelectionMode = "random" | "difficulty" | "multi-difficulty"
 
 interface QuizConfigProps {
-  subject: "logique" | "droit" | "risques" | "probabilites"
+  subject: "logique" | "droit" | "droit-base" | "droit-applique" | "risques" | "probabilites"
 }
 
 export default function QuizConfig({ subject }: QuizConfigProps) {
@@ -24,10 +25,29 @@ export default function QuizConfig({ subject }: QuizConfigProps) {
 
   const STORAGE_KEY = `quiz-${subject}-state`
 
-  const currentQuestions = subject === "droit" ? COPYRIGHT_QUESTIONS : 
-                          subject === "risques" ? RISK_MANAGEMENT_QUESTIONS :
-                          subject === "probabilites" ? PROBABILITY_QUESTIONS :
-                          QUESTIONS.filter(q => q.id < 5000)
+  const currentQuestions = useMemo(() => {
+    switch(subject) {
+      case "droit":
+        return COPYRIGHT_QUESTIONS
+      case "droit-base":
+        return COPYRIGHT_QUESTIONS
+      case "droit-applique":
+        return APPLIED_COPYRIGHT_QUESTIONS
+      case "risques":
+        return RISK_MANAGEMENT_QUESTIONS
+      case "probabilites":
+        return PROBABILITY_QUESTIONS
+      default:
+        return QUESTIONS.filter(q => q.id < 5000)
+    }
+  }, [subject])
+
+  const getQuizPath = () => {
+    if (subject === "droit-base" || subject === "droit-applique") {
+      return `/droit/${subject}/quiz`
+    }
+    return `/${subject}/quiz`
+  }
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -90,7 +110,7 @@ export default function QuizConfig({ subject }: QuizConfigProps) {
     }
     
     const configParam = encodeURIComponent(JSON.stringify(config))
-    router.push(`/${subject}/quiz?config=${configParam}`)
+    router.push(`${getQuizPath()}?config=${configParam}`)
   }
 
   const toggleDifficulty = (difficulty: DifficultyLevel) => {

@@ -3,6 +3,7 @@
 import { notFound } from "next/navigation"
 import QuizConfig from "@/components/QuizConfig"
 import PageContainer from "@/components/common/PageContainer"
+import SubcategorySelection from "@/components/SubcategorySelection"
 import { getSubjectById } from "@/lib/subjects"
 
 interface SubjectPageProps {
@@ -14,6 +15,19 @@ export default function SubjectPage({ params }: SubjectPageProps) {
   
   if (!subject) {
     notFound()
+  }
+
+  if (subject.subcategories && subject.subcategories.length > 0) {
+    return (
+      <PageContainer 
+        title={subject.name}
+        showBackButton={true}
+        backHref="/"
+        backText="← Retour aux matières"
+      >
+        <SubcategorySelection subject={subject} />
+      </PageContainer>
+    )
   }
 
   return (

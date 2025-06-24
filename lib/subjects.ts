@@ -4,6 +4,13 @@ export interface Subject {
   icon: string
   color: string
   description?: string
+  subcategories?: SubCategory[]
+}
+
+export interface SubCategory {
+  id: string
+  name: string
+  description?: string
 }
 
 export const subjects: Subject[] = [
@@ -19,7 +26,19 @@ export const subjects: Subject[] = [
     name: "Droit",
     icon: "⚖️",
     color: "bg-purple-600",
-    description: "Droit d'auteur et propriété intellectuelle"
+    description: "Droit d'auteur et propriété intellectuelle",
+    subcategories: [
+      {
+        id: "droit-base",
+        name: "Droit de base",
+        description: "Notions fondamentales du droit d'auteur"
+      },
+      {
+        id: "droit-applique",
+        name: "Droit appliqué au texte",
+        description: "Analyse d'arrêts et cas pratiques"
+      }
+    ]
   },
   {
     id: "risques",
