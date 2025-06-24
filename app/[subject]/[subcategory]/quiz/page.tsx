@@ -19,7 +19,11 @@ export default function SubcategoryQuizPage({ params }: SubcategoryQuizPageProps
     notFound()
   }
 
-  const subcategory = subject.subcategories?.find(sub => sub.id === params.subcategory)
+  if (!subject.subcategories) {
+    notFound()
+  }
+
+  const subcategory = subject.subcategories.find(sub => sub.id === params.subcategory)
   
   if (!subcategory) {
     notFound()

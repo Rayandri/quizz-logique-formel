@@ -19,7 +19,11 @@ export default function SubcategoryPage({ params }: SubcategoryPageProps) {
     notFound()
   }
 
-  const subcategory = subject.subcategories?.find(sub => sub.id === params.subcategory)
+  if (!subject.subcategories) {
+    notFound()
+  }
+
+  const subcategory = subject.subcategories.find(sub => sub.id === params.subcategory)
   
   if (!subcategory) {
     notFound()
