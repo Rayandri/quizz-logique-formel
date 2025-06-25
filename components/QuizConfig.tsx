@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { QUESTIONS, type DifficultyLevel } from "@/lib/questions"
 import { COPYRIGHT_QUESTIONS } from "@/lib/copyright-questions"
 import { APPLIED_COPYRIGHT_QUESTIONS } from "@/lib/applied-copyright-questions"
+import { DATA_ENGINEERING_QUESTIONS } from "@/lib/data-engineering-questions"
 import { RISK_MANAGEMENT_QUESTIONS } from "@/lib/risk-management-questions"
 import { PROBABILITY_QUESTIONS } from "@/lib/probability-questions"
 import { getSubjectName } from "@/lib/subjects"
@@ -12,7 +13,7 @@ import { getSubjectName } from "@/lib/subjects"
 type SelectionMode = "random" | "difficulty" | "multi-difficulty"
 
 interface QuizConfigProps {
-  subject: "logique" | "droit" | "droit-base" | "droit-applique" | "risques" | "probabilites"
+  subject: "logique" | "droit" | "droit-base" | "droit-applique" | "data-ing" | "risques" | "probabilites"
 }
 
 export default function QuizConfig({ subject }: QuizConfigProps) {
@@ -33,6 +34,8 @@ export default function QuizConfig({ subject }: QuizConfigProps) {
         return COPYRIGHT_QUESTIONS
       case "droit-applique":
         return APPLIED_COPYRIGHT_QUESTIONS
+      case "data-ing":
+        return DATA_ENGINEERING_QUESTIONS
       case "risques":
         return RISK_MANAGEMENT_QUESTIONS
       case "probabilites":

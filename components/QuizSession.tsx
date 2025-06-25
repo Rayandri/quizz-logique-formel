@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { QUESTIONS, type QCM, type DifficultyLevel } from "@/lib/questions"
 import { COPYRIGHT_QUESTIONS } from "@/lib/copyright-questions"
 import { APPLIED_COPYRIGHT_QUESTIONS } from "@/lib/applied-copyright-questions"
+import { DATA_ENGINEERING_QUESTIONS } from "@/lib/data-engineering-questions"
 import { RISK_MANAGEMENT_QUESTIONS } from "@/lib/risk-management-questions"
 import { PROBABILITY_QUESTIONS } from "@/lib/probability-questions"
 import QuestionCard from "./QuestionCard"
@@ -24,7 +25,7 @@ interface QuizConfig {
 }
 
 interface QuizSessionProps {
-  subject: "logique" | "droit" | "droit-base" | "droit-applique" | "risques" | "probabilites"
+  subject: "logique" | "droit" | "droit-base" | "droit-applique" | "data-ing" | "risques" | "probabilites"
   config: QuizConfig
 }
 
@@ -135,6 +136,8 @@ export default function QuizSession({ subject, config }: QuizSessionProps) {
           return COPYRIGHT_QUESTIONS
         case "droit-applique":
           return APPLIED_COPYRIGHT_QUESTIONS
+        case "data-ing":
+          return DATA_ENGINEERING_QUESTIONS
         case "risques":
           return RISK_MANAGEMENT_QUESTIONS
         case "probabilites":

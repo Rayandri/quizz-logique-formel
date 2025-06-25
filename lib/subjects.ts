@@ -41,6 +41,13 @@ export const subjects: Subject[] = [
     ]
   },
   {
+    id: "data-ing",
+    name: "Data Engineering",
+    icon: "⚡",
+    color: "bg-orange-600",
+    description: "Spark, Kafka, Big Data et Scala fonctionnelle"
+  },
+  {
     id: "risques",
     name: "Gestion des Risques",
     icon: "🛡️",
