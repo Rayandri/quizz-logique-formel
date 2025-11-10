@@ -67,11 +67,21 @@ Application web interactive de quiz multisujets pour la révision d'examens EPIT
 
 ## 📦 Installation & Démarrage
 
-### **Prérequis**
+### **🐳 Déploiement avec Docker (Recommandé)**
+```bash
+# Démarrage rapide avec Docker Compose
+docker compose up -d
+
+# L'application sera accessible sur http://localhost:3000
+```
+
+Voir [DOCKER.md](DOCKER.md) pour plus de détails sur le déploiement Docker.
+
+### **Prérequis (Installation locale)**
 - Node.js 18+ 
 - pnpm (recommandé) ou npm
 
-### **Installation**
+### **Installation Locale**
 ```bash
 # Cloner le repository
 git clone <repository-url>
